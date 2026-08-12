@@ -1,0 +1,6 @@
+.alpackages/
+.vscode/
+backups/
+*.app
+__pycache__/
+*.pyc

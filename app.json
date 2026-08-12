@@ -1,0 +1,123 @@
+{
+    "id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
+    "name": "Approved Product List",
+    "publisher": "Systems Integration",
+    "version": "1.1.2.9",
+    "brief": "",
+    "description": "Approved Product List",
+    "privacyStatement": "",
+    "EULA": "",
+    "help": "",
+    "url": "",
+    "logo": "",
+    "platform": "28.0.0.0",
+    "application": "28.2.0.0",
+    "runtime": "17.0",
+    "idRanges": [
+        {
+            "from": 80201,
+            "to": 80300
+        }
+    ],
+    "dependencies": [
+        {
+            "id": "eabfa8e7-dd6b-4c1b-abcd-bd5ecc27d50f",
+            "name": "Systems Integration Customizations",
+            "publisher": "Systems Integration",
+            "version": "1.0.3.12"
+        },
+        {
+            "id": "2a0547fa-f60f-401d-b1fe-c7c4be8fb230",
+            "name": "LS Central System App",
+            "publisher": "LS Retail",
+            "version": "28.2.0.1847"
+        },
+        {
+            "id": "c5885c6a-cd60-4789-b940-410c5d3d1905",
+            "name": "Standard Customizations",
+            "publisher": "Performance Advantage Systems International, Inc.",
+            "version": "0.0.0.10"
+        },
+        {
+            "id": "0a9a9ce1-6f98-4cf0-82e2-0b3e7cabb32a",
+            "name": "EU 3-Party Trade Purchase",
+            "publisher": "Microsoft",
+            "version": "26.5.38752.38944"
+        },
+        {
+            "id": "b3780cd9-f8f8-4a83-a4d5-0c2ad87b28af",
+            "name": "Sustainability",
+            "publisher": "Microsoft",
+            "version": "26.5.38752.38944"
+        },
+        {
+            "id": "1ba340c4-00ef-49e9-9954-10bdffc83a2a",
+            "name": "PASI Licensing Management",
+            "publisher": "PASI",
+            "version": "1.0.0.8"
+        },
+        {
+            "id": "f4b69b55-c90d-4937-8f53-2742898fa948",
+            "name": "Continia Document Output",
+            "publisher": "Continia Software",
+            "version": "26.2.0.290331"
+        },
+        {
+            "id": "5ecfc871-5d82-43f1-9c54-59685e82318d",
+            "name": "LS Central",
+            "publisher": "LS Retail",
+            "version": "28.2.0.1847"
+        },
+        {
+            "id": "e1d97edc-c239-46b4-8d84-6368bdf67c8b",
+            "name": "E-Document Core",
+            "publisher": "Microsoft",
+            "version": "26.5.38752.41739"
+        },
+        {
+            "id": "3099ffc7-4cf7-4df6-9b96-7e4bc2bb587c",
+            "name": "Subscription Billing",
+            "publisher": "Microsoft",
+            "version": "26.5.38752.41642"
+        },
+        {
+            "id": "6da8dd2f-e698-461f-9147-8e404244dd85",
+            "name": "Continia Document Capture",
+            "publisher": "Continia Software",
+            "version": "26.2.0.282615"
+        },
+        {
+            "id": "abc622d1-0d07-40e3-9518-9a9adc77322a",
+            "name": "Philippine Localization",
+            "publisher": "PASI",
+            "version": "2.1.0.0"
+        },
+        {
+            "id": "70912191-3c4c-49fc-a1de-bc6ea1ac9da6",
+            "name": "Intrastat Core",
+            "publisher": "Microsoft",
+            "version": "26.5.38752.38944"
+        },
+        {
+            "id": "0745e76d-0b72-4641-87c2-ee45db5d2c32",
+            "name": "Continia Delivery Network",
+            "publisher": "Continia Software",
+            "version": "26.2.1.290832"
+        },
+        {
+            "id": "25a9851d-b839-4163-8fd2-f7e922d0339d",
+            "name": "Request Document System",
+            "publisher": "PASI",
+            "version": "1.0.1.0"
+        }
+    ],
+    "screenshots": [],
+    "resourceExposurePolicy": {
+        "allowDebugging": false,
+        "allowDownloadingSource": false,
+        "includeSourceInSymbolFile": false
+    },
+    "features": [
+        "NoImplicitWith"
+    ]
+}
