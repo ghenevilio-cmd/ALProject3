@@ -653,10 +653,9 @@ page 80201 "Market List"
 
     local procedure IsTemplateMasterUser(): Boolean
     var
-        Concept: Record "TBGC Concept Table";
+        MarketListAccessMgt: Codeunit "TBGC Market List Access Mgt";
     begin
-        Concept.SetRange("Template Master", CopyStr(UserId(), 1, MaxStrLen(Concept."Template Master")));
-        exit(not Concept.IsEmpty());
+        exit(MarketListAccessMgt.IsCurrentUserTemplateMaster());
     end;
 
     local procedure IsMarketListAccessUser(): Boolean

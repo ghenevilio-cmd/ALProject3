@@ -131,6 +131,7 @@ function App() {
   const itemSearchQueryRef = useRef('');
   const itemSearchDebounceRef = useRef(null);
   const locationCodeRef = useRef('');
+  const isTemplateMasterRef = useRef(false);
   const [locationOptions, setLocationOptions] = useState([]);
   const [checkoutMode, setCheckoutMode] = useState('release');
   const [availableItems, setAvailableItems] = useState([]);
@@ -204,6 +205,10 @@ function App() {
   useEffect(() => {
     locationCodeRef.current = locationCode;
   }, [locationCode]);
+
+  useEffect(() => {
+    isTemplateMasterRef.current = isTemplateMaster;
+  }, [isTemplateMaster]);
 
   useEffect(() => {
     itemSearchQueryRef.current = itemSearchQuery;
@@ -324,6 +329,12 @@ function App() {
 
     window.loadOrderHistory = (orderHistoryJson) => {
       try {
+        if (isTemplateMasterRef.current) {
+          setInfoModalMessage('You are not allowed to order.');
+          setShowInfoModal(true);
+          return;
+        }
+
         const orderHistory = typeof orderHistoryJson === 'string' ? JSON.parse(orderHistoryJson) : orderHistoryJson;
 
         if (!orderHistory?.hasOrderHistory || !Array.isArray(orderHistory.lines) || orderHistory.lines.length === 0) {
@@ -538,7 +549,7 @@ function App() {
   const openCheckoutConfirm = (mode) => {
     if (isSubmitting) return;
 
-    if (mode === 'checkout' && isTemplateMaster) {
+    if (isTemplateMaster) {
       setInfoModalMessage('You are not allowed to order.');
       setShowInfoModal(true);
       return;
@@ -576,6 +587,12 @@ function App() {
 
   const handleAddToDraftClick = () => {
     if (isSubmitting) return;
+
+    if (isTemplateMaster) {
+      setInfoModalMessage('You are not allowed to order.');
+      setShowInfoModal(true);
+      return;
+    }
 
     if (!validateVendorMinimumOrderAmount()) {
       return;
@@ -637,6 +654,12 @@ function App() {
   };
 
   const handleLoadLastOrder = () => {
+    if (isTemplateMaster) {
+      setInfoModalMessage('You are not allowed to order.');
+      setShowInfoModal(true);
+      return;
+    }
+
     if (!lastOrderHistory || !Array.isArray(lastOrderHistory.lines) || lastOrderHistory.lines.length === 0) {
       setInfoModalMessage('No saved order history was found for this location.');
       setShowInfoModal(true);

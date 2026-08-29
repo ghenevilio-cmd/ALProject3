@@ -1,6 +1,6 @@
 controladdin "POS Control Addin"
 {
-    Scripts = 'react-pos/dist/assets/index-DL39VJFV.js';
+    Scripts = 'react-pos/dist/assets/index-B4k0RS3I.js';
     StyleSheets = 'react-pos/dist/assets/index-BrhGaniE.css';
     StartupScript = 'react-pos/startup.js';
 

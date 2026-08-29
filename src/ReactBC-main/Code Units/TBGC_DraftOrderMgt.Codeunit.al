@@ -22,6 +22,7 @@ codeunit 80208 "TBGC Draft Order Mgt"
 
     procedure SaveDraftOrder(CartJson: Text; IsCheckoutDraft: Boolean): Text
     var
+        MarketListAccessMgt: Codeunit "TBGC Market List Access Mgt";
         CheckoutState: Codeunit "TBGC POS Checkout State";
         OrderHistoryMgt: Codeunit "TBGC APL Order History Mgt";
         ReleasedDateMgt: Codeunit "TBGC Released Date Mgt";
@@ -56,6 +57,9 @@ codeunit 80208 "TBGC Draft Order Mgt"
         DraftOrderLineNosByVendor: Dictionary of [Code[20], Integer];
         DraftOrderNo: Code[20];
     begin
+        if not MarketListAccessMgt.CanCurrentUserOrder() then
+            Error('You are not allowed to order.');
+
         if not JRoot.ReadFrom(CartJson) then
             Error('Invalid cart JSON.');
 

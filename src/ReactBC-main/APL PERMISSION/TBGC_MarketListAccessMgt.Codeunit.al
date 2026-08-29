@@ -18,6 +18,19 @@ codeunit 80286 "TBGC Market List Access Mgt"
         exit(UserSetup."TBGC Market List Permission" = UserSetup."TBGC Market List Permission"::ALLOWED);
     end;
 
+    procedure IsCurrentUserTemplateMaster(): Boolean
+    var
+        Concept: Record "TBGC Concept Table";
+    begin
+        Concept.SetRange("Template Master", CopyStr(UserId(), 1, MaxStrLen(Concept."Template Master")));
+        exit(not Concept.IsEmpty());
+    end;
+
+    procedure CanCurrentUserOrder(): Boolean
+    begin
+        exit(not (IsCurrentUserTemplateMaster() or IsCurrentUserAllowed()));
+    end;
+
     procedure IsCurrentUserDeleteEditAllowed(): Boolean
     begin
         exit(IsUserDeleteEditAllowed(CopyStr(UserId(), 1, 50)));
