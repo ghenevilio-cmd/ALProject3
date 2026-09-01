@@ -17,10 +17,16 @@ permissionset 80233 "OMS2 API WRITE"
         tabledata "Shipment Method" = R,
         tabledata Currency = R,
         tabledata "Dimension Value" = R,
+        tabledata "OMS2 Receipt Command" = RIM,
+        tabledata "OMS2 Receipt Command Line" = RIMD,
         page "OMS2 Purchase Orders API" = X,
         page "OMS2 Purchase Order Lines API" = X,
         page "OMS2 Purchase Receipts API" = X,
-        codeunit "Release Purchase Document" = X;
+        page "OMS2 Receipt Commands API" = X,
+        page "OMS2 Receipt Command Lines API" = X,
+        codeunit "OMS2 Command Mgt" = X,
+        codeunit "Release Purchase Document" = X,
+        codeunit "Purch.-Post" = X;
 }
 
 permissionset 80234 "OMS2 API READ"
@@ -33,7 +39,11 @@ permissionset 80234 "OMS2 API READ"
         tabledata "Purchase Line" = R,
         tabledata "Purch. Rcpt. Header" = R,
         tabledata "Purch. Rcpt. Line" = R,
+        tabledata "OMS2 Receipt Command" = R,
+        tabledata "OMS2 Receipt Command Line" = R,
         page "OMS2 Purchase Orders API" = X,
         page "OMS2 Purchase Order Lines API" = X,
-        page "OMS2 Purchase Receipts API" = X;
+        page "OMS2 Purchase Receipts API" = X,
+        page "OMS2 Receipt Commands API" = X,
+        page "OMS2 Receipt Command Lines API" = X;
 }
