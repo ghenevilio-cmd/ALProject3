@@ -67,6 +67,11 @@ table 80236 "OMS2 Receipt Command"
             DataClassification = SystemMetadata;
             Editable = false;
         }
+        field(11; "Purchase Order Id"; Guid)
+        {
+            Caption = 'Purchase Order Id';
+            DataClassification = SystemMetadata;
+        }
     }
 
     keys
@@ -88,10 +93,10 @@ table 80236 "OMS2 Receipt Command"
     trigger OnInsert()
     var
         InvalidHashErr: Label 'OMS Receiving Payload Hash must be 64 hexadecimal characters.';
-        ReferenceRequiredErr: Label 'OMS PO Reference Number is required.';
+        PurchaseOrderRequiredErr: Label 'Purchase Order Id is required.';
     begin
-        if "OMS PO Ref. No." = '' then
-            Error(ReferenceRequiredErr);
+        if IsNullGuid("Purchase Order Id") then
+            Error(PurchaseOrderRequiredErr);
         if (StrLen("OMS Receiving Payload Hash") <> MaxStrLen("OMS Receiving Payload Hash")) or
            (DelChr("OMS Receiving Payload Hash", '=', '0123456789ABCDEF') <> '')
         then

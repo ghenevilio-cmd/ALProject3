@@ -36,6 +36,11 @@ page 80238 "OMS2 Receipt Commands API"
                 field(omsPoReferenceNo; Rec."OMS PO Ref. No.")
                 {
                     Caption = 'OMS PO Reference Number';
+                    Editable = false;
+                }
+                field(purchaseOrderId; Rec."Purchase Order Id")
+                {
+                    Caption = 'Purchase Order Id';
                 }
                 field(omsPayloadHash; Rec."OMS Receiving Payload Hash")
                 {

@@ -90,14 +90,31 @@ page 80232 "OMS2 Purchase Order Lines API"
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
         PurchaseHeader: Record "Purchase Header";
+        ExistingPurchaseLine: Record "Purchase Line";
         LastPurchaseLine: Record "Purchase Line";
     begin
         PurchaseHeader.Get(PurchaseHeader."Document Type"::Order, Rec."Document No.");
-        PurchaseHeader.TestField(Status, PurchaseHeader.Status::Open);
         if ItemNumber = '' then
             Error(ItemNumberRequiredErr);
         if Quantity <= 0 then
             Error(QuantityRequiredErr);
+
+        if LineNumber <> 0 then begin
+            ExistingPurchaseLine.SetRange("Document Type", ExistingPurchaseLine."Document Type"::Order);
+            ExistingPurchaseLine.SetRange("Document No.", Rec."Document No.");
+            ExistingPurchaseLine.SetRange("Line No.", LineNumber);
+            if ExistingPurchaseLine.FindFirst() then begin
+                if (ExistingPurchaseLine."No." <> ItemNumber)
+                    or (ExistingPurchaseLine."Unit of Measure Code" <> UnitOfMeasureCode)
+                    or (ExistingPurchaseLine.Quantity <> Quantity)
+                then
+                    Error(ChangedReplayErr, LineNumber);
+                Rec := ExistingPurchaseLine;
+                exit(false);
+            end;
+        end;
+
+        PurchaseHeader.TestField(Status, PurchaseHeader.Status::Open);
 
         Rec."Document Type" := Rec."Document Type"::Order;
         Rec.Type := Rec.Type::Item;
@@ -139,4 +156,5 @@ page 80232 "OMS2 Purchase Order Lines API"
         Quantity: Decimal;
         ItemNumberRequiredErr: Label 'Item Number is required.';
         QuantityRequiredErr: Label 'Quantity must be greater than zero.';
+        ChangedReplayErr: Label 'Purchase order line %1 was already used with different values.';
 }

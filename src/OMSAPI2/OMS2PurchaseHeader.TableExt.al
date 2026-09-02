@@ -44,6 +44,13 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         }
     }
 
+    keys
+    {
+        key(OMS2PoReference; "OMS PO Ref. No.")
+        {
+        }
+    }
+
     trigger OnBeforeInsert()
     var
         ExistingPurchaseHeader: Record "Purchase Header";

@@ -107,12 +107,23 @@ page 80231 "OMS2 Purchase Orders API"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
+        ExistingPurchaseHeader: Record "Purchase Header";
         POValidationMgt: Codeunit "TBGC PO Validation Mgt";
     begin
         if OmsPoReferenceNo = '' then
             Error(OmsReferenceRequiredErr);
         if OmsPayloadHash = '' then
             Error(PayloadHashRequiredErr);
+
+        ExistingPurchaseHeader.LockTable();
+        ExistingPurchaseHeader.SetRange("Document Type", ExistingPurchaseHeader."Document Type"::Order);
+        ExistingPurchaseHeader.SetRange("OMS PO Ref. No.", OmsPoReferenceNo);
+        if ExistingPurchaseHeader.FindFirst() then begin
+            if ExistingPurchaseHeader."OMS PO Payload Hash" <> OmsPayloadHash then
+                Error(ChangedReplayErr, OmsPoReferenceNo);
+            Rec := ExistingPurchaseHeader;
+            exit(false);
+        end;
 
         POValidationMgt.ValidateHeaderBeforeInsert(VendorNumber, LocationCode, RequestedReceiptDate);
         Rec."Document Type" := Rec."Document Type"::Order;
@@ -190,4 +201,5 @@ page 80231 "OMS2 Purchase Orders API"
         OmsReferenceRequiredErr: Label 'OMS PO Reference Number is required.';
         PayloadHashRequiredErr: Label 'OMS Payload Hash is required.';
         NoLinesErr: Label 'The purchase order must contain at least one line before release.';
+        ChangedReplayErr: Label 'OMS PO reference %1 was already used with a different payload.';
 }

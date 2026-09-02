@@ -5,10 +5,9 @@ codeunit 80240 "OMS2 Command Mgt"
                   tabledata "Purch. Rcpt. Header" = R;
 
     var
-        CommandPostedErr: Label 'Receipt command %1 already posted receipt %2.';
-        ChangedReplayErr: Label 'Receipt command %1 was already used with a different payload.';
         NoLinesErr: Label 'Receipt command %1 has no quantities to receive.';
-        OrderNotFoundErr: Label 'No open purchase order carries OMS PO reference %1.';
+        OrderNotFoundErr: Label 'The selected purchase order no longer exists.';
+        OrderReferenceMissingErr: Label 'Purchase order %1 has no OMS PO reference.';
         OrderNotReleasedErr: Label 'Purchase order %1 must be released before a receipt can be posted.';
         LineNotFoundErr: Label 'Item %1 is not an outstanding line on purchase order %2.';
         QuantityTooHighErr: Label 'Item %1 has only %2 outstanding on purchase order %3.';
@@ -29,6 +28,8 @@ codeunit 80240 "OMS2 Command Mgt"
         // company's own error instead of a second rule invented here. Everything else is standard.
         ThresholdMgt: Codeunit "TBGC PO Rcvg Threshold Mgt";
     begin
+        ReceiptCommand.LockTable();
+        ReceiptCommand.Get(ReceiptCommand."OMS Receiving Ref. No.");
         if ReceiptCommand.Status = ReceiptCommand.Status::Posted then
             exit;
 
@@ -67,24 +68,17 @@ codeunit 80240 "OMS2 Command Mgt"
         ReceiptCommand.Modify(true);
     end;
 
-    /** A replay carrying a different body must fail rather than post a second receipt. */
-    procedure AssertReplayMatches(ReceiptCommand: Record "OMS2 Receipt Command"; PayloadHash: Code[64])
-    begin
-        if ReceiptCommand."OMS Receiving Payload Hash" <> PayloadHash then
-            Error(ChangedReplayErr, ReceiptCommand."OMS Receiving Ref. No.");
-        if ReceiptCommand.Status = ReceiptCommand.Status::Posted then
-            Error(CommandPostedErr, ReceiptCommand."OMS Receiving Ref. No.", ReceiptCommand."Posted Receipt No.");
-    end;
-
     local procedure FindReleasedOrder(var ReceiptCommand: Record "OMS2 Receipt Command"; var PurchaseHeader: Record "Purchase Header")
     begin
-        PurchaseHeader.SetRange("Document Type", PurchaseHeader."Document Type"::Order);
-        PurchaseHeader.SetRange("OMS PO Ref. No.", ReceiptCommand."OMS PO Ref. No.");
-        if not PurchaseHeader.FindFirst() then
-            Error(OrderNotFoundErr, ReceiptCommand."OMS PO Ref. No.");
+        if not PurchaseHeader.GetBySystemId(ReceiptCommand."Purchase Order Id") then
+            Error(OrderNotFoundErr);
+        PurchaseHeader.TestField("Document Type", PurchaseHeader."Document Type"::Order);
+        if PurchaseHeader."OMS PO Ref. No." = '' then
+            Error(OrderReferenceMissingErr, PurchaseHeader."No.");
         if PurchaseHeader.Status <> PurchaseHeader.Status::Released then
             Error(OrderNotReleasedErr, PurchaseHeader."No.");
 
+        ReceiptCommand."OMS PO Ref. No." := PurchaseHeader."OMS PO Ref. No.";
         ReceiptCommand."Purchase Order No." := PurchaseHeader."No.";
         ReceiptCommand.Modify(true);
     end;

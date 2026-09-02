@@ -42,5 +42,15 @@ redundant subscriber, subject to the PREPRODTEST posting proof.
 5. OMSAPI2 sets the approved quantities and posts receipt-only through `Purch.-Post`.
 6. OMS records the official posted purchase-receipt identity returned by BC.
 
+## Read-only reference APIs
+
+OMSAPI2 also exposes company-scoped, read-only API pages for concepts, stores, zoning, and approved products.
+The store `code` is its Business Central Location Code; OMS sends the selected store's code when it creates the
+standard Purchase Header. These APIs do not create or modify Business Central master data.
+
+Receiving commands target the exact Purchase Order `SystemId` returned by Business Central. Matching retries
+resume or return the stored result, changed payload hashes conflict, and concurrent post actions are serialized
+on the receipt-command row.
+
 There is no PO approval, parallel BC purchasing workflow, direct write to posted
 tables, or reuse of `TBGC Draft Order Header` / `TBGC Draft Order Line`.
