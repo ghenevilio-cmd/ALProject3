@@ -109,6 +109,19 @@ page 80232 "OMS2 Purchase Order Lines API"
                     or (ExistingPurchaseLine.Quantity <> Quantity)
                 then
                     Error(ChangedReplayErr, LineNumber);
+                // A failed deep insert can leave BC's idempotent header and line in place. Repair fields that
+                // are determined by that same immutable request, then let the retry continue to Release.
+                if (ExistingPurchaseLine."Location Code" <> PurchaseHeader."Location Code")
+                    or (ExistingPurchaseLine."Shortcut Dimension 1 Code" <> PurchaseHeader."Location Code")
+                    or ((BrandCode <> '') and (ExistingPurchaseLine."TBGC Brand Code" <> BrandCode))
+                then begin
+                    PurchaseHeader.TestField(Status, PurchaseHeader.Status::Open);
+                    ExistingPurchaseLine.Validate("Location Code", PurchaseHeader."Location Code");
+                    if BrandCode <> '' then
+                        ExistingPurchaseLine.Validate("TBGC Brand Code", BrandCode);
+                    ExistingPurchaseLine.Validate("Shortcut Dimension 1 Code", PurchaseHeader."Location Code");
+                    ExistingPurchaseLine.Modify(true);
+                end;
                 Rec := ExistingPurchaseLine;
                 exit(false);
             end;
@@ -134,6 +147,11 @@ page 80232 "OMS2 Purchase Order Lines API"
         if UnitOfMeasureCode <> '' then
             Rec.Validate("Unit of Measure Code", UnitOfMeasureCode);
         Rec.Validate(Quantity, Quantity);
+        // Last, so nothing above can replace it: the line carries the same Shortcut Dimension 1 as the header,
+        // which is the location. Validating "No." sets the item's default dimensions, and this is the OMS rule
+        // about where the order is going rather than what is on it.
+        if Rec."Shortcut Dimension 1 Code" <> PurchaseHeader."Location Code" then
+            Rec.Validate("Shortcut Dimension 1 Code", PurchaseHeader."Location Code");
         exit(true);
     end;
 

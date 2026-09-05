@@ -121,6 +121,18 @@ page 80231 "OMS2 Purchase Orders API"
         if ExistingPurchaseHeader.FindFirst() then begin
             if ExistingPurchaseHeader."OMS PO Payload Hash" <> OmsPayloadHash then
                 Error(ChangedReplayErr, OmsPoReferenceNo);
+            // A failed deep insert can leave the idempotent header behind before all validated fields land.
+            // The matching payload hash proves these are the original values, so a retry may safely repair it.
+            if (ExistingPurchaseHeader."Location Code" <> LocationCode)
+                or (ExistingPurchaseHeader."Shortcut Dimension 1 Code" <> LocationCode)
+                or (ExistingPurchaseHeader."Expected Receipt Date" <> RequestedReceiptDate)
+            then begin
+                ExistingPurchaseHeader.TestField(Status, ExistingPurchaseHeader.Status::Open);
+                ExistingPurchaseHeader.Validate("Location Code", LocationCode);
+                ExistingPurchaseHeader.Validate("Shortcut Dimension 1 Code", LocationCode);
+                ExistingPurchaseHeader.Validate("Expected Receipt Date", RequestedReceiptDate);
+                ExistingPurchaseHeader.Modify(true);
+            end;
             Rec := ExistingPurchaseHeader;
             exit(false);
         end;
@@ -130,8 +142,11 @@ page 80231 "OMS2 Purchase Orders API"
         Rec.Validate("OMS PO Ref. No.", OmsPoReferenceNo);
         Rec.Validate("OMS PO Payload Hash", OmsPayloadHash);
         Rec.Validate("Buy-from Vendor No.", VendorNumber);
-        if CurrencyCode <> '' then
-            Rec.Validate("Currency Code", CurrencyCode);
+        // The currency comes from the vendor card, which "Buy-from Vendor No." has just applied. OMS names a
+        // currency in its payload, but setting it here made the order foreign-currency whenever it matched
+        // the company's own LCY code, and Business Central then demanded a Currency Factor that cannot exist:
+        // "Currency Factor must have a value in Purchase Header". Business Central knows its own currencies;
+        // the caller does not. The field is still read for the response, it is simply not written.
         Rec.Validate("Location Code", LocationCode);
         if Rec."Shortcut Dimension 1 Code" <> LocationCode then
             Rec.Validate("Shortcut Dimension 1 Code", LocationCode);
