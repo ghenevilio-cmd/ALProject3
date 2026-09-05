@@ -87,7 +87,14 @@ codeunit 80240 "OMS2 Command Mgt"
     var
         PurchaseLine: Record "Purchase Line";
         ReceiptCommandLine: Record "OMS2 Receipt Command Line";
+        ActualReceiptDate: Date;
     begin
+        // The company requires an actual receipt date on every line being received, and this codeunit asks
+        // TBGC PO Rcvg Threshold Mgt to enforce that before posting. The date is the day OMS recorded the
+        // delivery on: its posting date. Without it every OMS receipt failed that rule before reaching BC.
+        ActualReceiptDate := ReceiptCommand."Posting Date";
+        if ActualReceiptDate = 0D then
+            ActualReceiptDate := WorkDate();
         PurchaseLine.SetRange("Document Type", PurchaseHeader."Document Type");
         PurchaseLine.SetRange("Document No.", PurchaseHeader."No.");
         if PurchaseLine.FindSet() then
@@ -101,11 +108,11 @@ codeunit 80240 "OMS2 Command Mgt"
         ReceiptCommandLine.SetRange("OMS Receiving Ref. No.", ReceiptCommand."OMS Receiving Ref. No.");
         if ReceiptCommandLine.FindSet() then
             repeat
-                ReceiveOneLine(ReceiptCommandLine, PurchaseHeader);
+                ReceiveOneLine(ReceiptCommandLine, PurchaseHeader, ActualReceiptDate);
             until ReceiptCommandLine.Next() = 0;
     end;
 
-    local procedure ReceiveOneLine(ReceiptCommandLine: Record "OMS2 Receipt Command Line"; PurchaseHeader: Record "Purchase Header")
+    local procedure ReceiveOneLine(ReceiptCommandLine: Record "OMS2 Receipt Command Line"; PurchaseHeader: Record "Purchase Header"; ActualReceiptDate: Date)
     var
         PurchaseLine: Record "Purchase Line";
     begin
@@ -124,6 +131,7 @@ codeunit 80240 "OMS2 Command Mgt"
                 PurchaseLine."Outstanding Quantity", PurchaseHeader."No.");
 
         PurchaseLine.Validate("Qty. to Receive", ReceiptCommandLine."Quantity to Receive");
+        PurchaseLine.Validate("TBGC Actual Receipt Date", ActualReceiptDate);
         PurchaseLine.Modify(true);
     end;
 }
