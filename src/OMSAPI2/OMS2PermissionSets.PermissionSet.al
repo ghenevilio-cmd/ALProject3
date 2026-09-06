@@ -21,6 +21,8 @@ permissionset 80233 "OMS2 API WRITE"
         tabledata "TBGC Zoning Table" = R,
         tabledata "LSC Store" = R,
         tabledata "Approved Product List" = R,
+        tabledata "TBGC Draft Order Header" = RIM,
+        tabledata "TBGC Draft Order Line" = RIM,
         tabledata "OMS2 Receipt Command" = RIM,
         tabledata "OMS2 Receipt Command Line" = RIMD,
         page "OMS2 Purchase Orders API" = X,
@@ -34,6 +36,8 @@ permissionset 80233 "OMS2 API WRITE"
         page "OMS2 Stores API" = X,
         page "OMS2 Zoning API" = X,
         page "OMS2 Approved Products API" = X,
+        page "OMS2 Draft Orders API" = X,
+        page "OMS2 Draft Order Lines API" = X,
         codeunit "OMS2 Command Mgt" = X,
         codeunit "Release Purchase Document" = X,
         codeunit "Purch.-Post" = X;
@@ -55,6 +59,8 @@ permissionset 80234 "OMS2 API READ"
         tabledata "TBGC Zoning Table" = R,
         tabledata "LSC Store" = R,
         tabledata "Approved Product List" = R,
+        tabledata "TBGC Draft Order Header" = R,
+        tabledata "TBGC Draft Order Line" = R,
         tabledata Vendor = R,
         tabledata Item = R,
         page "OMS2 Purchase Orders API" = X,
@@ -67,5 +73,7 @@ permissionset 80234 "OMS2 API READ"
         page "OMS2 Concepts API" = X,
         page "OMS2 Stores API" = X,
         page "OMS2 Zoning API" = X,
-        page "OMS2 Approved Products API" = X;
+        page "OMS2 Approved Products API" = X,
+        page "OMS2 Draft Orders API" = X,
+        page "OMS2 Draft Order Lines API" = X;
 }

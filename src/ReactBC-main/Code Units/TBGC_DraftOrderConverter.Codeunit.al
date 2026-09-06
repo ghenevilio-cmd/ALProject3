@@ -55,7 +55,8 @@ codeunit 80210 "TBGC Draft Order Converter"
 
         ValidateDraftOrder(DraftOrderHeader, EnforceUserAccess, EffectiveLocationCode, ManualPostingDate);
         POValidationMgt.ValidateHeaderBeforeInsert(VendorNo, EffectiveLocationCode, DraftOrderHeader."Expected Receipt Date");
-        PreValidatePurchaseHeader(VendorNo, EffectiveLocationCode, DraftOrderHeader."Expected Receipt Date", ManualPostingDate);
+        PreValidatePurchaseHeader(VendorNo, DraftOrderHeader."OMS Currency Code", EffectiveLocationCode,
+          DraftOrderHeader."Expected Receipt Date", ManualPostingDate);
         PreValidateAllLines(
           DraftOrderLine,
           VendorNo,
@@ -107,14 +108,20 @@ codeunit 80210 "TBGC Draft Order Converter"
         // Only reached if ALL validations above passed
         PurchHeader.Init();
         PurchHeader."Document Type" := PurchHeader."Document Type"::Order;
+        if DraftOrderHeader."OMS PO Ref. No." <> '' then begin
+            PurchHeader.Validate("OMS PO Ref. No.", DraftOrderHeader."OMS PO Ref. No.");
+            PurchHeader.Validate("OMS PO Payload Hash", DraftOrderHeader."OMS PO Payload Hash");
+        end;
+        PurchHeader."TBGC Draft Order No." := DraftOrderHeader."No.";
         PurchHeader.Insert(true);
         CreatedPONo := PurchHeader."No.";
 
         PurchHeader.Validate("Buy-from Vendor No.", VendorNo);
+        if DraftOrderHeader."OMS Currency Code" <> '' then
+            PurchHeader.Validate("Currency Code", DraftOrderHeader."OMS Currency Code");
         ApplyManualDocumentDatesToPurchaseHeader(PurchHeader, ManualPostingDate);
         ApplyDraftLocationToPurchaseHeader(PurchHeader, EffectiveLocationCode);
         PurchHeader.Validate("Expected Receipt Date", DraftOrderHeader."Expected Receipt Date");
-        PurchHeader."TBGC Draft Order No." := DraftOrderHeader."No.";
         PurchHeader."TBGC Original Created By" := CopyStr(DraftOrderHeader."Created By User ID", 1, MaxStrLen(PurchHeader."TBGC Original Created By"));
         PurchHeader.Modify();
 
@@ -219,7 +226,7 @@ codeunit 80210 "TBGC Draft Order Converter"
         PurchLine."Line No." := LineNo;
         PurchLine.Type := PurchLine.Type::Item;
         PurchLine.Validate("No.", DraftOrderLine."Item No.");
-        PurchLine."Location Code" := EffectiveLocationCode;
+        PurchLine.Validate("Location Code", EffectiveLocationCode);
         if DraftOrderLine."TBGC Brand Code" <> '' then
             PurchLine.Validate("TBGC Brand Code", DraftOrderLine."TBGC Brand Code");
         PurchLine.Validate(Quantity, DraftOrderLine.Quantity);
@@ -228,7 +235,7 @@ codeunit 80210 "TBGC Draft Order Converter"
         PurchLine.Insert(true);
     end;
 
-    local procedure PreValidatePurchaseHeader(VendorNo: Code[20]; LocationCode: Code[20]; ExpectedReceiptDate: Date; ManualPostingDate: Date)
+    local procedure PreValidatePurchaseHeader(VendorNo: Code[20]; CurrencyCode: Code[10]; LocationCode: Code[20]; ExpectedReceiptDate: Date; ManualPostingDate: Date)
     var
         TempPurchHeader: Record "Purchase Header" temporary;
     begin
@@ -237,6 +244,8 @@ codeunit 80210 "TBGC Draft Order Converter"
         TempPurchHeader."No." := 'VALIDATION';
         TempPurchHeader.Insert();
         TempPurchHeader.Validate("Buy-from Vendor No.", VendorNo);
+        if CurrencyCode <> '' then
+            TempPurchHeader.Validate("Currency Code", CurrencyCode);
         ApplyManualDocumentDatesToPurchaseHeader(TempPurchHeader, ManualPostingDate);
         if TempPurchHeader."Currency Code" <> '' then
             TempPurchHeader.TestField("Currency Factor");

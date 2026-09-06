@@ -75,6 +75,38 @@ table 80208 "TBGC Draft Order Header"
             Editable = false;
             CalcFormula = lookup(Vendor.Name where("No." = field("Vendor No.")));
         }
+        field(80206; "OMS PO Ref. No."; Code[11])
+        {
+            Caption = 'OMS PO Ref. No.';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if ("OMS PO Ref. No." <> UpperCase("OMS PO Ref. No.")) or
+                   (DelChr("OMS PO Ref. No.", '=', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') <> '')
+                then
+                    Error('OMS PO Ref. No. must contain only uppercase letters and numbers.');
+            end;
+        }
+        field(80207; "OMS Currency Code"; Code[10])
+        {
+            Caption = 'OMS Currency Code';
+            DataClassification = CustomerContent;
+            TableRelation = Currency.Code;
+        }
+        field(80208; "OMS PO Payload Hash"; Code[64])
+        {
+            Caption = 'OMS PO Payload Hash';
+            DataClassification = SystemMetadata;
+
+            trigger OnValidate()
+            begin
+                if (StrLen("OMS PO Payload Hash") <> MaxStrLen("OMS PO Payload Hash")) or
+                   (DelChr("OMS PO Payload Hash", '=', '0123456789ABCDEF') <> '')
+                then
+                    Error('OMS PO Payload Hash must be a 64-character uppercase hexadecimal value.');
+            end;
+        }
     }
 
     keys
@@ -86,10 +118,16 @@ table 80208 "TBGC Draft Order Header"
         key(LocationStatus; "Location Code", Status, "Created At")
         {
         }
+        key(OMSReference; "OMS PO Ref. No.")
+        {
+        }
     }
 
     trigger OnInsert()
     begin
+        // Number allocation and insert share the same table lock, so concurrent API requests cannot choose the
+        // same DRF number. Use standard No. Series if this custom sequence ever becomes configurable.
+        LockTable();
         if "No." = '' then
             "No." := GetNextDraftNo();
 

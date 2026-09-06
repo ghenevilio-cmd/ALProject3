@@ -7,12 +7,14 @@ codeunit 80213 "TBGC Draft Auto Convert"
 
     procedure AutoConvertReleasedDraftOrders()
     var
+        ConvertState: Codeunit "TBGC Draft Convert State";
         DraftOrderConverter: Codeunit "TBGC Draft Order Converter";
         DraftOrderHeader: Record "TBGC Draft Order Header";
         CreatedPONo: Code[20];
         WarningMessage: Text;
         ConvertedCount: Integer;
         FailedCount: Integer;
+        ErrorText: Text;
         FailureSummary: Text;
         SuccessSummary: Text;
     begin
@@ -26,63 +28,27 @@ codeunit 80213 "TBGC Draft Auto Convert"
             if DraftOrderHeader."Released Date" <> Today then
                 continue;
 
-            Clear(CreatedPONo);
-            Clear(WarningMessage);
+            ConvertState.ClearState();
+            ConvertState.SetDraftOrderNo(DraftOrderHeader."No.");
+            ConvertState.SetJobQueueMode(true);
             ClearLastError();
-            if not TryClaimDraftOrder(DraftOrderHeader."No.") then begin
+            if not Codeunit.Run(Codeunit::"TBGC Draft Convert Runner") then begin
+                ErrorText := GetLastErrorText();
+                DraftOrderConverter.SetDraftConversionError(DraftOrderHeader."No.", ErrorText);
                 FailedCount += 1;
-
                 if FailureSummary <> '' then
                     FailureSummary += '\';
-
-                FailureSummary +=
-                  StrSubstNo(
-                    'Draft %1 skipped: %2',
-                    DraftOrderHeader."No.",
-                    CopyStr(GetLastErrorText(), 1, 180));
-            end else
-                if not TryValidateDraftOrder(DraftOrderHeader."No.") then begin
-                    DraftOrderConverter.ReleaseDraftAutoConvertClaim(DraftOrderHeader."No.");
-                    DraftOrderConverter.SetDraftConversionError(DraftOrderHeader."No.", GetLastErrorText());
-                    FailedCount += 1;
-
-                    if FailureSummary <> '' then
-                        FailureSummary += '\';
-
-                    FailureSummary +=
-                      StrSubstNo(
-                        'Draft %1 failed: %2',
-                        DraftOrderHeader."No.",
-                        CopyStr(GetLastErrorText(), 1, 180));
-                end else
-                    if not TryConvertDraftOrder(DraftOrderHeader."No.", CreatedPONo, WarningMessage) then begin
-                        DraftOrderConverter.ReleaseDraftAutoConvertClaim(DraftOrderHeader."No.");
-                        DraftOrderConverter.SetDraftConversionError(DraftOrderHeader."No.", GetLastErrorText());
-                        FailedCount += 1;
-
-                        if FailureSummary <> '' then
-                            FailureSummary += '\';
-
-                        FailureSummary +=
-                          StrSubstNo(
-                            'Draft %1 failed: %2',
-                            DraftOrderHeader."No.",
-                            CopyStr(GetLastErrorText(), 1, 180));
-                    end else begin
-                        ConvertedCount += 1;
-                        if SuccessSummary <> '' then
-                            SuccessSummary += '\';
-
-                        SuccessSummary +=
-                          StrSubstNo(
-                            'Draft %1 converted to PO %2',
-                            DraftOrderHeader."No.",
-                            CreatedPONo);
-                        Commit();
-                    end;
+                FailureSummary += StrSubstNo('Draft %1 failed: %2', DraftOrderHeader."No.",
+                    CopyStr(ErrorText, 1, 180));
+            end else begin
+                CreatedPONo := ConvertState.GetCreatedPONo();
+                WarningMessage := ConvertState.GetWarningMessage();
+                ConvertedCount += 1;
+                if SuccessSummary <> '' then
+                    SuccessSummary += '\';
+                SuccessSummary += StrSubstNo('Draft %1 converted to PO %2', DraftOrderHeader."No.", CreatedPONo);
+            end;
         until DraftOrderHeader.Next() = 0;
-
-        Commit();
         if FailedCount > 0 then
             Message(
               'Auto-convert finished with %1 converted and %2 failed.\%3',
@@ -99,27 +65,4 @@ codeunit 80213 "TBGC Draft Auto Convert"
                 Message('Auto-convert ran but no draft orders were scheduled for today (%1).', Today);
     end;
 
-    [TryFunction]
-    local procedure TryValidateDraftOrder(DraftOrderNo: Code[20])
-    var
-        DraftOrderConverter: Codeunit "TBGC Draft Order Converter";
-    begin
-        DraftOrderConverter.ValidateDraftOrderForPOCreation(DraftOrderNo, false);
-    end;
-
-    [TryFunction]
-    local procedure TryConvertDraftOrder(DraftOrderNo: Code[20]; var CreatedPONo: Code[20]; var WarningMessage: Text)
-    var
-        DraftOrderConverter: Codeunit "TBGC Draft Order Converter";
-    begin
-        DraftOrderConverter.ConvertDraftOrderToPOJobQueue(DraftOrderNo, CreatedPONo, WarningMessage);
-    end;
-
-    [TryFunction]
-    local procedure TryClaimDraftOrder(DraftOrderNo: Code[20])
-    var
-        DraftOrderConverter: Codeunit "TBGC Draft Order Converter";
-    begin
-        DraftOrderConverter.ClaimDraftOrderForAutoConvert(DraftOrderNo);
-    end;
 }

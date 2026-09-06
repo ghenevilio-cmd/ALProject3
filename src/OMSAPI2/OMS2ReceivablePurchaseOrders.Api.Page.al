@@ -44,6 +44,10 @@ page 80245 "OMS2 Receivable POs API"
                 {
                     Caption = 'OMS Payload Hash';
                 }
+                field(draftOrderNumber; Rec."TBGC Draft Order No.")
+                {
+                    Caption = 'Draft Order Number';
+                }
                 field(vendorNumber; Rec."Buy-from Vendor No.")
                 {
                     Caption = 'Vendor Number';

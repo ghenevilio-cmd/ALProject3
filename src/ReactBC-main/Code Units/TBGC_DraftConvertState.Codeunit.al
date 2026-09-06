@@ -7,6 +7,7 @@ codeunit 80218 "TBGC Draft Convert State"
         ManualPostingDate: Date;
         CreatedPONo: Code[20];
         WarningMessage: Text;
+        JobQueueMode: Boolean;
 
     procedure SetDraftOrderNo(NewDraftOrderNo: Code[20])
     begin
@@ -48,11 +49,22 @@ codeunit 80218 "TBGC Draft Convert State"
         exit(WarningMessage);
     end;
 
+    procedure SetJobQueueMode(NewJobQueueMode: Boolean)
+    begin
+        JobQueueMode := NewJobQueueMode;
+    end;
+
+    procedure IsJobQueueMode(): Boolean
+    begin
+        exit(JobQueueMode);
+    end;
+
     procedure ClearState()
     begin
         Clear(DraftOrderNo);
         Clear(ManualPostingDate);
         Clear(CreatedPONo);
         Clear(WarningMessage);
+        JobQueueMode := false;
     end;
 }

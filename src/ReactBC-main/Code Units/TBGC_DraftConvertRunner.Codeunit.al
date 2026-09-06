@@ -10,11 +10,16 @@ codeunit 80219 "TBGC Draft Convert Runner"
         CreatedPONo: Code[20];
         WarningMessage: Text;
     begin
-        DraftOrderConverter.ConvertDraftOrderToPOWithPostingDate(
-          ConvertState.GetDraftOrderNo(),
-          ConvertState.GetManualPostingDate(),
-          CreatedPONo,
-          WarningMessage);
+        if ConvertState.IsJobQueueMode() then begin
+            DraftOrderConverter.ClaimDraftOrderForAutoConvert(ConvertState.GetDraftOrderNo());
+            DraftOrderConverter.ConvertDraftOrderToPOJobQueue(
+              ConvertState.GetDraftOrderNo(), CreatedPONo, WarningMessage);
+        end else
+            DraftOrderConverter.ConvertDraftOrderToPOWithPostingDate(
+              ConvertState.GetDraftOrderNo(),
+              ConvertState.GetManualPostingDate(),
+              CreatedPONo,
+              WarningMessage);
 
         ConvertState.SetCreatedPONo(CreatedPONo);
         ConvertState.SetWarningMessage(WarningMessage);
