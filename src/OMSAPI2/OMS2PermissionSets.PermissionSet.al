@@ -6,6 +6,7 @@ permissionset 80233 "OMS2 API WRITE"
     Permissions =
         tabledata "Purchase Header" = RIM,
         tabledata "Purchase Line" = RIM,
+        tabledata "Purchases & Payables Setup" = R,
         tabledata "Purch. Rcpt. Header" = R,
         tabledata "Purch. Rcpt. Line" = R,
         tabledata Vendor = R,

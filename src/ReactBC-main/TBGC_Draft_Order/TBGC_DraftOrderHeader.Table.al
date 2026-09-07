@@ -75,6 +75,12 @@ table 80208 "TBGC Draft Order Header"
             Editable = false;
             CalcFormula = lookup(Vendor.Name where("No." = field("Vendor No.")));
         }
+        field(14; "No. Series"; Code[20])
+        {
+            Caption = 'No. Series';
+            DataClassification = CustomerContent;
+            TableRelation = "No. Series";
+        }
         field(80206; "OMS PO Ref. No."; Code[11])
         {
             Caption = 'OMS PO Ref. No.';
@@ -125,11 +131,13 @@ table 80208 "TBGC Draft Order Header"
 
     trigger OnInsert()
     begin
-        // Number allocation and insert share the same table lock, so concurrent API requests cannot choose the
-        // same DRF number. Use standard No. Series if this custom sequence ever becomes configurable.
-        LockTable();
-        if "No." = '' then
-            "No." := GetNextDraftNo();
+        if "No." = '' then begin
+            PurchasesPayablesSetup.SetLoadFields("TBGC Draft Order Nos.");
+            PurchasesPayablesSetup.Get();
+            PurchasesPayablesSetup.TestField("TBGC Draft Order Nos.");
+            "No. Series" := PurchasesPayablesSetup."TBGC Draft Order Nos.";
+            "No." := NoSeries.GetNextNo("No. Series");
+        end;
 
         if "Created At" = 0DT then
             "Created At" := CurrentDateTime();
@@ -147,21 +155,7 @@ table 80208 "TBGC Draft Order Header"
             DraftOrderLine.DeleteAll();
     end;
 
-    local procedure GetNextDraftNo(): Code[20]
     var
-        DraftOrderHeader: Record "TBGC Draft Order Header";
-        LastNoInteger: Integer;
-        DraftSequenceText: Text;
-    begin
-        DraftOrderHeader.SetCurrentKey("No.");
-        if DraftOrderHeader.FindLast() then
-            Evaluate(LastNoInteger, DelChr(DraftOrderHeader."No.", '=', 'DRF-'));
-
-        LastNoInteger += 1;
-        DraftSequenceText := Format(LastNoInteger);
-        while StrLen(DraftSequenceText) < 6 do
-            DraftSequenceText := '0' + DraftSequenceText;
-
-        exit(CopyStr('DRF-' + DraftSequenceText, 1, 20));
-    end;
+        PurchasesPayablesSetup: Record "Purchases & Payables Setup";
+        NoSeries: Codeunit "No. Series";
 }

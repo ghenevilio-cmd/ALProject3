@@ -2,6 +2,12 @@ tableextension 80296 "APL Purch Payables Setup Ext" extends "Purchases & Payable
 {
     fields
     {
+        field(80292; "TBGC Draft Order Nos."; Code[20])
+        {
+            Caption = 'TBGC Draft Order Nos.';
+            DataClassification = CustomerContent;
+            TableRelation = "No. Series";
+        }
         field(80294; "APL Order History Ret. Days"; Integer)
         {
             Caption = 'APL Order History Retention Days';

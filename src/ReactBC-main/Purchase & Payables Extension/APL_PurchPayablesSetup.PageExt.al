@@ -2,6 +2,14 @@ pageextension 80297 "APL Purch Payables Setup Ext" extends "Purchases & Payables
 {
     layout
     {
+        addlast("Number Series")
+        {
+            field("TBGC Draft Order Nos."; Rec."TBGC Draft Order Nos.")
+            {
+                ApplicationArea = All;
+                ToolTip = 'Specifies the number series used for new TBGC Draft Orders.';
+            }
+        }
         addlast(General)
         {
             field("APL Order History Ret. Days"; Rec."APL Order History Ret. Days")
