@@ -117,8 +117,6 @@ codeunit 80210 "TBGC Draft Order Converter"
         CreatedPONo := PurchHeader."No.";
 
         PurchHeader.Validate("Buy-from Vendor No.", VendorNo);
-        if DraftOrderHeader."OMS Currency Code" <> '' then
-            PurchHeader.Validate("Currency Code", DraftOrderHeader."OMS Currency Code");
         ApplyManualDocumentDatesToPurchaseHeader(PurchHeader, ManualPostingDate);
         ApplyDraftLocationToPurchaseHeader(PurchHeader, EffectiveLocationCode);
         PurchHeader.Validate("Expected Receipt Date", DraftOrderHeader."Expected Receipt Date");
@@ -244,8 +242,7 @@ codeunit 80210 "TBGC Draft Order Converter"
         TempPurchHeader."No." := 'VALIDATION';
         TempPurchHeader.Insert();
         TempPurchHeader.Validate("Buy-from Vendor No.", VendorNo);
-        if CurrencyCode <> '' then
-            TempPurchHeader.Validate("Currency Code", CurrencyCode);
+        ValidateOmsCurrencyMatchesVendor(TempPurchHeader, CurrencyCode);
         ApplyManualDocumentDatesToPurchaseHeader(TempPurchHeader, ManualPostingDate);
         if TempPurchHeader."Currency Code" <> '' then
             TempPurchHeader.TestField("Currency Factor");
@@ -255,6 +252,24 @@ codeunit 80210 "TBGC Draft Order Converter"
         ApplyShipmentMethodToPurchaseHeader(TempPurchHeader, LocationCode);
         ApplyLocationShipToDetails(TempPurchHeader, LocationCode);
         TempPurchHeader.Validate("Expected Receipt Date", ExpectedReceiptDate);
+    end;
+
+    local procedure ValidateOmsCurrencyMatchesVendor(PurchHeader: Record "Purchase Header"; OmsCurrencyCode: Code[10])
+    var
+        GeneralLedgerSetup: Record "General Ledger Setup";
+        EffectiveCurrencyCode: Code[10];
+        CurrencyMismatchErr: Label 'OMS currency %1 does not match Business Central currency %2 for vendor %3. Correct the OMS order or Vendor Card before conversion.';
+    begin
+        GeneralLedgerSetup.SetLoadFields("LCY Code");
+        GeneralLedgerSetup.Get();
+        GeneralLedgerSetup.TestField("LCY Code");
+
+        EffectiveCurrencyCode := PurchHeader."Currency Code";
+        if PurchHeader."Currency Code" = '' then
+            EffectiveCurrencyCode := GeneralLedgerSetup."LCY Code";
+
+        if EffectiveCurrencyCode <> OmsCurrencyCode then
+            Error(CurrencyMismatchErr, OmsCurrencyCode, EffectiveCurrencyCode, PurchHeader."Buy-from Vendor No.");
     end;
 
     local procedure ApplyManualDocumentDatesToPurchaseHeader(var PurchHeader: Record "Purchase Header"; ManualPostingDate: Date)
