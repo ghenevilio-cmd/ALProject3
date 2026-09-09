@@ -85,6 +85,9 @@ table 80208 "TBGC Draft Order Header"
         {
             Caption = 'OMS PO Ref. No.';
             DataClassification = CustomerContent;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS now correlates this document by its Business Central Draft Order No.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin
@@ -104,6 +107,9 @@ table 80208 "TBGC Draft Order Header"
         {
             Caption = 'OMS PO Payload Hash';
             DataClassification = SystemMetadata;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin

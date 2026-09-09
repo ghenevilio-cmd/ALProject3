@@ -108,10 +108,6 @@ codeunit 80210 "TBGC Draft Order Converter"
         // Only reached if ALL validations above passed
         PurchHeader.Init();
         PurchHeader."Document Type" := PurchHeader."Document Type"::Order;
-        if DraftOrderHeader."OMS PO Ref. No." <> '' then begin
-            PurchHeader.Validate("OMS PO Ref. No.", DraftOrderHeader."OMS PO Ref. No.");
-            PurchHeader.Validate("OMS PO Payload Hash", DraftOrderHeader."OMS PO Payload Hash");
-        end;
         PurchHeader."TBGC Draft Order No." := DraftOrderHeader."No.";
         PurchHeader.Insert(true);
         CreatedPONo := PurchHeader."No.";

@@ -26,6 +26,10 @@ permissionset 80233 "OMS2 API WRITE"
         tabledata "TBGC Draft Order Line" = RIM,
         tabledata "OMS2 Receipt Command" = RIM,
         tabledata "OMS2 Receipt Command Line" = RIMD,
+        tabledata "OMS2 Draft Command" = RIM,
+        tabledata "OMS2 Draft Command Line" = RIMD,
+        tabledata "OMS2 Receipt Command V2" = RIM,
+        tabledata "OMS2 Receipt Command Line V2" = RIMD,
         page "OMS2 Purchase Orders API" = X,
         page "OMS2 Purchase Order Lines API" = X,
         page "OMS2 Purchase Receipts API" = X,
@@ -39,7 +43,12 @@ permissionset 80233 "OMS2 API WRITE"
         page "OMS2 Approved Products API" = X,
         page "OMS2 Draft Orders API" = X,
         page "OMS2 Draft Order Lines API" = X,
+        page "OMS2 Draft Commands V2 API" = X,
+        page "OMS2 Draft Cmd Lines V2 API" = X,
+        page "OMS2 Receipt Commands V2 API" = X,
+        page "OMS2 Receipt Cmd Lines V2 API" = X,
         codeunit "OMS2 Command Mgt" = X,
+        codeunit "OMS2 Command Mgt V2" = X,
         codeunit "Release Purchase Document" = X,
         codeunit "Purch.-Post" = X;
 }
@@ -56,6 +65,10 @@ permissionset 80234 "OMS2 API READ"
         tabledata "Purch. Rcpt. Line" = R,
         tabledata "OMS2 Receipt Command" = R,
         tabledata "OMS2 Receipt Command Line" = R,
+        tabledata "OMS2 Draft Command" = R,
+        tabledata "OMS2 Draft Command Line" = R,
+        tabledata "OMS2 Receipt Command V2" = R,
+        tabledata "OMS2 Receipt Command Line V2" = R,
         tabledata "TBGC Concept Table" = R,
         tabledata "TBGC Zoning Table" = R,
         tabledata "LSC Store" = R,
@@ -76,5 +89,9 @@ permissionset 80234 "OMS2 API READ"
         page "OMS2 Zoning API" = X,
         page "OMS2 Approved Products API" = X,
         page "OMS2 Draft Orders API" = X,
-        page "OMS2 Draft Order Lines API" = X;
+        page "OMS2 Draft Order Lines API" = X,
+        page "OMS2 Draft Commands V2 API" = X,
+        page "OMS2 Draft Cmd Lines V2 API" = X,
+        page "OMS2 Receipt Commands V2 API" = X,
+        page "OMS2 Receipt Cmd Lines V2 API" = X;
 }

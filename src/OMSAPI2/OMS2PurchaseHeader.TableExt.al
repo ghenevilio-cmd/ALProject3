@@ -6,6 +6,9 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         {
             Caption = 'OMS PO Ref. No.';
             DataClassification = CustomerContent;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS now correlates purchase orders by TBGC Draft Order No.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin
@@ -16,6 +19,9 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         {
             Caption = 'OMS Receiving Ref. No.';
             DataClassification = CustomerContent;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS now stores the official Business Central Posted Receipt No.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin
@@ -26,6 +32,9 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         {
             Caption = 'OMS PO Payload Hash';
             DataClassification = SystemMetadata;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin
@@ -36,6 +45,9 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         {
             Caption = 'OMS Receiving Payload Hash';
             DataClassification = SystemMetadata;
+            ObsoleteState = Pending;
+            ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
+            ObsoleteTag = '1.1.2.16';
 
             trigger OnValidate()
             begin
