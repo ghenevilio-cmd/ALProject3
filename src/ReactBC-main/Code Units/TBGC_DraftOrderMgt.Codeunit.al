@@ -46,7 +46,6 @@ codeunit 80208 "TBGC Draft Order Mgt"
         ItemNo: Code[20];
         Description: Text[100];
         BrandCode: Code[20];
-        BrandDescription: Text[100];
         UOMCode: Code[20];
         Qty: Decimal;
         DirectUnitCost: Decimal;
@@ -116,7 +115,6 @@ codeunit 80208 "TBGC Draft Order Mgt"
             Clear(ItemNo);
             Clear(Description);
             Clear(BrandCode);
-            Clear(BrandDescription);
             Clear(UOMCode);
             Clear(Qty);
             Clear(DirectUnitCost);
@@ -136,9 +134,6 @@ codeunit 80208 "TBGC Draft Order Mgt"
 
             if LineObj.Get('brandCode', JToken) then
                 BrandCode := CopyStr(JToken.AsValue().AsText(), 1, MaxStrLen(BrandCode));
-
-            if LineObj.Get('brandDescription', JToken) then
-                BrandDescription := CopyStr(JToken.AsValue().AsText(), 1, MaxStrLen(BrandDescription));
 
             if LineObj.Get('uom', JToken) then
                 UOMCode := CopyStr(JToken.AsValue().AsText(), 1, MaxStrLen(UOMCode));
@@ -186,8 +181,7 @@ codeunit 80208 "TBGC Draft Order Mgt"
             DraftOrderLine."Vendor No." := VendorNo;
             DraftOrderLine."Item No." := ItemNo;
             DraftOrderLine.Description := Description;
-            DraftOrderLine."TBGC Brand Code" := BrandCode;
-            DraftOrderLine."TBGC Brand Description" := BrandDescription;
+            DraftOrderLine.Validate("TBGC Brand Code", BrandCode);
             DraftOrderLine."Unit of Measure Code" := UOMCode;
             DraftOrderLine.Quantity := Qty;
             DraftOrderLine."Direct Unit Cost" := DirectUnitCost;

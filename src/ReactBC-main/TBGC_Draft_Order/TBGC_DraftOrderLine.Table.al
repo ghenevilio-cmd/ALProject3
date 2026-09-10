@@ -31,6 +31,23 @@ table 80209 "TBGC Draft Order Line"
         field(6; "TBGC Brand Code"; Code[20])
         {
             Caption = 'TBGC Brand Code';
+
+            trigger OnValidate()
+            var
+                BrandList: Record "TBGC Brand List";
+                BrandNotFoundErr: Label 'TBGC Brand Code %1 is not set up for Item No. %2.';
+            begin
+                if "TBGC Brand Code" = '' then begin
+                    "TBGC Brand Description" := '';
+                    exit;
+                end;
+
+                TestField("Item No.");
+                if not BrandList.Get("Item No.", "TBGC Brand Code") then
+                    Error(BrandNotFoundErr, "TBGC Brand Code", "Item No.");
+
+                "TBGC Brand Description" := BrandList."TBGC Brand Description";
+            end;
         }
         field(7; "TBGC Brand Description"; Text[100])
         {

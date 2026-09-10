@@ -5,7 +5,8 @@ codeunit 80249 "OMS2 Command Mgt V2"
                   tabledata "Purchase Line" = RIM,
                   tabledata "Purch. Rcpt. Header" = R,
                   tabledata "TBGC Draft Order Header" = RIM,
-                  tabledata "TBGC Draft Order Line" = RIM;
+                  tabledata "TBGC Draft Order Line" = RIM,
+                  tabledata "TBGC Brand List" = R;
 
     procedure CreateDraft(var Command: Record "OMS2 Draft Command")
     var
@@ -45,7 +46,7 @@ codeunit 80249 "OMS2 Command Mgt V2"
                 DraftLine."Vendor No." := Command."Vendor No.";
                 DraftLine."Item No." := CommandLine."Item No.";
                 DraftLine.Description := CopyStr(Item.Description, 1, MaxStrLen(DraftLine.Description));
-                DraftLine."TBGC Brand Code" := CommandLine."Brand Code";
+                DraftLine.Validate("TBGC Brand Code", CommandLine."Brand Code");
                 DraftLine."Unit of Measure Code" := CommandLine."Unit of Measure Code";
                 DraftLine.Quantity := CommandLine.Quantity;
                 DraftLine."Direct Unit Cost" := CommandLine."Direct Unit Cost";
