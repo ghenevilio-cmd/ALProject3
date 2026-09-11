@@ -20,10 +20,14 @@ foreach ($source in $sources) {
 }
 
 $v2 = ($sources | ForEach-Object { Get-Content -Raw -LiteralPath (Join-Path $project $_) }) -join "`n"
-foreach ($required in @('commandId', 'Payload Hash', 'Draft Order No.', 'Posted Receipt No.', 'SetSuppressCommit(true)')) {
+foreach ($required in @('commandId', 'createdByUserId', 'Payload Hash', 'Draft Order No.', 'Posted Receipt No.', 'SetSuppressCommit(true)')) {
     if ($v2 -notmatch [regex]::Escape($required)) {
         throw "OMSAPI2 v2 contract is missing: $required"
     }
+}
+$commandMgt = Get-Content -Raw -LiteralPath (Join-Path $project 'src/OMSAPI2/OMS2CommandMgtV2.Codeunit.al')
+if ($commandMgt -notmatch 'DraftHeader\."Created By User ID"\s*:=\s*Command\."Created By User ID"') {
+    throw 'OMSAPI2 v2 does not carry the command origin to the Draft Order.'
 }
 if ($v2 -match 'OMS PO Ref\. No\.|OMS Receiving Ref\. No\.') {
     throw 'OMSAPI2 v2 still exposes an OMS document reference.'

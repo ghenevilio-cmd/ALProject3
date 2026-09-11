@@ -34,6 +34,8 @@ codeunit 80249 "OMS2 Command Mgt V2"
         DraftHeader.Type := DraftHeader.Type::Checkout;
         DraftHeader.Status := DraftHeader.Status::Open;
         DraftHeader.Validate("Released Date", Today);
+        if Command."Created By User ID" <> '' then
+            DraftHeader."Created By User ID" := Command."Created By User ID";
         DraftHeader.Insert(true);
 
         if CommandLine.FindSet() then

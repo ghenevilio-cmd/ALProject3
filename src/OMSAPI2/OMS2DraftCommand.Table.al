@@ -18,6 +18,7 @@ table 80249 "OMS2 Draft Command"
         field(9; "Draft Order Id"; Guid) { Caption = 'Draft Order Id'; Editable = false; }
         field(10; "Created At"; DateTime) { Caption = 'Created At'; Editable = false; }
         field(11; "Completed At"; DateTime) { Caption = 'Completed At'; Editable = false; }
+        field(12; "Created By User ID"; Code[50]) { Caption = 'Created By User ID'; }
     }
 
     keys

@@ -25,6 +25,7 @@ page 80256 "OMS2 Draft Commands V2 API"
             {
                 field(commandId; Rec."Command Id") { Caption = 'Command Id'; }
                 field(payloadHash; Rec."Payload Hash") { Caption = 'Payload Hash'; }
+                field(createdByUserId; Rec."Created By User ID") { Caption = 'Created By User ID'; }
                 field(vendorNumber; Rec."Vendor No.") { Caption = 'Vendor Number'; }
                 field(currencyCode; Rec."Currency Code") { Caption = 'Currency Code'; }
                 field(locationCode; Rec."Location Code") { Caption = 'Location Code'; }
