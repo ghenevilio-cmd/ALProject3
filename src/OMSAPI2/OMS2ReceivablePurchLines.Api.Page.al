@@ -66,6 +66,17 @@ page 80246 "OMS2 Receivable PO Lines API"
                 {
                     Caption = 'Outstanding Quantity';
                 }
+                // How much over the ordered quantity this line's Item Family still allows, and what that
+                // leaves receivable right now. Carried with the line OMS already reads on every refresh, so
+                // the limit travels with the quantities it applies to and cannot disagree with them.
+                field(receivingThresholdPercent; ReceivingThresholdPct)
+                {
+                    Caption = 'Receiving Threshold Percent';
+                }
+                field(maxReceivableQuantity; MaxReceivableQty)
+                {
+                    Caption = 'Maximum Receivable Quantity';
+                }
                 field(directUnitCost; Rec."Direct Unit Cost")
                 {
                     Caption = 'Direct Unit Cost';
@@ -86,4 +97,16 @@ page 80246 "OMS2 Receivable PO Lines API"
     begin
         Rec.ReadIsolation := IsolationLevel::ReadCommitted;
     end;
+
+    trigger OnAfterGetRecord()
+    var
+        ReceivingThreshold: Codeunit "OMS2 Receiving Threshold";
+    begin
+        ReceivingThresholdPct := ReceivingThreshold.ThresholdPctForLine(Rec);
+        MaxReceivableQty := ReceivingThreshold.RemainingReceivable(Rec);
+    end;
+
+    var
+        ReceivingThresholdPct: Decimal;
+        MaxReceivableQty: Decimal;
 }

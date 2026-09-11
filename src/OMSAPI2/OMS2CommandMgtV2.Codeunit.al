@@ -148,6 +148,7 @@ codeunit 80249 "OMS2 Command Mgt V2"
     local procedure ReceiveOneLine(CommandLine: Record "OMS2 Receipt Command Line V2"; PurchaseHeader: Record "Purchase Header"; ActualReceiptDate: Date)
     var
         PurchaseLine: Record "Purchase Line";
+        ReceivingThreshold: Codeunit "OMS2 Receiving Threshold";
     begin
         PurchaseLine.SetRange("Document Type", PurchaseHeader."Document Type");
         PurchaseLine.SetRange("Document No.", PurchaseHeader."No.");
@@ -158,8 +159,13 @@ codeunit 80249 "OMS2 Command Mgt V2"
         PurchaseLine.SetFilter("Outstanding Quantity", '>%1', 0);
         if not PurchaseLine.FindFirst() then
             Error('Item %1 is not an outstanding line on purchase order %2.', CommandLine."Item No.", PurchaseHeader."No.");
-        if CommandLine."Quantity to Receive" > PurchaseLine."Outstanding Quantity" then
-            Error('Item %1 has only %2 outstanding on purchase order %3.', CommandLine."Item No.", PurchaseLine."Outstanding Quantity", PurchaseHeader."No.");
+        /*
+         * The ordered quantity is not the limit; the item family's PO Receiving Threshold % is. A delivery may
+         * legitimately arrive slightly over, and refusing it here would refuse what Business Central itself
+         * allows a receiver to accept by hand.
+         */
+        ReceivingThreshold.AssertWithinThreshold(PurchaseLine, CommandLine."Quantity to Receive");
+        ReceivingThreshold.ApplyThresholdAllowance(PurchaseLine, CommandLine."Quantity to Receive");
 
         PurchaseLine.Validate("Qty. to Receive", CommandLine."Quantity to Receive");
         PurchaseLine.Validate("TBGC Actual Receipt Date", ActualReceiptDate);

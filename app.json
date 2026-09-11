@@ -2,7 +2,7 @@
     "id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
     "name": "Approved Product List",
     "publisher": "Systems Integration",
-    "version": "1.1.2.18",
+    "version": "1.1.2.19",
     "brief": "",
     "description": "Approved Product List",
     "privacyStatement": "",
@@ -24,7 +24,7 @@
             "id": "eabfa8e7-dd6b-4c1b-abcd-bd5ecc27d50f",
             "name": "Systems Integration Customizations",
             "publisher": "Systems Integration",
-            "version": "1.0.3.12"
+            "version": "1.0.3.13"
         },
         {
             "id": "2a0547fa-f60f-401d-b1fe-c7c4be8fb230",
