@@ -33,16 +33,9 @@ if ($v2 -match 'OMS PO Ref\. No\.|OMS Receiving Ref\. No\.') {
     throw 'OMSAPI2 v2 still exposes an OMS document reference.'
 }
 
-foreach ($page in @(
-    'src/OMSAPI2/OMS2DraftOrderPages.PageExt.al',
-    'src/OMSAPI2/OMS2PurchaseOrderCard.PageExt.al',
-    'src/OMSAPI2/OMS2PurchaseOrderList.PageExt.al',
-    'src/OMSAPI2/OMS2PostedPurchReceipt.PageExt.al',
-    'src/OMSAPI2/OMS2PostedPurchReceipts.PageExt.al'
-)) {
-    if ((Get-Content -Raw -LiteralPath (Join-Path $project $page)) -match 'OMS (?:PO|Receiving) Ref\. No\.') {
-        throw "Retired OMS document reference remains visible in $page"
-    }
-}
+# Five page extensions used to be read here to prove they no longer displayed a retired OMS reference. They were
+# emptied when those references came off the user interface, leaving objects that extended a page and did
+# nothing, and were then removed. Reading files that no longer exist made this script fail without proving
+# anything; the check above already asserts that no v2 source exposes a retired reference.
 
 Write-Output 'OMSAPI2 v2 source contracts passed.'
