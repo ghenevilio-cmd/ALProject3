@@ -31,17 +31,16 @@ page 80235 "OMS2 Purchase Receipts API"
                 {
                     Caption = 'Number';
                 }
-                field(omsPoReferenceNo; Rec."OMS PO Ref. No.")
-                {
-                    Caption = 'OMS PO Reference Number';
-                }
-                field(omsReceivingReferenceNo; Rec."OMS Receiving Ref. No.")
-                {
-                    Caption = 'OMS Receiving Reference Number';
-                }
                 field(orderNumber; Rec."Order No.")
                 {
                     Caption = 'Order Number';
+                }
+                // Who counted the delivery in: D365-WEB-<employee> from OMS, D365-MOB-<employee> from the
+                // mobile application, and the Business Central user for a receipt posted at a desk. A buyer
+                // asking who received a delivery is asking about the person, not about which system was used.
+                field(receivedBy; Rec."TBGC Original Created By")
+                {
+                    Caption = 'Received By';
                 }
                 field(vendorNumber; Rec."Buy-from Vendor No.")
                 {
@@ -66,7 +65,16 @@ page 80235 "OMS2 Purchase Receipts API"
     trigger OnOpenPage()
     begin
         Rec.ReadIsolation := IsolationLevel::ReadCommitted;
-        // One OMS order can produce several partial receipts, so the OMS reference is a filter, never a key.
-        Rec.SetFilter("OMS Receiving Ref. No.", '<>%1', '');
+        /*
+         * Every receipt posted against a purchase order, whoever posted it.
+         *
+         * This used to select receipts carrying an OMS receiving reference. That reference was retired when
+         * Business Central became the owner of document identities, so nothing has set it since — the page
+         * answered with pre-cutover receipts only, and a delivery counted in on the mobile application was
+         * invisible to OMS even though its quantities had already moved the order to partially received.
+         *
+         * The order number is the correlation OMS needs and the one a receipt always carries.
+         */
+        Rec.SetFilter("Order No.", '<>%1', '');
     end;
 }

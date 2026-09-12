@@ -17,6 +17,15 @@ table 80258 "OMS2 Receipt Command V2"
         field(8; "Posted Receipt Id"; Guid) { Caption = 'Posted Receipt Id'; Editable = false; }
         field(9; "Created At"; DateTime) { Caption = 'Created At'; Editable = false; }
         field(10; "Completed At"; DateTime) { Caption = 'Completed At'; Editable = false; }
+        /*
+         * Who counted the delivery in, as OMS knows them. Business Central's own creator is the integration
+         * service user for every receipt OMS posts, which names the connection rather than the person, and the
+         * posted receipt's Received By is the field a buyer actually reads.
+         *
+         * Optional: a command sent before this field existed still posts, and its receipt keeps the standard
+         * fallback.
+         */
+        field(11; "Received By User ID"; Code[50]) { Caption = 'Received By User ID'; DataClassification = EndUserIdentifiableInformation; }
     }
 
     keys

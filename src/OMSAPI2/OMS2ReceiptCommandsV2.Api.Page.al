@@ -27,6 +27,7 @@ page 80258 "OMS2 Receipt Commands V2 API"
                 field(payloadHash; Rec."Payload Hash") { Caption = 'Payload Hash'; }
                 field(purchaseOrderId; Rec."Purchase Order Id") { Caption = 'Purchase Order Id'; }
                 field(postingDate; Rec."Posting Date") { Caption = 'Posting Date'; }
+                field(receivedByUserId; Rec."Received By User ID") { Caption = 'Received By User ID'; }
                 field(status; Rec.Status) { Caption = 'Status'; Editable = false; }
                 field(purchaseOrderNumber; Rec."Purchase Order No.") { Caption = 'Purchase Order Number'; Editable = false; }
                 field(postedReceiptNumber; Rec."Posted Receipt No.") { Caption = 'Posted Receipt Number'; Editable = false; }

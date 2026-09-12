@@ -87,6 +87,7 @@ codeunit 80249 "OMS2 Command Mgt V2"
 
         Clear(CapturedReceiptId);
         Clear(CapturedReceiptNo);
+        CapturedReceivedBy := Command."Received By User ID";
         CaptureReceipt := true;
         PurchPost.SetSuppressCommit(true);
         PurchPost.Run(PurchaseHeader);
@@ -179,10 +180,24 @@ codeunit 80249 "OMS2 Command Mgt V2"
             exit;
         CapturedReceiptId := PurchRcptHeader.SystemId;
         CapturedReceiptNo := PurchRcptHeader."No.";
+
+        /*
+         * Received By names the person who counted the delivery in. Codeunit 80216 falls back to UserId(),
+         * which for a receipt OMS posted is the integration service user — the connection, not the receiver.
+         *
+         * Assigned rather than defaulted: subscribers on the same event have no guaranteed order, so leaving
+         * it to whichever ran first would decide the name by compile order. Writing it whenever the command
+         * carries one makes the order irrelevant, and a command without one still gets the standard fallback.
+         */
+        if CapturedReceivedBy = '' then
+            exit;
+        PurchRcptHeader."TBGC Original Created By" := CapturedReceivedBy;
+        PurchRcptHeader.Modify(false);
     end;
 
     var
         CaptureReceipt: Boolean;
         CapturedReceiptId: Guid;
         CapturedReceiptNo: Code[20];
+        CapturedReceivedBy: Code[50];
 }
