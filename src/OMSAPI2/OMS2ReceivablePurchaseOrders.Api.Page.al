@@ -36,14 +36,6 @@ page 80245 "OMS2 Receivable POs API"
                 {
                     Caption = 'Number';
                 }
-                field(omsPoReferenceNo; Rec."OMS PO Ref. No.")
-                {
-                    Caption = 'OMS PO Reference Number';
-                }
-                field(omsPayloadHash; Rec."OMS PO Payload Hash")
-                {
-                    Caption = 'OMS Payload Hash';
-                }
                 field(draftOrderNumber; Rec."TBGC Draft Order No.")
                 {
                     Caption = 'Draft Order Number';

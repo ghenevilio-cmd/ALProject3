@@ -1,9 +1,16 @@
+/*
+ * The v1 receipt command line, retired alongside its header — see OMS2ReceiptCommand.Table.al for why the object
+ * stays in the app instead of being deleted.
+ */
 table 80237 "OMS2 Receipt Command Line"
 {
     Caption = 'OMS Receipt Command Line';
     DataClassification = CustomerContent;
     Access = Public;
     Extensible = false;
+    ObsoleteState = Removed;
+    ObsoleteReason = 'OMS posts receipts through OMS2 Receipt Command Line V2.';
+    ObsoleteTag = '1.1.2.21';
 
     fields
     {
@@ -11,8 +18,6 @@ table 80237 "OMS2 Receipt Command Line"
         {
             Caption = 'OMS Receiving Ref. No.';
             DataClassification = CustomerContent;
-            NotBlank = true;
-            TableRelation = "OMS2 Receipt Command"."OMS Receiving Ref. No.";
         }
         field(2; "Line No."; Integer)
         {
@@ -23,16 +28,13 @@ table 80237 "OMS2 Receipt Command Line"
         {
             Caption = 'Item No.';
             DataClassification = CustomerContent;
-            TableRelation = Item."No.";
         }
         field(4; "Quantity to Receive"; Decimal)
         {
             Caption = 'Quantity to Receive';
             DataClassification = CustomerContent;
             DecimalPlaces = 0 : 5;
-            MinValue = 0;
         }
-        /** Set when OMS knows the exact purchase line; otherwise the item number resolves it. */
         field(5; "Purchase Line No."; Integer)
         {
             Caption = 'Purchase Line No.';
@@ -47,29 +49,4 @@ table 80237 "OMS2 Receipt Command Line"
             Clustered = true;
         }
     }
-
-    trigger OnInsert()
-    var
-        ReceiptCommand: Record "OMS2 Receipt Command";
-        LastLine: Record "OMS2 Receipt Command Line";
-        ItemRequiredErr: Label 'Item No. is required.';
-        QuantityRequiredErr: Label 'Quantity to Receive must be greater than zero.';
-        CommandClosedErr: Label 'Receipt command %1 is no longer open.';
-    begin
-        ReceiptCommand.Get("OMS Receiving Ref. No.");
-        if ReceiptCommand.Status <> ReceiptCommand.Status::Open then
-            Error(CommandClosedErr, "OMS Receiving Ref. No.");
-        if "Item No." = '' then
-            Error(ItemRequiredErr);
-        if "Quantity to Receive" <= 0 then
-            Error(QuantityRequiredErr);
-
-        if "Line No." = 0 then begin
-            LastLine.SetRange("OMS Receiving Ref. No.", "OMS Receiving Ref. No.");
-            if LastLine.FindLast() then
-                "Line No." := LastLine."Line No." + 10000
-            else
-                "Line No." := 10000;
-        end;
-    end;
 }
