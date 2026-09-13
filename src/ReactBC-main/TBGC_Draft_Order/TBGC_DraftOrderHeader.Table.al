@@ -85,17 +85,9 @@ table 80208 "TBGC Draft Order Header"
         {
             Caption = 'OMS PO Ref. No.';
             DataClassification = CustomerContent;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS now correlates this document by its Business Central Draft Order No.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                if ("OMS PO Ref. No." <> UpperCase("OMS PO Ref. No.")) or
-                   (DelChr("OMS PO Ref. No.", '=', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') <> '')
-                then
-                    Error('OMS PO Ref. No. must contain only uppercase letters and numbers.');
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
         field(80207; "OMS Currency Code"; Code[10])
         {
@@ -107,17 +99,9 @@ table 80208 "TBGC Draft Order Header"
         {
             Caption = 'OMS PO Payload Hash';
             DataClassification = SystemMetadata;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                if (StrLen("OMS PO Payload Hash") <> MaxStrLen("OMS PO Payload Hash")) or
-                   (DelChr("OMS PO Payload Hash", '=', '0123456789ABCDEF') <> '')
-                then
-                    Error('OMS PO Payload Hash must be a 64-character uppercase hexadecimal value.');
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
     }
 
@@ -130,8 +114,12 @@ table 80208 "TBGC Draft Order Header"
         key(LocationStatus; "Location Code", Status, "Created At")
         {
         }
+        // Indexed the retired OMS reference, which nothing looks a document up by any more.
         key(OMSReference; "OMS PO Ref. No.")
         {
+            ObsoleteState = Removed;
+            ObsoleteReason = 'OMS now correlates this document by its Business Central Draft Order No.';
+            ObsoleteTag = '1.1.2.21';
         }
     }
 

@@ -12,12 +12,22 @@ page 80247 "OMS2 Draft Orders API"
     SourceTableView = where(Type = const(Checkout));
     DelayedInsert = true;
     ODataKeyFields = SystemId;
-    InsertAllowed = true;
+    InsertAllowed = false;
     ModifyAllowed = false;
     DeleteAllowed = false;
     ChangeTrackingAllowed = true;
     Extensible = false;
     AboutText = 'Creates idempotent TBGC Draft Orders for conversion by the standard Business Central Job Queue.';
+    /*
+     * The v1 draft order endpoint, whose whole contract was the OMS PO reference: it keyed replay detection on
+     * that number and refused a repeat carrying a different payload hash. Business Central owns document
+     * identity now, OMS sends a hidden command id instead, and nothing has called this since that cutover.
+     *
+     * A page cannot carry ObsoleteState, so it is retired by closing it instead: insertion is refused and the
+     * retired fields are gone from the layout, which leaves a readable object that can no longer create a
+     * document or reach a field that no longer exists. Replay protection went with them — it keyed on the OMS
+     * reference — and nothing is lost by that, because nothing can be inserted here at all.
+     */
 
     layout
     {
@@ -27,8 +37,6 @@ page 80247 "OMS2 Draft Orders API"
             {
                 field(id; Rec.SystemId) { Caption = 'Id'; Editable = false; }
                 field(number; Rec."No.") { Caption = 'Number'; Editable = false; }
-                field(omsPoReferenceNo; Rec."OMS PO Ref. No.") { Caption = 'OMS PO Reference Number'; }
-                field(omsPayloadHash; Rec."OMS PO Payload Hash") { Caption = 'OMS Payload Hash'; }
                 field(vendorNumber; Rec."Vendor No.") { Caption = 'Vendor Number'; }
                 field(currencyCode; Rec."OMS Currency Code") { Caption = 'Currency Code'; }
                 field(locationCode; Rec."Location Code") { Caption = 'Location Code'; }
@@ -46,40 +54,6 @@ page 80247 "OMS2 Draft Orders API"
             }
         }
     }
-
-    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
-    var
-        Existing: Record "TBGC Draft Order Header";
-        POValidationMgt: Codeunit "TBGC PO Validation Mgt";
-    begin
-        Rec.TestField("OMS PO Ref. No.");
-        Rec.TestField("OMS PO Payload Hash");
-        Rec.TestField("Vendor No.");
-        Rec.TestField("OMS Currency Code");
-        Rec.TestField("Location Code");
-        Rec.TestField("Expected Receipt Date");
-
-        Existing.LockTable();
-        Existing.SetRange("OMS PO Ref. No.", Rec."OMS PO Ref. No.");
-        if Existing.FindFirst() then begin
-            if Existing."OMS PO Payload Hash" <> Rec."OMS PO Payload Hash" then
-                Error('OMS PO reference %1 was already used with a different payload.', Rec."OMS PO Ref. No.");
-            Rec := Existing;
-            exit(false);
-        end;
-
-        POValidationMgt.ValidateHeaderBeforeInsert(
-          Rec."Vendor No.", Rec."Location Code", Rec."Expected Receipt Date");
-        Rec.Type := Rec.Type::Checkout;
-        Rec.Validate("Released Date", Today);
-        exit(true);
-    end;
-
-    trigger OnNewRecord(BelowxRec: Boolean)
-    begin
-        Rec.Type := Rec.Type::Checkout;
-        Rec.Status := Rec.Status::Open;
-    end;
 
     trigger OnOpenPage()
     begin

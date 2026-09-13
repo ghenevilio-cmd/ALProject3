@@ -1,3 +1,15 @@
+/*
+ * The OMS document references OMS used to stamp on a purchase order, and the payload hashes that protected
+ * their replay.
+ *
+ * Business Central owns document identity now: OMS sends a hidden command id, correlates the standard purchase
+ * order by its TBGC Draft Order No., and stores the official Posted Receipt No. it gets back. Nothing writes
+ * or reads these four fields any more.
+ *
+ * They are marked Removed rather than deleted, so their field numbers stay reserved and any code that still
+ * reaches for one fails to compile instead of silently reading a blank. Their validation and the replay guard
+ * that rode on them are gone with them — a field that cannot be written has nothing to validate.
+ */
 tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
 {
     fields
@@ -6,109 +18,44 @@ tableextension 80225 "OMS2 Purchase Header" extends "Purchase Header"
         {
             Caption = 'OMS PO Ref. No.';
             DataClassification = CustomerContent;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS now correlates purchase orders by TBGC Draft Order No.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                ValidateReference("OMS PO Ref. No.", FieldCaption("OMS PO Ref. No."));
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
         field(80207; "OMS Receiving Ref. No."; Code[11])
         {
             Caption = 'OMS Receiving Ref. No.';
             DataClassification = CustomerContent;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS now stores the official Business Central Posted Receipt No.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                ValidateReference("OMS Receiving Ref. No.", FieldCaption("OMS Receiving Ref. No."));
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
         field(80208; "OMS PO Payload Hash"; Code[64])
         {
             Caption = 'OMS PO Payload Hash';
             DataClassification = SystemMetadata;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                ValidateHash("OMS PO Payload Hash", FieldCaption("OMS PO Payload Hash"));
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
         field(80209; "OMS Receiving Payload Hash"; Code[64])
         {
             Caption = 'OMS Receiving Payload Hash';
             DataClassification = SystemMetadata;
-            ObsoleteState = Pending;
+            ObsoleteState = Removed;
             ObsoleteReason = 'OMS v2 stores replay hashes in its technical command table.';
-            ObsoleteTag = '1.1.2.16';
-
-            trigger OnValidate()
-            begin
-                ValidateHash("OMS Receiving Payload Hash", FieldCaption("OMS Receiving Payload Hash"));
-            end;
+            ObsoleteTag = '1.1.2.21';
         }
     }
 
     keys
     {
+        // Indexed the retired OMS reference, which nothing looks a purchase order up by any more.
         key(OMS2PoReference; "OMS PO Ref. No.")
         {
+            ObsoleteState = Removed;
+            ObsoleteReason = 'OMS now correlates purchase orders by TBGC Draft Order No.';
+            ObsoleteTag = '1.1.2.21';
         }
     }
-
-    trigger OnBeforeInsert()
-    var
-        ExistingPurchaseHeader: Record "Purchase Header";
-        DuplicateReferenceErr: Label 'OMS PO reference %1 already belongs to purchase order %2.';
-        ChangedReplayErr: Label 'OMS PO reference %1 was already used with a different payload.';
-    begin
-        if "OMS PO Ref. No." = '' then
-            exit;
-
-        TestField("OMS PO Payload Hash");
-        // ponytail: the short header insert is serialized; replace with an integration ledger only if measured contention requires it.
-        ExistingPurchaseHeader.LockTable();
-        ExistingPurchaseHeader.SetRange("Document Type", ExistingPurchaseHeader."Document Type"::Order);
-        ExistingPurchaseHeader.SetRange("OMS PO Ref. No.", "OMS PO Ref. No.");
-        if not ExistingPurchaseHeader.FindFirst() then
-            exit;
-
-        if ExistingPurchaseHeader."OMS PO Payload Hash" <> "OMS PO Payload Hash" then
-            Error(ChangedReplayErr, "OMS PO Ref. No.");
-
-        Error(DuplicateReferenceErr, "OMS PO Ref. No.", ExistingPurchaseHeader."No.");
-    end;
-
-    local procedure ValidateReference(Reference: Code[11]; ReferenceCaption: Text)
-    var
-        InvalidReferenceErr: Label '%1 must contain only uppercase letters and numbers.';
-    begin
-        if Reference = '' then
-            exit;
-
-        if (Reference <> UpperCase(Reference)) or
-           (DelChr(Reference, '=', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') <> '')
-        then
-            Error(InvalidReferenceErr, ReferenceCaption);
-    end;
-
-    local procedure ValidateHash(HashValue: Code[64]; HashCaption: Text)
-    var
-        InvalidHashErr: Label '%1 must be a 64-character hexadecimal SHA-256 value.';
-    begin
-        if HashValue = '' then
-            exit;
-
-        if (StrLen(HashValue) <> MaxStrLen(HashValue)) or
-           (DelChr(HashValue, '=', '0123456789ABCDEF') <> '')
-        then
-            Error(InvalidHashErr, HashCaption);
-    end;
 }
