@@ -214,11 +214,6 @@ pageextension 80287 "ML Receiving SysInfo Ext" extends "Purchase Order"
         {
             Visible = not MarketListReceivingMode;
         }
-        modify(Statistics_Promoted)
-        {
-            Visible = not MarketListReceivingMode;
-        }
-
         modify("Co&mments_Promoted")
         {
             Visible = not MarketListReceivingMode;
