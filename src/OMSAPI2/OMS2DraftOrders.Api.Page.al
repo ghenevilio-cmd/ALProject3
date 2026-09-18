@@ -1,4 +1,4 @@
-page 80247 "OMS2 Draft Orders API"
+page 80249 "OMS2 Draft Orders API"
 {
     APIVersion = 'v1.0';
     APIPublisher = 'systemsintegration';

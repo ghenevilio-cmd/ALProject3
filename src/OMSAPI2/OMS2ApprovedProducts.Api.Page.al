@@ -28,6 +28,8 @@ page 80244 "OMS2 Approved Products API"
                 field(vendorName; Rec."Vendor Name") { Caption = 'Vendor Name'; }
                 field(itemNumber; Rec."Item No.") { Caption = 'Item Number'; }
                 field(itemDescription; ItemDescription) { Caption = 'Item Description'; }
+                /// Blank means the item belongs to no family: OMS neither orders nor receives it until one is set.
+                field(itemFamilyCode; ItemFamilyCode) { Caption = 'Item Family Code'; }
                 field(unitOfMeasureCode; Rec."Unit of Measure Code") { Caption = 'Unit of Measure Code'; }
                 field(directUnitCost; Rec."Direct Unit Cost") { Caption = 'Direct Unit Cost'; }
                 field(minimumQuantity; Rec."Minimum Quantity") { Caption = 'Minimum Quantity'; }
@@ -50,10 +52,15 @@ page 80244 "OMS2 Approved Products API"
         Item: Record Item;
     begin
         Clear(ItemDescription);
-        if Item.Get(Rec."Item No.") then
+        Clear(ItemFamilyCode);
+        Item.SetLoadFields(Description, "LSC Item Family Code");
+        if Item.Get(Rec."Item No.") then begin
             ItemDescription := Item.Description;
+            ItemFamilyCode := Item."LSC Item Family Code";
+        end;
     end;
 
     var
         ItemDescription: Text[100];
+        ItemFamilyCode: Code[10];
 }

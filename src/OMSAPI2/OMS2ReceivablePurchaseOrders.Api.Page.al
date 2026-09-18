@@ -91,4 +91,41 @@ page 80245 "OMS2 Receivable POs API"
     begin
         Rec.ReadIsolation := IsolationLevel::ReadCommitted;
     end;
+
+    /// <summary>
+    /// Bound action: POST .../receivablePurchaseOrders({id})/Microsoft.NAV.print
+    ///
+    /// Renders this one purchase order with the report Report Selections holds for P.Order — the same report
+    /// the order card's own Print action runs, which here is report 405 "Order" with the TBGPurchaseOrder
+    /// layout and the QR code reportextension 80201 adds. OMS shows that document rather than drawing a second
+    /// one of its own, so paper from OMS and paper from Business Central are the same paper.
+    ///
+    /// The PDF comes back as base64 text because an OData action returns JSON.
+    /// </summary>
+    [ServiceEnabled]
+    procedure print(): Text
+    var
+        ReportSelections: Record "Report Selections";
+        PurchaseHeader: Record "Purchase Header";
+        TempBlob: Codeunit "Temp Blob";
+        Base64Convert: Codeunit "Base64 Convert";
+        RecRef: RecordRef;
+        OutStr: OutStream;
+        InStr: InStream;
+        NoReportErr: Label 'No report is set up for purchase orders in Report Selections.';
+    begin
+        PurchaseHeader := Rec;
+        PurchaseHeader.SetRecFilter();
+        RecRef.GetTable(PurchaseHeader);
+
+        ReportSelections.SetRange(Usage, ReportSelections.Usage::"P.Order");
+        ReportSelections.SetFilter("Report ID", '<>0');
+        if not ReportSelections.FindFirst() then
+            Error(NoReportErr);
+
+        TempBlob.CreateOutStream(OutStr);
+        Report.SaveAs(ReportSelections."Report ID", '', ReportFormat::Pdf, OutStr, RecRef);
+        TempBlob.CreateInStream(InStr);
+        exit(Base64Convert.ToBase64(InStr));
+    end;
 }

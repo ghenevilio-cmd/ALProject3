@@ -256,6 +256,13 @@ codeunit 80210 "TBGC Draft Order Converter"
         EffectiveCurrencyCode: Code[10];
         CurrencyMismatchErr: Label 'OMS currency %1 does not match Business Central currency %2 for vendor %3. Correct the OMS order or Vendor Card before conversion.';
     begin
+        // A draft the market list raised carries no OMS currency to reconcile. "OMS Currency Code" is written
+        // only by OMS2CommandMgtV2, so blank means this draft never came from OMS and there is nothing to
+        // compare it against. OMS itself cannot send a blank: its contract requires a three-letter code, so
+        // skipping here can only skip drafts OMS did not create.
+        if OmsCurrencyCode = '' then
+            exit;
+
         GeneralLedgerSetup.SetLoadFields("LCY Code");
         GeneralLedgerSetup.Get();
         GeneralLedgerSetup.TestField("LCY Code");
