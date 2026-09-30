@@ -104,6 +104,8 @@ codeunit 80210 "TBGC Draft Order Converter"
         VendorNo := DraftOrderLine."Vendor No.";
         ValidateDraftOrderForPOCreationWithPostingDate(DraftOrderNo, EnforceUserAccess, ManualPostingDate);
         EffectiveLocationCode := GetEffectiveLocationCode(DraftOrderHeader."Location Code", EnforceUserAccess);
+        if not EnforceUserAccess then
+            EnsureNoExistingPurchaseOrder(DraftOrderNo);
 
         // Only reached if ALL validations above passed
         PurchHeader.Init();
@@ -133,6 +135,8 @@ codeunit 80210 "TBGC Draft Order Converter"
         ClearLastError();
         if not TryReleasePurchaseDocument(PurchHeader) then
             Error(GetLastErrorText());
+        if not EnforceUserAccess then
+            EnsureReleasedPurchaseOrderHasAllItemLines(PurchHeader, DraftOrderNo);
 
         DraftOrderHeader.Get(DraftOrderNo);
         DraftOrderHeader.Status := DraftOrderHeader.Status::Converted;
@@ -207,6 +211,40 @@ codeunit 80210 "TBGC Draft Order Converter"
         DraftOrderHeader."Auto Convert In Progress" := false;
         DraftOrderHeader."Auto Convert Started At" := 0DT;
         DraftOrderHeader.Modify(true);
+    end;
+
+    local procedure EnsureNoExistingPurchaseOrder(DraftOrderNo: Code[20])
+    var
+        ExistingPurchHeader: Record "Purchase Header";
+    begin
+        ExistingPurchHeader.SetRange("Document Type", ExistingPurchHeader."Document Type"::Order);
+        ExistingPurchHeader.SetRange("TBGC Draft Order No.", DraftOrderNo);
+        if ExistingPurchHeader.FindFirst() then
+            Error('Draft Order %1 is already linked to Purchase Order %2. Review that order before auto-conversion.', DraftOrderNo, ExistingPurchHeader."No.");
+    end;
+
+    local procedure EnsureReleasedPurchaseOrderHasAllItemLines(PurchHeader: Record "Purchase Header"; DraftOrderNo: Code[20])
+    var
+        CreatedPurchHeader: Record "Purchase Header";
+        PurchLine: Record "Purchase Line";
+        DraftOrderLine: Record "TBGC Draft Order Line";
+        DraftLineCount: Integer;
+        PurchItemLineCount: Integer;
+    begin
+        if not CreatedPurchHeader.Get(PurchHeader."Document Type", PurchHeader."No.") then
+            Error('Purchase Order %1 was not found after conversion.', PurchHeader."No.");
+
+        if CreatedPurchHeader.Status <> CreatedPurchHeader.Status::Released then
+            Error('Purchase Order %1 was not released. Status is %2.', PurchHeader."No.", Format(CreatedPurchHeader.Status));
+
+        DraftOrderLine.SetRange("Document No.", DraftOrderNo);
+        DraftLineCount := DraftOrderLine.Count();
+        PurchLine.SetRange("Document Type", PurchHeader."Document Type");
+        PurchLine.SetRange("Document No.", PurchHeader."No.");
+        PurchLine.SetRange(Type, PurchLine.Type::Item);
+        PurchItemLineCount := PurchLine.Count();
+        if (DraftLineCount = 0) or (PurchItemLineCount <> DraftLineCount) then
+            Error('Purchase Order %1 has %2 item lines, but Draft Order %3 has %4 lines.', PurchHeader."No.", PurchItemLineCount, DraftOrderNo, DraftLineCount);
     end;
 
     local procedure CreatePurchaseLine(var PurchHeader: Record "Purchase Header"; DraftOrderLine: Record "TBGC Draft Order Line"; LineNo: Integer; EffectiveLocationCode: Code[20])

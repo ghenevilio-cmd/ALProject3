@@ -54,6 +54,10 @@ page 80235 "OMS2 Purchase Receipts API"
                 {
                     Caption = 'Posting Date';
                 }
+                field(createdAt; Rec.SystemCreatedAt)
+                {
+                    Caption = 'Created At';
+                }
                 field(lastModifiedDateTime; Rec.SystemModifiedAt)
                 {
                     Caption = 'Last Modified Date Time';

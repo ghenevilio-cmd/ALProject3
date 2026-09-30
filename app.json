@@ -2,7 +2,7 @@
     "id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
     "name": "Approved Product List",
     "publisher": "Systems Integration",
-    "version": "1.1.2.22",
+    "version": "1.1.2.24",
     "brief": "",
     "description": "Approved Product List",
     "privacyStatement": "",
@@ -21,8 +21,14 @@
     ],
     "dependencies": [
         {
+            "id": "9d5356b3-6259-4727-b54b-20e34d57cf51",
+            "name": "Bistro Customizations (Head Office)",
+            "publisher": "Performance Advantage Systems International, Inc.",
+            "version": "2.0.0.27"
+        },
+        {
             "id": "eabfa8e7-dd6b-4c1b-abcd-bd5ecc27d50f",
-            "name": "Systems Integration Customizations",
+            "name": "Systems Integration Customizations",   
             "publisher": "Systems Integration",
             "version": "1.0.3.15"
         },

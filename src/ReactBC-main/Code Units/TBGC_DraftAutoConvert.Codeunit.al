@@ -10,6 +10,7 @@ codeunit 80213 "TBGC Draft Auto Convert"
         ConvertState: Codeunit "TBGC Draft Convert State";
         DraftOrderConverter: Codeunit "TBGC Draft Order Converter";
         DraftOrderHeader: Record "TBGC Draft Order Header";
+        FailedDraftOrder: Record "TBGC Draft Order Header" temporary;
         CreatedPONo: Code[20];
         WarningMessage: Text;
         ConvertedCount: Integer;
@@ -34,7 +35,10 @@ codeunit 80213 "TBGC Draft Auto Convert"
             ClearLastError();
             if not Codeunit.Run(Codeunit::"TBGC Draft Convert Runner") then begin
                 ErrorText := GetLastErrorText();
-                DraftOrderConverter.SetDraftConversionError(DraftOrderHeader."No.", ErrorText);
+                FailedDraftOrder.Init();
+                FailedDraftOrder."No." := DraftOrderHeader."No.";
+                FailedDraftOrder."Last Error Message" := CopyStr(ErrorText, 1, MaxStrLen(FailedDraftOrder."Last Error Message"));
+                FailedDraftOrder.Insert();
                 FailedCount += 1;
                 if FailureSummary <> '' then
                     FailureSummary += '\';
@@ -49,6 +53,12 @@ codeunit 80213 "TBGC Draft Auto Convert"
                 SuccessSummary += StrSubstNo('Draft %1 converted to PO %2', DraftOrderHeader."No.", CreatedPONo);
             end;
         until DraftOrderHeader.Next() = 0;
+
+        if FailedDraftOrder.FindSet() then
+            repeat
+                DraftOrderConverter.SetDraftConversionError(FailedDraftOrder."No.", FailedDraftOrder."Last Error Message");
+            until FailedDraftOrder.Next() = 0;
+
         if FailedCount > 0 then
             Message(
               'Auto-convert finished with %1 converted and %2 failed.\%3',

@@ -60,6 +60,10 @@ page 80245 "OMS2 Receivable POs API"
                 {
                     Caption = 'Expected Receipt Date';
                 }
+                field(releasedAt; Rec."TBG Released DateTime")
+                {
+                    Caption = 'Released Date Time';
+                }
                 field(currencyCode; Rec."Currency Code")
                 {
                     Caption = 'Currency Code';
@@ -71,6 +75,10 @@ page 80245 "OMS2 Receivable POs API"
                 field(totalAmount; Rec.Amount)
                 {
                     Caption = 'Total Amount';
+                }
+                field(createdAt; Rec.SystemCreatedAt)
+                {
+                    Caption = 'Created At';
                 }
                 field(lastModifiedDateTime; Rec.SystemModifiedAt)
                 {

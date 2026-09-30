@@ -29,9 +29,20 @@
             "type": "al",
             "environmentType": "Sandbox",
             "environmentName": "PREPRODTEST",
-            "sessionId": 733506,
+            "sessionId": 12085,
             "breakOnNext": "WebClient",
             "breakOnError": "ExcludeTry",
+            "tenant": "59fd480a-d9e3-4019-a654-59bf2ee35a05"
+        },
+        {
+            "name": "AL: Generated Snapshot request",
+            "request": "snapshotInitialize",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "PREPRODTEST",
+            "sessionId": 11298,
+            "breakOnNext": "WebClient",
+            "executionContext": "DebugAndProfile",
             "tenant": "59fd480a-d9e3-4019-a654-59bf2ee35a05"
         }
     ]
