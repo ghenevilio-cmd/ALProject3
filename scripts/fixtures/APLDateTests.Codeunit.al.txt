@@ -1,0 +1,64 @@
+codeunit 80350 "APL Date Contract Tests"
+{
+    Subtype = Test;
+    [Test]
+    procedure FutureEndDoesNotDeactivate()
+    var
+        Price: Record "Approved Product List" temporary;
+    begin
+        Price."Starting Date" := Today - 10;
+        Price.Validate("Ending Date", Today + 10);
+        if Price.Inactive then Error('Future end must not deactivate current price.');
+        if Price."Starting Date" <> Today - 10 then Error('Closing must preserve source start.');
+    end;
+
+    [Test]
+    procedure BlankEndPreservesNewStart()
+    var
+        Price: Record "Approved Product List" temporary;
+    begin
+        Price."Starting Date" := Today + 10;
+        Price.Validate("Ending Date", 0D);
+        if Price."Starting Date" <> Today + 10 then Error('Blank end must preserve new explicit start.');
+    end;
+
+    [Test]
+    procedure EndDayIsInclusive()
+    var
+        Price: Record "Approved Product List" temporary;
+    begin
+        Price."Starting Date" := Today - 10;
+        Price.Validate("Ending Date", Today);
+        if not Price.IsValidOnDate(Today) then Error('Ending day is inclusive.');
+        if Price.IsValidOnDate(Today + 1) then Error('Expired price must not be selected.');
+        Price.Validate("Ending Date", Today - 1);
+        if not Price.Inactive then Error('A past end must retain retirement behavior.');
+    end;
+
+    [Test]
+    procedure ValidityFilterSelectsOnlyCurrentPrice()
+    var
+        Price: Record "Approved Product List" temporary;
+    begin
+        Price."Entry No." := 1;
+        Price."Starting Date" := Today - 1;
+        Price."Ending Date" := Today;
+        Price.Insert(false);
+        Price."Entry No." := 2;
+        Price."Starting Date" := Today + 1;
+        Price."Ending Date" := 0D;
+        Price.Insert(false);
+        Price."Entry No." := 3;
+        Price."Starting Date" := 0D;
+        Price.Inactive := true;
+        Price.Insert(false);
+        Price.SetValidOnDate(Today);
+        if Price.Count() <> 1 then Error('Only current active price may be selected.');
+        Price.FindFirst();
+        if Price."Entry No." <> 1 then Error('Wrong current price.');
+        Price.SetValidOnDate(Today + 1);
+        if Price.Count() <> 1 then Error('Only replacement price may be selected on next day.');
+        Price.FindFirst();
+        if Price."Entry No." <> 2 then Error('Wrong replacement price.');
+    end;
+}

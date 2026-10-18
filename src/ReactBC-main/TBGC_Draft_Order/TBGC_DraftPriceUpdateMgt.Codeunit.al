@@ -127,7 +127,7 @@ codeunit 80221 "TBGC Draft Price Update Mgt"
         Clear(PurchPrice);
         BestScore := -1;
 
-        CandidatePurchPrice.SetRange(Inactive, false);
+        CandidatePurchPrice.SetValidOnDate(Today);
         CandidatePurchPrice.SetRange("Vendor No.", DraftOrderLine."Vendor No.");
         CandidatePurchPrice.SetRange("Item No.", DraftOrderLine."Item No.");
         CandidatePurchPrice.SetRange("Unit of Measure Code", CopyStr(DraftOrderLine."Unit of Measure Code", 1, MaxStrLen(CandidatePurchPrice."Unit of Measure Code")));

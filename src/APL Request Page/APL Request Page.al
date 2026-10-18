@@ -58,7 +58,7 @@ report 80300 "APL Per Concept"
 
             trigger OnPreDataItem()
             begin
-                SetRange("Inactive", false);
+                "Approved Product List".SetValidOnDate(Today);
                 if not ApplyConceptFilter() then
                     CurrReport.Break();
             end;

@@ -143,7 +143,7 @@ tableextension 80262 "TBGC Purchase Line Ext" extends "Purchase Line"
     begin
         PurchPrice.Reset();
         PurchPrice.SetCurrentKey("Item No.", "Vendor No.", "Unit of Measure Code", "TBGC Brand Code", "TBGC Zoning Code");
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Item No.", "No.");
         PurchPrice.SetRange("Vendor No.", VendorNo);
         PurchPrice.SetRange("TBGC Brand Code", "TBGC Brand Code");
@@ -171,7 +171,7 @@ tableextension 80262 "TBGC Purchase Line Ext" extends "Purchase Line"
         if PreferredZoningCode <> '' then begin
             PurchPriceNoZone.Reset();
             PurchPriceNoZone.SetCurrentKey("Item No.", "Vendor No.", "Unit of Measure Code", "TBGC Brand Code", "TBGC Zoning Code");
-            PurchPriceNoZone.SetRange(Inactive, false);
+            PurchPriceNoZone.SetValidOnDate(Today);
             PurchPriceNoZone.SetRange("Item No.", "No.");
             PurchPriceNoZone.SetRange("Vendor No.", VendorNo);
             PurchPriceNoZone.SetRange("TBGC Brand Code", "TBGC Brand Code");

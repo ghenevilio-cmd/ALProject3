@@ -46,9 +46,10 @@ table 80266 "Approved Product List"
 
             trigger OnValidate()
             begin
-                Inactive := "Ending Date" <> 0D;
+                Inactive := ("Ending Date" <> 0D) and ("Ending Date" < Today);
 
-                if not Inactive then begin
+                // Only an existing inactive line is a reactivation; preserve new explicit dates.
+                if not Inactive and (xRec."Entry No." <> 0) and xRec.Inactive then begin
                     EnsureCurrentUserCanReactivate();
                     "Starting Date" := Today;
                 end;
@@ -269,6 +270,20 @@ table 80266 "Approved Product List"
         CheckDuplicatePurchasePrice();
     end;
 
+    procedure IsValidOnDate(PriceDate: Date): Boolean
+    begin
+        exit(not Inactive and
+             (("Starting Date" = 0D) or ("Starting Date" <= PriceDate)) and
+             (("Ending Date" = 0D) or ("Ending Date" >= PriceDate)));
+    end;
+
+    procedure SetValidOnDate(PriceDate: Date)
+    begin
+        SetRange(Inactive, false);
+        SetFilter("Starting Date", '%1|..%2', 0D, PriceDate);
+        SetFilter("Ending Date", '%1|%2..', 0D, PriceDate);
+    end;
+
     local procedure CheckDuplicatePurchasePrice()
     var
         ExistingCustomPurchasePrice: Record "Approved Product List";
@@ -340,17 +355,17 @@ table 80266 "Approved Product List"
 
         // Hard block: MI is never allowed regardless of user setting
         if UpperCase("Item Family Code") = 'MI' then
-            Error('Items under Item Family Code MI are not allowed in Approved Product List.');
+            Error(ItemFamilyForbiddenErr);
 
         // Read the user's Allowed Item Family from Market List Access setup
         if not UserSetup.Get(CopyStr(UserId(), 1, 50)) then
-            Error('No User Setup found for the current user. Please contact your administrator.');
+            Error(MissingUserSetupErr);
 
         AllowedFamily := UpperCase(UserSetup."TBGC APL Item Family");
 
         // Blank = fully blocked
         if AllowedFamily = '' then
-            Error('You are not allowed to add or edit items in the Approved Product List. Please set an Allowed Item Family in Market List Access for your user.');
+            Error(ItemFamilyRequiredErr);
 
         // ALL = no restriction
         if AllowedFamily = 'ALL' then
@@ -358,7 +373,7 @@ table 80266 "Approved Product List"
 
         // Specific family code = must match the item's family
         if UpperCase("Item Family Code") <> AllowedFamily then
-            Error('You can only add or edit items with Item Family ''%1'' in the Approved Product List. Item ''%2'' belongs to Item Family ''%3''.', AllowedFamily, "Item No.", "Item Family Code");
+            Error(ItemFamilyMismatchErr, AllowedFamily, "Item No.", "Item Family Code");
     end;
 
     local procedure ValidateItemIsAllowed()
@@ -372,7 +387,7 @@ table 80266 "Approved Product List"
             exit;
 
         if Item.Blocked then
-            Error('Item %1 cannot be used in Approved Product List because it is blocked.', "Item No.");
+            Error(ItemBlockedErr, "Item No.");
     end;
 
     local procedure ValidateVendorIsAllowed()
@@ -387,7 +402,7 @@ table 80266 "Approved Product List"
 
         if Vendor.Blocked in [Vendor.Blocked::All, Vendor.Blocked::Payment] then
             Error(
-              'Vendor %1 cannot be used in Approved Product List because it is blocked for %2.',
+              VendorBlockedErr,
               "Vendor No.",
               Format(Vendor.Blocked));
     end;
@@ -422,10 +437,18 @@ table 80266 "Approved Product List"
             exit;
 
         if not UserSetup.Get(CopyStr(UserId(), 1, 50)) then
-            Error('No User Setup found for the current user. Please contact your administrator.');
+            Error(MissingUserSetupErr);
 
         if not UserSetup."TBGC Allowed APL Activation" then
-            Error('You are not allowed to reactivate inactive Approved Product List lines.');
+            Error(ReactivationForbiddenErr);
     end;
 
+    var
+        MissingUserSetupErr: Label 'No User Setup found for the current user. Please contact your administrator.';
+        ItemFamilyForbiddenErr: Label 'Items under Item Family Code MI are not allowed in Approved Product List.';
+        ItemFamilyRequiredErr: Label 'You are not allowed to add or edit items in the Approved Product List. Please set an Allowed Item Family in Market List Access for your user.';
+        ItemFamilyMismatchErr: Label 'You can only add or edit items with Item Family ''%1'' in the Approved Product List. Item ''%2'' belongs to Item Family ''%3''.';
+        ItemBlockedErr: Label 'Item %1 cannot be used in Approved Product List because it is blocked.';
+        VendorBlockedErr: Label 'Vendor %1 cannot be used in Approved Product List because it is blocked for %2.';
+        ReactivationForbiddenErr: Label 'You are not allowed to reactivate inactive Approved Product List lines.';
 }

@@ -174,7 +174,7 @@ codeunit 80294 "TBGC Brand Selection Mgt"
     var
         PurchPrice: Record "Approved Product List";
     begin
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Item No.", PurchLine."No.");
         PurchPrice.SetRange("Vendor No.", VendorNo);
         PurchPrice.SetRange("TBGC Brand Code", BrandCode);

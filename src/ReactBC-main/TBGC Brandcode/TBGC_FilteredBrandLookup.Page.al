@@ -45,7 +45,7 @@ page 80293 "TBGC Filtered Brand Lookup"
     procedure SetFilters(ItemNo: Code[20]; VendorNo: Code[20]; ZoningCode: Code[20]; ConceptCode: Code[20])
     begin
         Rec.Reset();
-        Rec.SetRange(Inactive, false);
+        Rec.SetValidOnDate(Today);
         Rec.SetRange("Item No.", ItemNo);
         Rec.SetRange("Vendor No.", VendorNo);
         Rec.SetFilter("TBGC Brand Code", '<>%1', '');

@@ -318,7 +318,7 @@ codeunit 80295 "TBGC APL Order History Mgt"
     var
         PurchPrice: Record "Approved Product List";
     begin
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Vendor No.", OrderHistoryLine."Vendor No.");
         PurchPrice.SetRange("Item No.", OrderHistoryLine."Item No.");
         PurchPrice.SetRange("TBGC Brand Code", OrderHistoryLine."Brand Code");
@@ -345,7 +345,7 @@ codeunit 80295 "TBGC APL Order History Mgt"
     var
         PurchPrice: Record "Approved Product List";
     begin
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Vendor No.", OrderHistoryLine."Vendor No.");
         PurchPrice.SetRange("Item No.", OrderHistoryLine."Item No.");
         PurchPrice.SetRange("TBGC Brand Code", OrderHistoryLine."Brand Code");
@@ -402,7 +402,7 @@ codeunit 80295 "TBGC APL Order History Mgt"
         if (ItemNo = '') or (BrandCode = '') then
             exit('');
 
-        CustomPurchasePrice.SetRange(Inactive, false);
+        CustomPurchasePrice.SetValidOnDate(Today);
         CustomPurchasePrice.SetRange("Vendor No.", VendorNo);
         CustomPurchasePrice.SetRange("Item No.", ItemNo);
         CustomPurchasePrice.SetRange("TBGC Brand Code", BrandCode);
@@ -478,7 +478,7 @@ codeunit 80295 "TBGC APL Order History Mgt"
     local procedure TryGetMatchingPurchPrice(OrderHistoryLine: Record "TBGC APL Order History"; ZoningCode: Code[20]; ConceptCode: Code[20]; City: Text[50]; IgnoreUOM: Boolean; UseGenericCity: Boolean; var PurchPrice: Record "Approved Product List"): Boolean
     begin
         PurchPrice.Reset();
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Vendor No.", OrderHistoryLine."Vendor No.");
         PurchPrice.SetRange("Item No.", OrderHistoryLine."Item No.");
         PurchPrice.SetRange("TBGC Brand Code", OrderHistoryLine."Brand Code");
@@ -504,7 +504,7 @@ codeunit 80295 "TBGC APL Order History Mgt"
     local procedure TryGetMatchingPurchPrice(OrderHistoryLine: Record "TBGC APL Order History"; ZoningCode: Code[20]; ConceptCode: Code[20]; IgnoreUOM: Boolean; var PurchPrice: Record "Approved Product List"): Boolean
     begin
         PurchPrice.Reset();
-        PurchPrice.SetRange(Inactive, false);
+        PurchPrice.SetValidOnDate(Today);
         PurchPrice.SetRange("Vendor No.", OrderHistoryLine."Vendor No.");
         PurchPrice.SetRange("Item No.", OrderHistoryLine."Item No.");
         PurchPrice.SetRange("TBGC Brand Code", OrderHistoryLine."Brand Code");

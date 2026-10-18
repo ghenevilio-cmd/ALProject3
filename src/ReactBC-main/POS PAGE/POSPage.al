@@ -250,8 +250,7 @@ page 80201 "Market List"
 
         if (ZoningCode <> '') or (ConceptCode <> '') then begin
             PurchPrice.Reset();
-            PurchPrice.SetRange("Inactive", false);
-            PurchPrice.SetRange("Ending Date", 0D);
+            PurchPrice.SetValidOnDate(Today);
 
             if ZoningCode <> '' then
                 PurchPrice.SetRange("TBGC Zoning Code", ZoningCode);
@@ -317,7 +316,7 @@ page 80201 "Market List"
         if (PurchPrice."Item No." = '') or (PurchPrice."Vendor No." = '') then
             exit;
 
-        if PurchPrice.Inactive or (PurchPrice."Ending Date" <> 0D) then
+        if not PurchPrice.IsValidOnDate(Today) then
             exit;
 
         if (ZoningCode <> '') and (PurchPrice."TBGC Zoning Code" <> ZoningCode) then
