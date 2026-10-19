@@ -15,7 +15,7 @@ page 80261 "OMS2 Posted Receipt Lines API"
     DeleteAllowed = false;
     Editable = false;
     Extensible = false;
-    AboutText = 'Read-only evidence for one exact purchase order line across its posted receipts. Requires exact orderNumber and orderLineNumber filters. Does not authorize or execute Undo.';
+    AboutText = 'Receipt evidence for one exact purchase order line. Requires exact orderNumber and orderLineNumber filters. Standard line Undo requires the separate service execution permission.';
 
     layout
     {
@@ -24,6 +24,7 @@ page 80261 "OMS2 Posted Receipt Lines API"
             repeater(Lines)
             {
                 field(id; Rec.SystemId) { Caption = 'id'; }
+                field(undoContractVersion; UndoContractVersion) { Caption = 'undoContractVersion'; }
                 field(receiptId; ReceiptHeader.SystemId) { Caption = 'receiptId'; }
                 field(receiptNumber; Rec."Document No.") { Caption = 'receiptNumber'; }
                 field(lineNumber; Rec."Line No.") { Caption = 'lineNumber'; }
@@ -52,11 +53,13 @@ page 80261 "OMS2 Posted Receipt Lines API"
     }
 
     var
+        UndoContractVersion: Integer;
         ReceiptHeader: Record "Purch. Rcpt. Header";
         ExactLineRequiredErr: Label 'An exact purchase order number and order line number are required.';
 
     trigger OnOpenPage()
     begin
+        UndoContractVersion := 1;
         Rec.ReadIsolation := IsolationLevel::ReadCommitted;
         if (Rec.GetFilter("Order No.") = '') or (Rec.GetFilter("Order Line No.") = '') then
             Error(ExactLineRequiredErr);
@@ -65,6 +68,25 @@ page 80261 "OMS2 Posted Receipt Lines API"
            (Rec.GetRangeMin("Order Line No.") <= 0) or
            (Rec.GetRangeMin("Order Line No.") <> Rec.GetRangeMax("Order Line No.")) then
             Error(ExactLineRequiredErr);
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure Undo(var ActionContext: WebServiceActionContext; RequestId: Guid; ExpectedCompanyId: Guid; ExpectedReceiptId: Guid; ExpectedReceiptLineNumber: Integer;
+        ExpectedOrderNumber: Code[20]; ExpectedOrderLineNumber: Integer; ExpectedVendorNumber: Code[20];
+        ExpectedItemNumber: Code[20]; ExpectedLocationCode: Code[10]; ExpectedConceptCode: Code[20];
+        ExpectedUnitOfMeasureCode: Code[10]; ExpectedQuantity: Decimal; ExpectedQuantityBase: Decimal; ExpectedModifiedAt: DateTime)
+    var
+        ReceiptUndo: Codeunit "OMS2 Receipt Line Undo";
+        CorrectionId: Guid;
+    begin
+        CorrectionId := ReceiptUndo.Execute(Rec.SystemId, RequestId, ExpectedCompanyId, ExpectedReceiptId, ExpectedReceiptLineNumber, ExpectedOrderNumber,
+            ExpectedOrderLineNumber, ExpectedVendorNumber, ExpectedItemNumber, ExpectedLocationCode, ExpectedConceptCode,
+            ExpectedUnitOfMeasureCode, ExpectedQuantity, ExpectedQuantityBase, ExpectedModifiedAt);
+        ActionContext.SetObjectType(ObjectType::Page);
+        ActionContext.SetObjectId(Page::"OMS2 Posted Receipt Lines API");
+        ActionContext.AddEntityKey(Rec.FieldNo(SystemId), CorrectionId);
+        ActionContext.SetResultCode(WebServiceActionResultCode::Created);
     end;
 
     trigger OnAfterGetRecord()

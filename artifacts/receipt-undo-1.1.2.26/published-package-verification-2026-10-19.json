@@ -1,0 +1,115 @@
+{
+  "packages": {
+    "reviewed": {
+      "sha256": "5462f53250e43118bb159bfb85a6f4eb5ec26485f71be1ca2d7f49b1435c1149",
+      "version": "1.1.2.27",
+      "manifest": {
+        "Id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
+        "Name": "Approved Product List",
+        "Publisher": "Systems Integration",
+        "Brief": "",
+        "Description": "Approved Product List",
+        "Version": "1.1.2.27",
+        "CompatibilityId": "0.0.0.0",
+        "PrivacyStatement": "",
+        "EULA": "",
+        "Help": "",
+        "HelpBaseUrl": "",
+        "Url": "",
+        "Logo": "",
+        "Platform": "28.0.0.0",
+        "Application": "28.2.0.0",
+        "Runtime": "17.0",
+        "Target": "Cloud",
+        "ShowMyCode": "False"
+      },
+      "files": 159
+    },
+    "userBuild": {
+      "sha256": "3b6d1469788df4b62050c06294b043fc22ab7b4a88acf6cb8d24230bb532f3e2",
+      "version": "1.1.2.26",
+      "manifest": {
+        "Id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
+        "Name": "Approved Product List",
+        "Publisher": "Systems Integration",
+        "Brief": "",
+        "Description": "Approved Product List",
+        "Version": "1.1.2.26",
+        "CompatibilityId": "0.0.0.0",
+        "PrivacyStatement": "",
+        "EULA": "",
+        "Help": "",
+        "HelpBaseUrl": "",
+        "Url": "",
+        "Logo": "",
+        "Platform": "28.0.0.0",
+        "Application": "28.2.0.0",
+        "Runtime": "17.0",
+        "Target": "Cloud",
+        "ShowMyCode": "False"
+      },
+      "files": 159
+    }
+  },
+  "added": [],
+  "removed": [],
+  "changed": [],
+  "allSourceAndRuntimeAssetsMatch": true,
+  "installed": {
+    "at": "2026-10-19T04:01:49.205Z",
+    "readOnly": true,
+    "environment": "PREPRODTEST",
+    "serviceClientId": "4817f91c-9351-4c96-828c-992ca882bfda",
+    "extensions": {
+      "status": 200,
+      "records": [
+        {
+          "id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
+          "packageId": "7a451b98-cc0b-44b5-af18-bd5a3e2d775e",
+          "name": "Approved Product List",
+          "publisher": "Systems Integration",
+          "isInstalled": true,
+          "version": "1.1.2.26"
+        }
+      ]
+    },
+    "metadata": {
+      "status": 200,
+      "receiptLineEntity": true,
+      "contractVersion": true,
+      "boundUndoAction": true,
+      "parameters": [
+        "bindingParameter",
+        "requestId",
+        "expectedCompanyId",
+        "expectedReceiptId",
+        "expectedReceiptLineNumber",
+        "expectedOrderNumber",
+        "expectedOrderLineNumber",
+        "expectedVendorNumber",
+        "expectedItemNumber",
+        "expectedLocationCode",
+        "expectedConceptCode",
+        "expectedUnitOfMeasureCode",
+        "expectedQuantity",
+        "expectedQuantityBase",
+        "expectedModifiedAt"
+      ],
+      "readOnly": true
+    }
+  },
+  "packageIdMatchesLocalHeader": true,
+  "manifestDifferencesOnly": [
+    "App.Version",
+    "Build.Timestamp",
+    "Build.By (VS Code publisher label)"
+  ],
+  "compilerVersionUnchanged": true,
+  "acceptedReleaseVersion": "1.1.2.26",
+  "sourceReviewStatus": "PASS unchanged reviewed sources",
+  "publicationBy": "user",
+  "financialExecutionEnabled": false,
+  "version27Status": "superseded for publication; original reviewed evidence retained",
+  "acceptedPackagePath": "C:\\AL\\ALProject3\\artifacts\\receipt-undo-1.1.2.26\\Systems Integration_Approved Product List_1.1.2.26.app",
+  "acceptedPackageSha256": "3b6d1469788df4b62050c06294b043fc22ab7b4a88acf6cb8d24230bb532f3e2"
+}
