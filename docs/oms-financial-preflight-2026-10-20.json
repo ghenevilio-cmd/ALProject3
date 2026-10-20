@@ -1,0 +1,92 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "code": "2 Hungry Shrews Corp",
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617"
+    },
+    {
+      "id": 2,
+      "code": "BAAMC",
+      "bcCompanyId": "604ace90-33b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 3,
+      "code": "BAC",
+      "bcCompanyId": "dd3af18b-55ae-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 4,
+      "code": "BAEMC",
+      "bcCompanyId": "be4bd27a-3ab2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 5,
+      "code": "BBIC",
+      "bcCompanyId": "2aaabd92-2fb2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 6,
+      "code": "BC",
+      "bcCompanyId": "d5071214-43b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 7,
+      "code": "BIAMC",
+      "bcCompanyId": "63099779-3fb2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 8,
+      "code": "BIC",
+      "bcCompanyId": "67826df4-41b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 9,
+      "code": "BINMC",
+      "bcCompanyId": "1d5ca368-41b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 10,
+      "code": "CBIC",
+      "bcCompanyId": "b8fc20e9-40b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 11,
+      "code": "CRCI",
+      "bcCompanyId": "26ddcd71-42b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 12,
+      "code": "FBRC.",
+      "bcCompanyId": "fb1356fb-44b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 13,
+      "code": "GJRC",
+      "bcCompanyId": "16630457-40b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 14,
+      "code": "TBG Elite Restaurants, Inc.",
+      "bcCompanyId": "0831f764-44b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 15,
+      "code": "TBG Food Holdings, Inc.",
+      "bcCompanyId": "dcde023c-31b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 16,
+      "code": "TBG Shared Services, Inc.",
+      "bcCompanyId": "0b33219b-43b2-ef11-b8ec-6045bd1f867d"
+    },
+    {
+      "id": 17,
+      "code": "TBIC",
+      "bcCompanyId": "5cbfbcf3-3eb2-ef11-b8ec-6045bd1f867d"
+    }
+  ],
+  "requests": [],
+  "outbox": [],
+  "checkedAt": "2026-10-20T04:23:22.844Z"
+}

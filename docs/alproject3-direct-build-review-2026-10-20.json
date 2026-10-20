@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-20",
+  "result": "CHANGES REQUIRED: version and nested test isolation only",
+  "sourceComparison": {
+    "packageSources": 153,
+    "rootSrcSources": 153,
+    "missing": [],
+    "changed": [],
+    "newlineOnly": [],
+    "additional": [],
+    "nestedProjects": [
+      "app.json",
+      "tests/receipt-concept/app.json"
+    ]
+  },
+  "assets": [
+    {
+      "packageEntry": "addin/src/react-pos/dist/assets/index-B4k0RS3I.js",
+      "packageHash": "ae2af2c98ab0cc6c53fe3fd0c40b8eecdf9c2fcf489fc43ae65b9246cb306a6d",
+      "local": [
+        {
+          "path": "src/ReactBC-main/react-pos/dist/assets/index-B4k0RS3I.js",
+          "exists": true,
+          "hash": "ae2af2c98ab0cc6c53fe3fd0c40b8eecdf9c2fcf489fc43ae65b9246cb306a6d"
+        }
+      ]
+    },
+    {
+      "packageEntry": "addin/src/react-pos/dist/assets/index-BrhGaniE.css",
+      "packageHash": "342033ce40b7808331b76a1c4a4a0b0284f9949b3e5473b413fe256683f36448",
+      "local": [
+        {
+          "path": "src/ReactBC-main/react-pos/dist/assets/index-BrhGaniE.css",
+          "exists": true,
+          "hash": "342033ce40b7808331b76a1c4a4a0b0284f9949b3e5473b413fe256683f36448"
+        }
+      ]
+    },
+    {
+      "packageEntry": "addin/src/react-pos/startup.js",
+      "packageHash": "77cd2e75d2d13c410d25e609d273107c155443ff0de36b81e803aae58acc743b",
+      "local": [
+        {
+          "path": "src/ReactBC-main/react-pos/startup.js",
+          "exists": true,
+          "hash": "77cd2e75d2d13c410d25e609d273107c155443ff0de36b81e803aae58acc743b"
+        }
+      ]
+    },
+    {
+      "packageEntry": "addin/src/react-receiving/dist/assets/index-CZgWARzN.js",
+      "packageHash": "b043eb21a4507d35fea0b283acb1e5789e197cbfe93e54946005fc7a56ff5dde",
+      "local": [
+        {
+          "path": "src/ReactBC-main/TBGC Receiving/react-receiving/dist/assets/index-CZgWARzN.js",
+          "exists": true,
+          "hash": "b043eb21a4507d35fea0b283acb1e5789e197cbfe93e54946005fc7a56ff5dde"
+        }
+      ]
+    },
+    {
+      "packageEntry": "addin/src/react-receiving/dist/assets/index-CUjR20cn.css",
+      "packageHash": "3a4bd201156135ec2e0a8d2d7d12164045d75d3fb86acfe1eb6b65bb1f690b52",
+      "local": [
+        {
+          "path": "src/ReactBC-main/TBGC Receiving/react-receiving/dist/assets/index-CUjR20cn.css",
+          "exists": true,
+          "hash": "3a4bd201156135ec2e0a8d2d7d12164045d75d3fb86acfe1eb6b65bb1f690b52"
+        }
+      ]
+    },
+    {
+      "packageEntry": "addin/src/react-receiving/startup.js",
+      "packageHash": "d39b913a832025a923126dcb6f8258fafdc06f36c4796b6cb0f36b22ce523f6f",
+      "local": [
+        {
+          "path": "src/ReactBC-main/TBGC Receiving/react-receiving/startup.js",
+          "exists": true,
+          "hash": "d39b913a832025a923126dcb6f8258fafdc06f36c4796b6cb0f36b22ce523f6f"
+        }
+      ]
+    },
+    {
+      "packageEntry": "layout/src/APL%20Request%20Page/reportlayout/APLPerConcept.xlsx",
+      "packageHash": "27eda6fc1d084b80a639fcd5edd4b7c14f264fbca1d64765185e650ef03a741f",
+      "local": [
+        {
+          "path": "src/APL Request Page/reportlayout/APLPerConcept.xlsx",
+          "exists": true,
+          "hash": "27eda6fc1d084b80a639fcd5edd4b7c14f264fbca1d64765185e650ef03a741f"
+        }
+      ]
+    }
+  ],
+  "directCompile": {
+    "compiler": "18.1.43.24897",
+    "sourceFiles": 154,
+    "exitCode": 1,
+    "error": "AL0297: test codeunit80351 outside production ID range80201..80300"
+  },
+  "reviewedFixesPresent": true,
+  "sourceChanged": false,
+  "hostedMutation": false,
+  "reviewedPackageSha256": "62b3eb0a0e497af3fe3000bbae53a445084adeb99e9394d7cf8022b2f5c55d13"
+}

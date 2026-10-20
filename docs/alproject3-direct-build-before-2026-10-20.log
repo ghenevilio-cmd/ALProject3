@@ -1,0 +1,9 @@
+Microsoft (R) AL Compiler version 18.1.43.24897
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'Approved Product List' containing '154' files at '12:09:57.978'.
+
+tests\receipt-concept\ReceiptConceptTests.Codeunit.al(1,10): error AL0297: The application object identifier '80351' is not valid. It must be within the allowed ranges '[80201..80300]'.
+
+Compilation ended at '12:10:09.262'.
+

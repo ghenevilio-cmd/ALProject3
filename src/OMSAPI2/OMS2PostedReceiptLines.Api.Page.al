@@ -34,7 +34,8 @@ page 80261 "OMS2 Posted Receipt Lines API"
                 field(itemNumber; Rec."No.") { Caption = 'itemNumber'; }
                 field(lineType; Rec.Type.AsInteger()) { Caption = 'lineType'; }
                 field(locationCode; Rec."Location Code") { Caption = 'locationCode'; }
-                field(conceptCode; Rec."Shortcut Dimension 1 Code") { Caption = 'conceptCode'; }
+                field(conceptCode; StoreConceptCode) { Caption = 'conceptCode'; }
+                field(shortcutDimension1Code; Rec."Shortcut Dimension 1 Code") { Caption = 'shortcutDimension1Code'; }
                 field(unitOfMeasureCode; Rec."Unit of Measure Code") { Caption = 'unitOfMeasureCode'; }
                 field(quantityPerUnitOfMeasure; Rec."Qty. per Unit of Measure") { Caption = 'quantityPerUnitOfMeasure'; }
                 field(quantity; Rec.Quantity) { Caption = 'quantity'; }
@@ -54,12 +55,13 @@ page 80261 "OMS2 Posted Receipt Lines API"
 
     var
         UndoContractVersion: Integer;
+        StoreConceptCode: Code[20];
         ReceiptHeader: Record "Purch. Rcpt. Header";
         ExactLineRequiredErr: Label 'An exact purchase order number and order line number are required.';
 
     trigger OnOpenPage()
     begin
-        UndoContractVersion := 1;
+        UndoContractVersion := 2;
         Rec.ReadIsolation := IsolationLevel::ReadCommitted;
         if (Rec.GetFilter("Order No.") = '') or (Rec.GetFilter("Order Line No.") = '') then
             Error(ExactLineRequiredErr);
@@ -76,12 +78,22 @@ page 80261 "OMS2 Posted Receipt Lines API"
         ExpectedOrderNumber: Code[20]; ExpectedOrderLineNumber: Integer; ExpectedVendorNumber: Code[20];
         ExpectedItemNumber: Code[20]; ExpectedLocationCode: Code[10]; ExpectedConceptCode: Code[20];
         ExpectedUnitOfMeasureCode: Code[10]; ExpectedQuantity: Decimal; ExpectedQuantityBase: Decimal; ExpectedModifiedAt: DateTime)
+    begin
+        Error('This receipt Undo contract is retired. Refresh through the updated OMS connector.');
+    end;
+
+    [ServiceEnabled]
+    [Scope('Cloud')]
+    procedure UndoV2(var ActionContext: WebServiceActionContext; RequestId: Guid; ExpectedCompanyId: Guid; ExpectedReceiptId: Guid; ExpectedReceiptLineNumber: Integer;
+        ExpectedOrderNumber: Code[20]; ExpectedOrderLineNumber: Integer; ExpectedVendorNumber: Code[20];
+        ExpectedItemNumber: Code[20]; ExpectedLocationCode: Code[10]; ExpectedConceptCode: Code[20]; ExpectedShortcutDimension1Code: Code[20];
+        ExpectedUnitOfMeasureCode: Code[10]; ExpectedQuantity: Decimal; ExpectedQuantityBase: Decimal; ExpectedModifiedAt: DateTime)
     var
         ReceiptUndo: Codeunit "OMS2 Receipt Line Undo";
         CorrectionId: Guid;
     begin
         CorrectionId := ReceiptUndo.Execute(Rec.SystemId, RequestId, ExpectedCompanyId, ExpectedReceiptId, ExpectedReceiptLineNumber, ExpectedOrderNumber,
-            ExpectedOrderLineNumber, ExpectedVendorNumber, ExpectedItemNumber, ExpectedLocationCode, ExpectedConceptCode,
+            ExpectedOrderLineNumber, ExpectedVendorNumber, ExpectedItemNumber, ExpectedLocationCode, ExpectedConceptCode, ExpectedShortcutDimension1Code,
             ExpectedUnitOfMeasureCode, ExpectedQuantity, ExpectedQuantityBase, ExpectedModifiedAt);
         ActionContext.SetObjectType(ObjectType::Page);
         ActionContext.SetObjectId(Page::"OMS2 Posted Receipt Lines API");
@@ -90,7 +102,12 @@ page 80261 "OMS2 Posted Receipt Lines API"
     end;
 
     trigger OnAfterGetRecord()
+    var
+        Store: Record "LSC Store";
+        Mapping: Codeunit "OMS2 Receipt Store Mapping";
     begin
+        Clear(StoreConceptCode);
+        StoreConceptCode := Mapping.ResolveConcept(Store, Rec."Location Code", false);
         // A missing parent is an integrity failure, never an empty receipt identity.
         if ReceiptHeader."No." <> Rec."Document No." then begin
             ReceiptHeader.SetLoadFields(SystemId);

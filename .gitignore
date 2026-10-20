@@ -1,3 +1,4 @@
 .alout/
 /*.app
 .worktrees/
+/tests/receipt-concept/.alpackages/

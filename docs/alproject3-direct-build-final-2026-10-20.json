@@ -1,0 +1,48 @@
+{
+  "result": "PASS",
+  "productionPackageSha256": "c676af670db305344bf8488c7d1c712d692faa45ec74b4794bf483a585729016",
+  "testPackageSha256": "bcdb80907637578c0bb7ffeea86e45ef9967d4eddc610b16a0062262378c6152",
+  "applicationSources": 153,
+  "runtimeAssets": 7,
+  "compiledSymbolsIdentical": true,
+  "productionContainsTestCodeunit": false,
+  "separateTestProcedures": 7,
+  "installedPackageId": "e885f548-3de6-44fb-8d63-b95ffa7e64a6",
+  "installedPackageIdentityMatchesRoot": true,
+  "installedVersion": "1.1.2.28",
+  "readOnlyBcChecks": true,
+  "bcFinancialAction": false,
+  "localBuildWarnings": {
+    "AL1025": 9,
+    "reason": "Dependency license text files do not match AL definition grammar"
+  },
+  "negativeControls": [
+    "changed compiled symbols rejected",
+    "extra package entry rejected",
+    "missing test methods rejected"
+  ],
+  "focusedAstraReview": "PASS",
+  "alRuntimeTests": "compiled only; not executed",
+  "files": [
+    {
+      "path": "app.json",
+      "sha256": "9286bb933ba5c7241837a55f37196a254d24a297da0f4d2396df56c678c639ec"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "ffac7099a61c778de4970dd24ed44fa11c337064a08c62acd4f5c17251ec744f"
+    },
+    {
+      "path": "tests/receipt-concept/app.json",
+      "sha256": "a81e603aaead4b61ac1a5908e0e30f4ef5baab72d90a255522da855f1f89b6d1"
+    },
+    {
+      "path": "tests/receipt-concept/ReceiptConceptTests.Codeunit.al",
+      "sha256": "75cf20ac3381296105615b4bc79e004d6829c31ddbef96588c0065c23a0e3528"
+    },
+    {
+      "path": "scripts/verify_direct_receipt_concept_package.py",
+      "sha256": "cf404d70a4890c51f27bc10899c0d3bc095c862ecaa73b7c9469afad4ff07464"
+    }
+  ]
+}

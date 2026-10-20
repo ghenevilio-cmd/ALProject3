@@ -1,0 +1,17 @@
+Microsoft (R) AL Compiler version 18.1.43.24897
+Copyright (C) Microsoft Corporation. All rights reserved
+
+Compilation started for project 'Approved Product List' containing '154' files at '12:13:14.210'.
+
+scripts\fixtures\APLDateTests.Codeunit.al.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\scripts\fixtures\APLDateTests.Codeunit.al.txt' does not match any definition.
+src\ReactBC-main\react-pos\node_modules\baseline-browser-mapping\LICENSE.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\react-pos\node_modules\baseline-browser-mapping\LICENSE.txt' does not match any definition.
+src\ReactBC-main\react-pos\node_modules\esquery\license.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\react-pos\node_modules\esquery\license.txt' does not match any definition.
+src\ReactBC-main\react-pos\node_modules\jsesc\LICENSE-MIT.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\react-pos\node_modules\jsesc\LICENSE-MIT.txt' does not match any definition.
+src\ReactBC-main\react-pos\node_modules\punycode\LICENSE-MIT.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\react-pos\node_modules\punycode\LICENSE-MIT.txt' does not match any definition.
+src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\baseline-browser-mapping\LICENSE.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\baseline-browser-mapping\LICENSE.txt' does not match any definition.
+src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\esquery\license.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\esquery\license.txt' does not match any definition.
+src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\jsesc\LICENSE-MIT.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\jsesc\LICENSE-MIT.txt' does not match any definition.
+src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\punycode\LICENSE-MIT.txt(1,1): warning AL1025: The file at location 'C:/AL/ALProject3\src\ReactBC-main\TBGC Receiving\react-receiving\node_modules\punycode\LICENSE-MIT.txt' does not match any definition.
+
+Compilation ended at '12:13:30.868'.
+

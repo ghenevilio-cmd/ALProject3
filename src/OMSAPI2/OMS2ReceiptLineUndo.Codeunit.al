@@ -5,7 +5,7 @@ codeunit 80262 "OMS2 Receipt Line Undo"
     [CommitBehavior(CommitBehavior::Error)]
     procedure Execute(SelectedLineId: Guid; RequestId: Guid; ExpectedCompanyId: Guid; ExpectedReceiptId: Guid; ExpectedReceiptLineNumber: Integer;
         ExpectedOrderNumber: Code[20]; ExpectedOrderLineNumber: Integer; ExpectedVendorNumber: Code[20];
-        ExpectedItemNumber: Code[20]; ExpectedLocationCode: Code[10]; ExpectedConceptCode: Code[20];
+        ExpectedItemNumber: Code[20]; ExpectedLocationCode: Code[10]; ExpectedConceptCode: Code[20]; ExpectedShortcutDimension1Code: Code[20];
         ExpectedUnitOfMeasureCode: Code[10]; ExpectedQuantity: Decimal; ExpectedQuantityBase: Decimal;
         ExpectedModifiedAt: DateTime): Guid
     var
@@ -14,6 +14,8 @@ codeunit 80262 "OMS2 Receipt Line Undo"
         CompanyRecord: Record Company;
         Item: Record Item;
         Location: Record Location;
+        Store: Record "LSC Store";
+        Mapping: Codeunit "OMS2 Receipt Store Mapping";
         WarehouseReceiptLine: Record "Posted Whse. Receipt Line";
         StandardUndo: Codeunit "Undo Purchase Receipt Line";
     begin
@@ -31,8 +33,10 @@ codeunit 80262 "OMS2 Receipt Line Undo"
         if (ReceiptHeader.SystemId <> ExpectedReceiptId) or (ReceiptLine."Line No." <> ExpectedReceiptLineNumber) or
            (ReceiptLine."Order No." <> ExpectedOrderNumber) or (ReceiptLine."Order Line No." <> ExpectedOrderLineNumber) or
            (ReceiptLine."Buy-from Vendor No." <> ExpectedVendorNumber) or (ReceiptLine."No." <> ExpectedItemNumber) or
-           (ReceiptLine."Location Code" <> ExpectedLocationCode) or (ReceiptLine."Shortcut Dimension 1 Code" <> ExpectedConceptCode) or
+           (ReceiptLine."Location Code" <> ExpectedLocationCode) or (ReceiptLine."Shortcut Dimension 1 Code" <> ExpectedShortcutDimension1Code) or
            (ReceiptLine."Unit of Measure Code" <> ExpectedUnitOfMeasureCode) or (ReceiptLine.SystemModifiedAt <> ExpectedModifiedAt) then
+            Error(ChangedErr);
+        if Mapping.ResolveConcept(Store, ReceiptLine."Location Code", true) <> ExpectedConceptCode then
             Error(ChangedErr);
         ReceiptLine.TestField(Type, ReceiptLine.Type::Item);
         ReceiptLine.TestField(Correction, false);

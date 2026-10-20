@@ -1,0 +1,784 @@
+{
+  "version": "1.1.2.28",
+  "status": "compiled, NOT published",
+  "baseline": "C:\\AL\\ALProject3\\artifacts\\receipt-undo-1.1.2.26\\Systems Integration_Approved Product List_1.1.2.26.app",
+  "baselineSha256": "3b6d1469788df4b62050c06294b043fc22ab7b4a88acf6cb8d24230bb532f3e2",
+  "package": "C:\\AL\\ALProject3\\artifacts\\receipt-concept-1.1.2.28\\Systems Integration_Approved Product List_1.1.2.28.app",
+  "packageSha256": "62b3eb0a0e497af3fe3000bbae53a445084adeb99e9394d7cf8022b2f5c55d13",
+  "preservedSources": 149,
+  "modifiedSources": 3,
+  "addedSources": 1,
+  "sources": [
+    {
+      "path": "src/APL Request Page/APL Request Page.al",
+      "sha256": "b9d681ec2ea8c93fcecb2bbd77bc31ccc1446b9bc316414730ffe1d4cba21c92",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/APLAPI/TBGAPLAPI.Page.al",
+      "sha256": "cd20a5df07987bdee65e44f39812c696ca754151d500087850a2af5bddd59a9d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/APLAPI/TBGBrandListAPI.Page.al",
+      "sha256": "b2cfc5f82a7fb0412b3b57af5c87277f60ba2bb51dd1b1afe9f89998818d6d49",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ApprovedProducts.Api.Page.al",
+      "sha256": "c969d2d5cef21cc62ed6e068b1720601b6cc6173dbc1cef8176382122e7d90b8",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2CommandMgtV2.Codeunit.al",
+      "sha256": "5f209c0d37475bb933ae70c84f3d29236ca95e1ee28eb0bdab614ecf290bffa7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2Concepts.Api.Page.al",
+      "sha256": "a40a8cbc226c2f82a111683c0fd0707545e67b9f4347621121c0c92bb22e2602",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftCommand.Table.al",
+      "sha256": "a64c3a326cb852da92699bfeb1e4191defa68c3ea75f9f5625a193d2cf438cb7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftCommandLine.Table.al",
+      "sha256": "e6693c66388b65e2a233a296e129075f67256d0f6efcee4e1d4d342f64297c48",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftCommandLinesV2.Api.Page.al",
+      "sha256": "643ebeb24974024a794bfcd5b09a5a152d55ecd34f683e653e266d74bee0e9d7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftCommandsV2.Api.Page.al",
+      "sha256": "40ac243fbbbdd8d589a3981fa1cf7f691245647bb240a70cfc8e54f6378ce3a9",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftOrderLines.Api.Page.al",
+      "sha256": "12811bc2a0826a61491c57a5a74811753d44d8d629e857f3931a477ad3ebbe87",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2DraftOrders.Api.Page.al",
+      "sha256": "3834964cd0371c77c209bdbc1fc019fb9381040555e48507f4f953936a62f9ee",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PermissionSets.PermissionSet.al",
+      "sha256": "21c7a642992aee5f23aad7fc10593dcea06b8db8dcc744c8970de07212f440e7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PostingRules.Api.Page.al",
+      "sha256": "b2f7c805c7b23531c51b55b3d1eeb4169ed8805504d7e0848b221766065420c2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchaseHeader.TableExt.al",
+      "sha256": "2dd9c9b3f8daaafc6bf3b8ce96f2faceba4e58fc725281cc6db1caacbceabdab",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchaseOrderLines.Api.Page.al",
+      "sha256": "b7417d58f78c730aa0086e6ea03f3b9ba749f9666f553fa1d405e09052026e9f",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchaseOrderQR.ReportExt.al",
+      "sha256": "a2dd5f66f03902b6f105008a61dd3dd432d59c2787869c66e85f30ef68ee20be",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchaseReceiptPrint.Api.Page.al",
+      "sha256": "08c7b0131b1e02706dff31a61ae95d1a595ffbcbf82a28f90a8fff6d1efca6d8",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchaseReceipts.Api.Page.al",
+      "sha256": "9aed38a52934bb37b3daa089738abc922946f1a4696d5fbdba19c1e2d0daa9c0",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PurchRcptHeader.TableExt.al",
+      "sha256": "e215dc8037c89fce74d250cda79defc0f2a9bdaf2f2ecee652b333d97523dff6",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommand.Table.al",
+      "sha256": "efaea59fbf16e57eb01e9a6216f7f92195ad21de682f6f633ea086cab0333e05",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommandLine.Table.al",
+      "sha256": "7a8e2a57dc273d1df30128ae8f83f9bd62f354e75696183693c73af74c4dfa64",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommandLinesV2.Api.Page.al",
+      "sha256": "b504537bb73f817836d5ac26372e622de7c16796c3937c1e8b2972c2d23f5734",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommandLineV2.Table.al",
+      "sha256": "944e972256148067a2daf4fa072811313f0beeb76738ef65afade94c6670417d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommandsV2.Api.Page.al",
+      "sha256": "b7929e2e84bbf80a757bdd427a5ddbd76f5f4fd40e2675074f10a0f203b1f375",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptCommandV2.Table.al",
+      "sha256": "9768d996e55703c3e2dd8fec78c4339f9b7a3b219c8fa91b3004312e217df927",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptLineUndo.PermissionSet.al",
+      "sha256": "c2e0db8117ebcc607f5b7d056607b8ae08c0ba9c1c24acd6afbb700221de96b2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceivablePurchaseOrders.Api.Page.al",
+      "sha256": "a1fdb34e29957395a3b22d98a057e287e69c2f91542f6c7bdd6c6f38eff5b168",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceivablePurchLines.Api.Page.al",
+      "sha256": "e37a4cde26b66c7eeaebb34114fe76b520d4b43fb98ca6e04de66caaed6edff3",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceivingEligibility.Api.Page.al",
+      "sha256": "97d0ed6869fee7d6944048208f8c488369f04588ba44b1d69721739c3a3865b1",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceivingThreshold.Codeunit.al",
+      "sha256": "8a5e7685f3a7de64d88bc7e3d4002466416e2fabf35a3b373bc1728e939ce056",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2Stores.Api.Page.al",
+      "sha256": "0948aa8508da41e6355cdc5834b657f21543565c40663f9f900f8e66b0a6bdfb",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2Zoning.Api.Page.al",
+      "sha256": "ef7f55067b09c106543c5c7160331d92de4137ffa4f8fd34ab1403f9644e697a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/POSControlAddin.al",
+      "sha256": "7633bf3b6e56c7953e6e84ad53e33508b3a756e3e1cddd7ac69fcca8328acf2c",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/VMS-APL-API/TBGC_VMSPurchLineAPI_PageExt.al",
+      "sha256": "32e3e576a250bccfa741e3c89c19792cfeb797eae18bdca3b8639c02b8d7ca0a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/VMS-APL-API/VMS_APL_API_Read.PermissionSet.al",
+      "sha256": "232d763705086ef8452c838a178a86c6d94beba4fc5fe4b2a9f3161bd9d18872",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/VMS-APL-API/VMS_APL_ApprovedProductList_API.Page.al",
+      "sha256": "3de8e78214805c24408e769a8866acfd554224a2f8c331b7e7abbf09fbe111b9",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/VMS-APL-API/VMS_APL_Concept_API.Page.al",
+      "sha256": "2535b6437945886b37db226c15635e62108f7321c9eeaac6d056e505bb07cb4d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/VMS-APL-API/VMS_APL_Zoning_API.Page.al",
+      "sha256": "364c100ae108c4782a5fd966d41875e3f160d42100e256681e9e87c1d4dd0b31",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/APL PERMISSION/TBGC_MarketList.PermissionSet.al",
+      "sha256": "2d6d187a9a6f5aac5ec0b74f301b9a5af6a7e59e8742c06e159b6244d8fb7025",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/APL PERMISSION/TBGC_MarketListAccess.Page.al",
+      "sha256": "a08b7fca6ae35c9af4828f7ef6c3a1ea08093fc39e437ae019f962972e1492fb",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/APL PERMISSION/TBGC_MarketListAccessMgt.Codeunit.al",
+      "sha256": "aa03ebd685c1a830fdb35d4b4d03c304e53cf36db8d587537557d82c87304770",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/APL PERMISSION/TBGC_UserSetup_MarketListAccess.TableExt.al",
+      "sha256": "e9fc84fa13f01d7bd443e59a70cd949303da1404a6bf3bdeaec72a64e3e2bc47",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/APL PERMISSION/TBGC_UserSetup_MLDelEdit.PageExt.al",
+      "sha256": "ea7a99408ccd7d7c58a74f273cfa294199480c98c3126a2a2fd52c43dd056867",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Checkout Runner/TBGC_POS_Checkout_Runner.Codeunit.al",
+      "sha256": "738053a69887c9416c42d3d9d49b3dd36c0a312dc08753dadec67564f3dac26e",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Checkout Runner/TBGC_POS_Checkout_State.Codeunit.al",
+      "sha256": "f38c27b6b94c4567a384eef81348a405deaa0686100080899f13611bf6b71ab4",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftAutoConvert.Codeunit.al",
+      "sha256": "ca25dfdcf42afc736abeafe95f186f3675485138cfe0af3ab4cd6b7a6027da15",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftConversionContext.Codeunit.al",
+      "sha256": "84cd60ec428d5c89a2e1d93c5dcf51f531f3b35c206747885444f19f497f6f57",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftConvertRunner.Codeunit.al",
+      "sha256": "c61bb21255abdc74d4af0e2c7a52bd6424196c3cbc06371fd9db5dd2d65048bf",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftConvertState.Codeunit.al",
+      "sha256": "51928c6654baeacbaff35889bd3a5193a56da0464397e38ad502386f44beb908",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftOrderCleanup.Codeunit.al",
+      "sha256": "3ec3349d91d2a789fa778435c7ce95c837457c0980233886a0fa8b1a5bd44654",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftOrderConverter.Codeunit.al",
+      "sha256": "938a2627606af69c52369078ecfe634b4c6137358938d1ca684ec7ad129ea0e9",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_DraftOrderMgt.Codeunit.al",
+      "sha256": "9b6c7c62b5e333cc46508340c5f78dfad46fb14760ef21ee5babc1e517c23227",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_PO_Validation_Mgt.Codeunit.al",
+      "sha256": "63dcd5c195bea85a274e1f5da4aef4c94b7694decd615202e93c34b68d0fc483",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_PurchaseReleaseTracking.Codeunit.al",
+      "sha256": "96607cc35a75f32518c3fed8f2f747334a7d9d89254fbd2c613f33b026b3d789",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_Receiving_Mgt.Codeunit.al",
+      "sha256": "eabcddb3ff0271f78f52a944a72e3a51f3cffbe5ce51042a29a487e7e96612ed",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Code Units/TBGC_ReleasedDateMgt.Codeunit.al",
+      "sha256": "0608537791d39e4364b35391df659b949eec27e9a5d88e6baa83ce4541e3a63f",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/POS PAGE/POSPage.al",
+      "sha256": "3eb22611f29d0a31081feeec7a679edf12885c9c05d39d6b656b8200dab07669",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/POSubs/POEditableSubs.al",
+      "sha256": "69bddf9c5919d9cd8d195a1c7f91841490943093bf81f4326f8caa0da42e7b33",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Purch&Payables/POReceivingThreshold.al",
+      "sha256": "acc2a17f916b108834c1d8fe15cb37fe2748752f06da59688ccadfbdac7c002b",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Purchase & Payables Extension/APL_PurchPayablesSetup.PageExt.al",
+      "sha256": "7d5a977b9b97b419dc22e6373376fef2620ba6387b0cb155ac7a686046cfd463",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/Purchase & Payables Extension/APL_PurchPayablesSetup.TableExt.al",
+      "sha256": "289a1e6a15719518e6a71463b63a4ef5d709d5c1daf47069b2e22a3e21f197c4",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Approved_Product_List_Page.al",
+      "sha256": "e45f5fec178566da7e53b5c211e461e218a5f9b4a40dba96e1534ce7a8424d6d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Approved_Product_List_Table.al",
+      "sha256": "778c28f85458ab9c266710419f71cc50c410cde40e6f6a97215df7942f8614d9",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_BlanketPurchOrderSubformPageExt.al",
+      "sha256": "451957811c73be67ff1d0719db776ebbb5ea9cebcc736c1f7eb65aebc3e09360",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_BrandList_page.al",
+      "sha256": "9fa9b29c8a53182b23c7fee0f0e1d309ddd71ca53c7442ef7bbac41b1ea375f2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_BrandList_table.al",
+      "sha256": "a6d7e509152950b284f10c11a73e3ba388c06fdbf51fb1894254e48d7d8a1928",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_BrandSelectionMgt.Codeunit.al",
+      "sha256": "348302b01a76e4b205d13be74ef1ba8bbf309f656be0b2a4c7922ec6e9934e71",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Brands_page.al",
+      "sha256": "d192b87d7fbadab7b7dd4002afa60bfe358d6fa0830e7d8ae4ea9bc333ab5678",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Brand_table.al",
+      "sha256": "084525b469a453bb3323e88d915c0e763669b0a7c438ac2d0ca47596966b9855",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ConceptPage.al",
+      "sha256": "0fdbd0355c214bbf56c026aea15e61b4ebc593c1bb725c902aad68cb402c4deb",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ConceptTable.al",
+      "sha256": "acb9def50b53d4758acce2e6e678057e406521d8ebcc16bd0d63ca0f729a53ec",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Concept_Store_List.Page.al",
+      "sha256": "6fa7d2b501b436ab7b642f91f3c5e53493682f402a7006d4310314100d747827",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_FilteredBrandLookup.Page.al",
+      "sha256": "20e8c7637978159c9c9f1fba3a6cd0685e3f2866307d7c7ba6a56e62957b3c95",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ItemListPageExt.al",
+      "sha256": "d8c7278332f6bc1672090e0049c57b96b2a79e5261ac3b182ec69346ec53fc59",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Items_pageext.al",
+      "sha256": "911d195926367199eabbf9e260389b01fc8c6c3ab3e6708a8b543ae62d7e2f1f",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ItemTableExt.al",
+      "sha256": "47e4e72797716a58226396c698a05202ac36c526b71744d868963cf3b45a5b67",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ItemVendorCatalogPageExt.al",
+      "sha256": "0f2e67df6c6a1a223335e37c7cc0a7e196e3ec9219bffe2faa2b329026ad75fa",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ItemVendorTableExt.al",
+      "sha256": "bcc63919cb273f0fb28fc714261d9aecd4d3a80a2ab44b6ef4ecc1405c1d87bd",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_LSCPostedPRCountingLinesTableExt.al",
+      "sha256": "3aa3f5086224d1d11f70975d46949bdd81bd1e4716f37037b269ccc6ec6f1e86",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_LSCPurchaseBrandTransfer.Codeunit.al",
+      "sha256": "813e9f1fcbf1ba150f8106fbe346fb3a98e9fd27aa790982109173cb00a60b5a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PickingReceivingLinesPageExt.al",
+      "sha256": "d949634c02a106187ff35a1ca7f6e1c86754f48e2e6a7ed158584feb7114f33c",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PickingReceivingLinesTableExt.al",
+      "sha256": "7e96783a0e66fbf65146088ca796f348adb7209632f56b6f4a77fb3fc24578ba",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PostedPurchaseRcptSubformExt.al",
+      "sha256": "a1c104f3db2cdd4709d92ac4ff0239dfa508061f663b73ad420602ea2150781e",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PostedPurchCrMemoSubformExt.al",
+      "sha256": "88deb09c009d6417615620a431b17ae53f1980f59b2f72acaf41b2802f6b17f3",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PostedPurchInvoiceSubformExt.al",
+      "sha256": "a9b0cd7fda8ec489a87843afc61c90e3c8143bdb3b231f3605bc10c98568b795",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PostedReceivingLinesPageExt.al",
+      "sha256": "5376aafe00899bf2f04026c9d9e143a4d7e344c0bec7509ceaf2a5f0f6283069",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PostedReturnShipmentSubformExt.al",
+      "sha256": "e552a33b58f0a2760b709eafb12b3d3aab657ff2cdafef3043421cf8791d14f0",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchaseBrandTransfer.Codeunit.al",
+      "sha256": "0c596c42299cfcbe21afb1dd8feb50de87e8b8ef843eb6e748346a8d57a3d649",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchaseLineArchiveTableExt.al",
+      "sha256": "2eb753478ab6d9026b9b473be9b2d07039455b638e42b16a99436924e6d8c448",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchaseLineTableExt.al",
+      "sha256": "00f646855481bbe80713d93786a4be2e156a64fe69d971dc0acac44aeb83aac7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchaseOrderArchiveSubformPageExt.al",
+      "sha256": "53b98a7af82029e9827f5e9dbc4520a41cc951974b3345fb507983ee3d3681ab",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Purchase_Prices_PageExt.al",
+      "sha256": "7b99d6cd90c1ecf69db5a2a2eb2dfd55c63a18c802b7009968453af42e3a95cc",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Purchase_Price_TableExt.al",
+      "sha256": "beab9ff68b2f2246cb49ff6d5bff264425b23fc8fe925e0f5f55ec79280dc912",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchCrMemoLineTableExt.al",
+      "sha256": "192181437020551fe6cc96d42da7d09c71368a372699714ae6113d60c8f1b0f2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchCrMemoSubformPageExt.al",
+      "sha256": "3c56dee08bdc389aebc8b95c9911add68644b18bd2a3847cc7db823df32ea623",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchInvLineTableExt.al",
+      "sha256": "cc5323f7687fa72f6234f2afec35afcf089c0ae031dd060bbabfd862a43c5673",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchInvoiceSubformPageExt.al",
+      "sha256": "229c091c26a4708b88a3b53cec5d18197cab26f2204d693a18b487b213bdd7d6",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchOrderSubformPageExt.al",
+      "sha256": "fd30bc8b7dd976dcf015032b619bd4ad4b5811550e383e651b228196836ddbdf",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchQuoteSubformPageExt.al",
+      "sha256": "d5cf7b56f410575a7a505eec506f04a3dbb1bcf01e26cb4e61e2d2ec800b4e94",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchRcptLineTableExt.al",
+      "sha256": "aae49fcb817e3ed63dacd8742850a1861bb400e22a0c07c42aac7744fd46e074",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_PurchReturnOrderSubformPageExt.al",
+      "sha256": "b7e06dc374844845af4deecd2504cb58e57807a67cfc24b5d642706ee74bc844",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ReturnShipmentLineTableExt.al",
+      "sha256": "be011eda6992f21ee510fc8b95f517a7139e1a73d899dd996ac50f253c8a1394",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_StoreCard_PageExt.al",
+      "sha256": "489ff2d3c5ac74ae6d985d7a2b29692d0231dff0b575e5ecdfec02b5fc80546d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_StoreList_PageExt.al",
+      "sha256": "7395f620ccbdf331a232647098340b48abaa3e62113cecac27074bacb075419a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Store_Table_Ext.al",
+      "sha256": "4684d25542044bfba7b933639797721a0560853db0c87d52e29a516a5d97a813",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_Zone_Store_List_PageExt.al",
+      "sha256": "e7be23f15a7da3788afe4637f2e3fe96d20fcb360c3a1dee52ff3a3e398d3c5c",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ZoningPage.al",
+      "sha256": "3df0d33acddda9373a6c95643d64c5979e3c3fe84528a00bff587c7d4d3624bc",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Brandcode/TBGC_ZoningTable.al",
+      "sha256": "a6344cb7a01bbe76203af3a03e7550f4a2107b1b20518637ead70836bf5104b2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Item Family/TBGC_ItemFamily.PageExt.al",
+      "sha256": "cfba56eb634008ed31efee49687ad99db0b63233f33abb4a4450a2fb38ff42c7",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Item Family/TBGC_ItemFamily.TableExt.al",
+      "sha256": "b069a15222cfc348399cf4201a4e12fe9c42eaf6ff8e2732456e12f8e214b29c",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Item Family/TBGC_RetItemPageExtension.al",
+      "sha256": "2dbab58a736e7e55caa8f4316f378c9ff09f101ae31c0f3bc7eec7b98d03d83c",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/MarketListReceiving_SystemFields_Ext.al",
+      "sha256": "2ef95bd71ae64b81ac94448fae25ec3975da24e2968dfea6a835df1f03ea2ca8",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_MarketListReceivingContext.Codeunit.al",
+      "sha256": "906e0e884ead4951d67b4fe93301d4c96f8c83f81d55d2cfea4da1808e38f21b",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_OriginalCreatedByTransfer.Codeunit.al",
+      "sha256": "7ba7adb9daeae7eeba4fe84412f5ece8c18a7b6ecf31e50489e671cc5bef556a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Posted_Purchase_Receipts_PageExt.al",
+      "sha256": "3a75f74bf6288aa632f8046f8de92334d1b896d3ffcdf602d870c5c722f51c24",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Posted_Purchase_Receipt_PageExt.al",
+      "sha256": "39e7c33fdf7ee4e6fbc49f032500f31445b89ffd028f8417db374dedce4bcb31",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Posted_Retail_Receiving_Header_TableExt.al",
+      "sha256": "b994777f947c0c4013309eebe6bdbf9514552e099af5b7d0d3e2040516c1a364",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Posted_Retail_Receiving_List_PageExt.al",
+      "sha256": "4562ae23c8556fef04068ac31f80c7080e233ee8d0795e363f890c891ac7bed5",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Posted_Retail_Receiving_PageExt.al",
+      "sha256": "d0735961b069d2a39e5a75b970595a358d86e3192f54e2751842df90c6acc438",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_PurchaseHeaderTableExt.al",
+      "sha256": "f629a2d6109f565c1d5ee79519e14c2346441a996be485116047236d418a830a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_PurchRcptHeader_TableExt.al",
+      "sha256": "ac0a2b4f3eb9ad4b62cdf87f046805d7a2c3918bb0a8e7c202fd9c07a1f421b8",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Receiving_ControlAddin.al",
+      "sha256": "27eab18e82e72f3ca1882eae4546b732ed0b9e19587ed35b9268987ec6ddc2f1",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Receiving_Module_Page.al",
+      "sha256": "e69e30735fbe5513af43652f0a7235416a5316d23d47b18bcd73e43251bef872",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Retail_Receiving_Card_PageExt.al",
+      "sha256": "a605243e4f890d23f44f32e9e725128fa3f0cba75f126d82d45f0121848afe42",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Retail_Receiving_Header_TableExt.al",
+      "sha256": "a662e933e4fd4ee2e2689f54d75d204ba4cf42c46eebe36e353e37c13db0f1db",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Receiving/TBGC_Retail_Receiving_PageExt.al",
+      "sha256": "8f05a5d61092f531ac5093606f9e8b49a2381fdf23ce73612aace4eaa101be0d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Vendor Extension/TBGC_Vendor.TableExt.al",
+      "sha256": "c5fd66932f8cf4f6382a31c6b9844219744046631ac74069aa9b1d5577abc853",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC Vendor Extension/TBGC_VendorCard.PageExt.al",
+      "sha256": "2954a098b3d06a8d33c1fc527fef3583dfd0e41d99bb405902a7f28aa7f49254",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftOrderCard.Page.al",
+      "sha256": "6a11370db471c6c0416760afe4ee10c56f521a6b47c7297bf4688fb5c78aaeb6",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftOrderHeader.Table.al",
+      "sha256": "30377643674ad9f4afa7867d686b09d17a7146c12fd18d0639cfaa1cd507008d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftOrderLine.Table.al",
+      "sha256": "ab32e0b81d8210137dd1a79e39a564954321d5f93a6786975ff2a61f9d3955be",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftOrders.Page.al",
+      "sha256": "b6d0b079c372de22c3db143900bf6c2d9c0497b5ed6b9495b4752f1b9c0c5118",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftOrderSubform.Page.al",
+      "sha256": "c18afef7c7635633a23c9fd3d2e86bacff9991bb6a45013f642cdbc678ebc795",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftPriceUpdateBuffer.Table.al",
+      "sha256": "f4fe43d9a04cbcc000c94a5379fa95e740ba41f2545e2b2a51c5cec1955f7c3a",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftPriceUpdateJobQueue.Codeunit.al",
+      "sha256": "2de624a1285a367e8dfe634dd08247180c5838e7e7905b8c5953e2258323e3e6",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftPriceUpdateMgt.Codeunit.al",
+      "sha256": "2bd5dfadf29bf72ca228d6d8957410014f4d845d1acb371ac8f5b61bde069658",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_DraftPriceUpdates.Page.al",
+      "sha256": "ec6dfc4d70250e288cb5e7b61082d620a730b984a8773d1b2f7ebf9b48ae1d7f",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_ManualPostingDateDialog.Page.al",
+      "sha256": "c8d2e43008b817cb871b664bb4284486e06ba07d42515de8468940f9b68c3bf3",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Draft_Order/TBGC_ReleasedDateDialog.Page.al",
+      "sha256": "874b917455cd6a8379339c2c2a9a539d6f9ebd13442a721ea21acf781053e8ad",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_MLOrderingDaySetup/TBGC_MLOrderingDayMgt.Codeunit.al",
+      "sha256": "915fac369ec08b0c6af9528ac1ba42409f2ba8d88ec969d60e262c6443f813c2",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_MLOrderingDaySetup/TBGC_MLOrderingDaySetup.Page.al",
+      "sha256": "bd3b4d57224402bd6612ff4d5fdfcaae84fcd7c8e56348a3a66816d1000f4afe",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_MLOrderingDaySetup/TBGC_MLOrderingDaySetup.Table.al",
+      "sha256": "51b0ad9cc933475bc6865286faea845e8041641bc77d3281c0c7c70b6cbbd85e",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Order_History/APL_OrderHistory.Page.al",
+      "sha256": "84d92cc7b352a23e09c2f2a6be28707605c268550eece6c5c3deac916d78af6d",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Order_History/APL_OrderHistory.Table.al",
+      "sha256": "a9a8a7bba844a94499451bb07949e0d1a8cfb6a6bfe862a6cb23033248918fef",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Order_History/APL_OrderHistoryLookup.Page.al",
+      "sha256": "698e8d3bed308395a4e539e4627eea8f304df2ebb949afbe0a7fa1188f6fc848",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/TBGC_Order_History/APL_OrderHistoryMgt.Codeunit.al",
+      "sha256": "f62f6058ac7804a64f88ef824169005dfd73bf06ab74dea6888e9778236816f1",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/User Setup/TBGC_UserSetup_APLActivation.PageExt.al",
+      "sha256": "b644f145067c729f582240848905b250ac74157d6aaacbf11b36eb528c3b10c1",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/ReactBC-main/User Setup/TBGC_UserSetup_APLActivation.TableExt.al",
+      "sha256": "cfe18c4b371a514d95947f92d2ab120949f18407df1c9cf6741a963164db86ca",
+      "origin": "reviewed-1.1.2.26"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2PostedReceiptLines.Api.Page.al",
+      "sha256": "5ecdb6904bc51c502bac7f24eccc59a5765578bc7867f7e643c1639e7b4f81c5",
+      "origin": "concept-contract2-correction"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptLineUndo.Codeunit.al",
+      "sha256": "14157228215aea6dd76d04dee281423c749693d3ff455ee498fc51888eb69bcb",
+      "origin": "concept-contract2-correction"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptLineRead.PermissionSet.al",
+      "sha256": "e12d34b089a2bf19b5987226668e313af02c94d6e8340cf5f9ecd63233624277",
+      "origin": "concept-contract2-correction"
+    },
+    {
+      "path": "src/OMSAPI2/OMS2ReceiptStoreMapping.Codeunit.al",
+      "sha256": "2010fa6e3d75a5d46ecd708fb6a8660413a395d778e916d8b5df5c2228f7771b",
+      "origin": "concept-contract2-mapping"
+    }
+  ],
+  "limitations": [
+    "verify installed 1.1.2.26 content before separately approved publication",
+    "final Astra review and controlled BC invoice/Undo race, rollback and response-loss tests pending",
+    "user-enabled Undo setting unchanged; no live financial test performed",
+    "no new BC business tables or custom reversal algorithm"
+  ]
+}
