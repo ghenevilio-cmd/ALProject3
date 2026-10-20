@@ -1,0 +1,370 @@
+{
+  "date": "2026-10-20",
+  "status": "DEPLOYED, APPROVED CASE REPAIR AND SIGNED-IN VISIBILITY VERIFIED",
+  "commits": {
+    "OMS": "fb221b7ead19b568860da0fa0e88d702a331c95d",
+    "VMS": "17a014b9b46a2501587e2e9ba4b2c4fe8332a5fb",
+    "AL": "b581c22cfda63976d70738427ce8db26f967c47c"
+  },
+  "pipelines": {
+    "VMS": 1236,
+    "OMS": 1237,
+    "duplicateOMS1238": "cancelled before deployment"
+  },
+  "bc": {
+    "version": "1.1.2.28",
+    "environment": "PREPRODTEST",
+    "packageId": "e885f548-3de6-44fb-8d63-b95ffa7e64a6",
+    "publishedRootPackageSha256": "c676af670db305344bf8488c7d1c712d692faa45ec74b4794bf483a585729016",
+    "contractVersion": 2,
+    "locationCode": "1991",
+    "conceptCode": "DENNYS",
+    "rawDimension": "1991"
+  },
+  "repair": {
+    "at": "2026-10-20T04:42:19.635Z",
+    "manifestHash": "1ce10ee6b834a2e505fcca0258e582d3464cccf96d2996542e47e50fa0500e67",
+    "approved": true,
+    "committed": true,
+    "cases": [
+      {
+        "id": 1,
+        "companyId": 1,
+        "status": "IN_PROGRESS",
+        "locationCode": "1991",
+        "conceptCode": "DENNYS",
+        "version": 3,
+        "beforeHash": "774f2160b5af22e65a2e7802b43881d76e5095e793c0e3da0abe50aef8de2285",
+        "afterHash": "59a6b2fd7d19f802fe104b056dba301b3795d357b9486db949d4e8e27fb74035",
+        "historyPreserved": true,
+        "auditEvents": 1,
+        "correctionEvents": 1
+      },
+      {
+        "id": 2,
+        "companyId": 1,
+        "status": "IN_PROGRESS",
+        "locationCode": "1991",
+        "conceptCode": "DENNYS",
+        "version": 3,
+        "beforeHash": "3aa7a21438a75158525ce1e1a7abfc39ad7398d65a69872ae9e2ece49ae9adf9",
+        "afterHash": "045e1369531a55326e3186c641996a7d997d048b5fe2575ddfc57a6b912dd331",
+        "historyPreserved": true,
+        "auditEvents": 1,
+        "correctionEvents": 1
+      }
+    ],
+    "originalHistoryEvents": 4,
+    "currentHistoryEvents": 6,
+    "idempotentRepeat": 0,
+    "bcWrites": false,
+    "financialUndo": false
+  },
+  "scopes": {
+    "at": "2026-10-20T04:43:04.247Z",
+    "readOnly": true,
+    "company": "HSS",
+    "results": [
+      {
+        "conceptCode": "DENNYS",
+        "locationCode": "1991",
+        "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+        "status": 200,
+        "noStore": true,
+        "items": [
+          {
+            "id": 2,
+            "status": "IN_PROGRESS",
+            "orderNumber": "POR10000002",
+            "receiptNumber": "108157",
+            "locationCode": "1991",
+            "conceptCode": "DENNYS"
+          },
+          {
+            "id": 1,
+            "status": "IN_PROGRESS",
+            "orderNumber": "POR10000008",
+            "receiptNumber": "108167",
+            "locationCode": "1991",
+            "conceptCode": "DENNYS"
+          }
+        ]
+      },
+      {
+        "conceptCode": "1991",
+        "locationCode": "1991",
+        "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+        "status": 200,
+        "noStore": true,
+        "items": []
+      },
+      {
+        "conceptCode": "DENNYS",
+        "locationCode": "OTHER",
+        "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+        "status": 200,
+        "noStore": true,
+        "items": []
+      },
+      {
+        "conceptCode": "OTHER",
+        "locationCode": "1991",
+        "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+        "status": 200,
+        "noStore": true,
+        "items": []
+      },
+      {
+        "conceptCode": "DENNYS",
+        "locationCode": "1991",
+        "bcCompanyId": "dd3af18b-55ae-ef11-b8ec-6045bd1f867d",
+        "status": 200,
+        "noStore": true,
+        "items": []
+      },
+      {
+        "caseId": 1,
+        "readOnlyUndoEvidence": true,
+        "status": 200,
+        "contract": 2,
+        "concept": "DENNYS",
+        "raw": "1991"
+      },
+      {
+        "caseId": 2,
+        "readOnlyUndoEvidence": true,
+        "status": 200,
+        "contract": 2,
+        "concept": "DENNYS",
+        "raw": "1991"
+      }
+    ],
+    "noBusinessMutation": true
+  },
+  "ui": {
+    "signedInUser": "29957 / Ghene Vilio Melitante Winters",
+    "company": "HSS",
+    "path": "/staff/receiving, Disputes tab",
+    "bothCasesVisible": true,
+    "status": "IN_PROGRESS",
+    "historyCreatedStartAndCorrectionVisible": true,
+    "undoSubmitted": false,
+    "evidenceTextSha256": "b14abb7a96e48b896533d2b043fe4f4fad7594812c37d87afa4fd68a8f06fc3c",
+    "screenshotSha256": "56d35950d67117decf415fd4e825be203c324e3531dd5a0fe2b7401d5e1531d8"
+  },
+  "verification": {
+    "VMS": {
+      "at": "2026-10-20T04:34:59.212Z",
+      "commit": "17a014b9b46a2501587e2e9ba4b2c4fe8332a5fb",
+      "backendRun": 1236,
+      "deployment": {
+        "status": 4,
+        "id": "12361792470822583",
+        "pipelineCommit": "17a014b9b46a2501587e2e9ba4b2c4fe8332a5fb",
+        "pipelineBuild": 1236,
+        "metadataHasCommit": true,
+        "verification": "Successful exact-source pipeline plus compiled hosted byte comparison"
+      },
+      "backendFiles": [
+        {
+          "path": "modules/po/receiptLines.js",
+          "sha256": "17697b3fc845f352df8fc52662bc4b3d0c3e3a0187a16a97470d42eca2d3b1f1",
+          "matches": true
+        },
+        {
+          "path": "modules/oms-integration/disputeRead.js",
+          "sha256": "95f4563418291544620a092a78a41498b026cad55ed8de718a3df438262e0275",
+          "matches": true
+        },
+        {
+          "path": "modules/disputes/service.js",
+          "sha256": "09618e02bc86221d08b4c3cd9f056506c95788d6d8167208b3fe7b2a13ceb2cc",
+          "matches": true
+        }
+      ],
+      "schemaMatches": true,
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/health",
+          "status": 200,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/ready",
+          "status": 200,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/po/forwarding-settings",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/admin/po-forwarding-settings",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/oms-integration/purchase-orders/forwarding-eligibility",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/oms-integration/disputes/read",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/oms-integration/disputes/undo-evidence",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/web/v1/vms/po/forwarding-settings",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/web/v1/vms/admin/po-forwarding-settings",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/web/v1/vms/oms-integration/purchase-orders/forwarding-eligibility",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/web/v1/vms/oms-integration/disputes/read",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/web/v1/vms/oms-integration/disputes/undo-evidence",
+          "status": 401,
+          "noStore": true
+        }
+      ],
+      "backendVerified": true,
+      "verifiedAt": "2026-10-20T04:35:06.615Z"
+    },
+    "OMS": {
+      "at": "2026-10-20T04:40:45.757Z",
+      "commit": "fb221b7ead19b568860da0fa0e88d702a331c95d",
+      "backendRun": 1237,
+      "deployment": {
+        "status": 4,
+        "id": "12371792471196380",
+        "pipelineCommit": "fb221b7ead19b568860da0fa0e88d702a331c95d",
+        "pipelineBuild": 1237,
+        "metadataHasCommit": true,
+        "verification": "Successful exact-source pipeline plus compiled hosted byte comparison"
+      },
+      "backendFiles": [
+        {
+          "path": "integration/bc/undo.js",
+          "sha256": "d0924948507666b4713c600d3f6a0ba0500850476a29482f6bae6ec414aaf33f",
+          "matches": true
+        },
+        {
+          "path": "receiving/undo/repository.js",
+          "sha256": "dab065f20e28fa7c1b1d0a73a8a3b100aa033d5b55c95011f1eb9fc5baa2527c",
+          "matches": true
+        },
+        {
+          "path": "receiving/undo/rules.js",
+          "sha256": "f4ce697bae204e98a368aa53368796a68acb05c1d882c36b3a4249569dfa5788",
+          "matches": true
+        }
+      ],
+      "schemaMatches": true,
+      "checks": [
+        {
+          "method": "GET",
+          "path": "/api/v1/health",
+          "status": 200,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/ready",
+          "status": 200,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/administration/integration-activity",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/administration/integration-activity/00000000-0000-4000-8000-000000000001/retry",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/receiving-disputes",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/receipt-undo?caseId=1",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/receipt-undo/eligibility?caseId=1",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/receipt-undo",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/receipt-undo/00000000-0000-4000-8000-000000000001/events",
+          "status": 401,
+          "noStore": true
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/receipt-undo/00000000-0000-4000-8000-000000000001/decision",
+          "status": 401,
+          "noStore": true
+        }
+      ],
+      "undoExecutionSetting": "true",
+      "financialUndoEnabled": true,
+      "financialTestPerformed": false,
+      "backendVerified": true,
+      "verifiedAt": "2026-10-20T04:41:03.837Z"
+    }
+  },
+  "limits": [
+    "No live financial Undo or invoice-race/rollback acceptance",
+    "Seven AL runtime tests compiled but not run",
+    "Restricted ordinary-user browser acceptance not repeated; anonymous and exact service-scope denials verified",
+    "Broader security incomplete; G1 ratings and G2 bulk pricing remain open"
+  ],
+  "noMigration": true,
+  "noPermissionGrant": true
+}

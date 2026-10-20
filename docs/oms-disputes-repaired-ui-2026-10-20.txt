@@ -1,0 +1,67 @@
+Browser tab: 3, Title: "Bistro Ordering Management System", URL: "https://orders.bistro.com.ph/staff/receiving".
+0 AXWebArea Bistro Ordering Management System, URL: orders.bistro.com.ph/staff/receiving
+	1 container
+		2 button Open navigation
+			3 image
+			4 text Toggle Sidebar
+		5 container breadcrumb
+			6 content list
+				7 text Receiving
+		8 pop up button (collapsed) Description: Notifications, 0 waiting, Secondary Actions: Expand
+		9 button Switch to dark mode
+		10 pop up button (collapsed) Description: Ghene Vilio Melitante Winters, ID: radix-_r_1b_, Secondary Actions: Expand
+		11 container
+			12 heading Receiving requests, Value: 1
+				13 text Receiving requests
+			14 text Request authorization before recording received quantities.
+		16 heading Purchase orders, Value: 2
+			17 text Purchase orders
+		18 tab group Receiving views
+			19 tab (selectable, settable, boolean) All orders, Value: 0
+			20 tab (selectable, settable, boolean) To receive, Value: 0
+			21 tab (selectable, settable, boolean) Partially received, Value: 0
+			22 tab (selectable, settable, boolean) Fully received, Value: 0
+			23 tab (selected, settable, boolean) Disputes, Value: 1
+		24 container Receipt-line disputes
+			25 heading Disputes, Value: 2
+				26 text Disputes
+			27 text Purchasing cases from VMS for your current company and stores. Reporting a problem does not undo a receipt.
+			29 container
+				30 text PO  POR10000002  · line  10000
+			31 container
+				32 text Receipt  108157  · line  10000
+			33 container
+				34 text A00000012  ·  1 PC2  disputed
+			35 text Sample
+			36 container
+				37 text IN PROGRESS  · Owner:  Ghene Vilio Melitante Winters
+			38 container
+				39 text Reported by  Ghene Vilio Melitante Winters  ·  Due Oct 23, 2026, 12:00 AM Manila
+			40 button (expanded) View history, Secondary Actions: Collapse
+			55 container Dispute history
+				56 heading Processing history, Value: 3
+					57 text Processing history
+				58 content list
+					59 container
+						60 text CONCEPT CORRECTED  ·  Ghene Vilio Melitante Winters Correct receipt concept mapping; original evidence and history retained. Oct 20, 2026, 12:42 PM  Manila
+					61 container
+						62 text START  ·  Ghene Vilio Melitante Winters Oct 20, 2026, 12:26 PM  Manila
+					63 container
+						64 text CREATED  ·  Ghene Vilio Melitante Winters Sample Oct 19, 2026, 10:56 PM  Manila
+			41 button (collapsed) Undo requests, Secondary Actions: Expand
+			42 container
+				43 text PO  POR10000008  · line  10000
+			44 container
+				45 text Receipt  108167  · line  10000
+			46 container
+				47 text A00000012  ·  1 PC  disputed
+			48 text Damage
+			49 container
+				50 text IN PROGRESS  · Owner:  Ghene Vilio Melitante Winters
+			51 container
+				52 text Reported by  Ghene Vilio Melitante Winters  ·  Due Oct 23, 2026, 12:00 AM Manila
+			53 button (collapsed) View history, Secondary Actions: Expand
+			54 button (collapsed) Undo requests, Secondary Actions: Expand
+			28 button Refresh disputes
+
+The focused UI element is 40 button (expanded) View history, Secondary Actions: Collapse

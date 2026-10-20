@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-20T04:21:08.142Z",
+  "at": "2026-10-20T04:41:56.130Z",
   "readOnly": true,
   "environment": "PREPRODTEST",
   "extensions": {
@@ -83,6 +83,80 @@
           "quantityInvoiced": 0,
           "quantityInvoicedBase": 0,
           "correction": false
+        }
+      ]
+    }
+  ],
+  "rawReceipts": [
+    {
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "po": "POR10000008",
+      "checkedAt": "2026-10-20T04:42:07.268Z",
+      "rows": [
+        {
+          "@odata.etag": "W/\"JzIwOzEzMDAzMTk4Njg4MTUzNjE0MTkxMTswMDsn\"",
+          "id": "c9c6e379-08c9-f111-a056-6045bd1f556a",
+          "undoContractVersion": 2,
+          "receiptId": "bec6e379-08c9-f111-a056-6045bd1f556a",
+          "receiptNumber": "108167",
+          "lineNumber": 10000,
+          "orderNumber": "POR10000008",
+          "orderLineNumber": 10000,
+          "vendorNumber": "V002282",
+          "itemNumber": "A00000012",
+          "lineType": 2,
+          "locationCode": "1991",
+          "conceptCode": "DENNYS",
+          "shortcutDimension1Code": "1991",
+          "unitOfMeasureCode": "PC",
+          "quantityPerUnitOfMeasure": 180,
+          "quantity": 1,
+          "quantityBase": 180,
+          "quantityInvoiced": 0,
+          "quantityInvoicedBase": 0,
+          "quantityReceivedNotInvoiced": 1,
+          "correction": false,
+          "salesOrderNumber": "",
+          "specialOrderSalesNumber": "",
+          "jobNumber": "",
+          "productionOrder": false,
+          "lastModifiedDateTime": "2026-10-16T02:22:54.037Z"
+        }
+      ]
+    },
+    {
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "po": "POR10000002",
+      "checkedAt": "2026-10-20T04:42:08.377Z",
+      "rows": [
+        {
+          "@odata.etag": "W/\"JzE5OzE4MzAxODM4OTQ2OTQwNTQzMjkxOzAwOyc=\"",
+          "id": "b52c6ef7-9bc3-f111-a057-6045bd1c76d8",
+          "undoContractVersion": 2,
+          "receiptId": "aa2c6ef7-9bc3-f111-a057-6045bd1c76d8",
+          "receiptNumber": "108157",
+          "lineNumber": 10000,
+          "orderNumber": "POR10000002",
+          "orderLineNumber": 10000,
+          "vendorNumber": "V002282",
+          "itemNumber": "A00000012",
+          "lineType": 2,
+          "locationCode": "1991",
+          "conceptCode": "DENNYS",
+          "shortcutDimension1Code": "1991",
+          "unitOfMeasureCode": "PC2",
+          "quantityPerUnitOfMeasure": 200,
+          "quantity": 1,
+          "quantityBase": 200,
+          "quantityInvoiced": 0,
+          "quantityInvoicedBase": 0,
+          "quantityReceivedNotInvoiced": 1,
+          "correction": false,
+          "salesOrderNumber": "",
+          "specialOrderSalesNumber": "",
+          "jobNumber": "",
+          "productionOrder": false,
+          "lastModifiedDateTime": "2026-10-09T04:43:30.793Z"
         }
       ]
     }

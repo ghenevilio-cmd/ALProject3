@@ -29,7 +29,7 @@ async function main(){
  for(const po of ['POR10000008','POR10000002']){
   const u=new URL(root+'/api/systemsintegration/omsapi2/v1.0/companies('+company+')/postedReceiptLines');u.searchParams.set('$filter',"orderNumber eq '"+po+"' and orderLineNumber eq 10000");u.searchParams.set('$top','500');
   const r=await get(u);const rows=r.json?.value?.map(x=>({id:x.id,receiptId:x.receiptId,receiptNumber:x.receiptNumber,lineNumber:x.lineNumber,orderNumber:x.orderNumber,orderLineNumber:x.orderLineNumber,locationCode:x.locationCode,conceptCode:x.conceptCode,shortcutDimension1Code:x.shortcutDimension1Code,undoContractVersion:x.undoContractVersion,quantity:x.quantity,quantityBase:x.quantityBase,quantityInvoiced:x.quantityInvoiced,quantityInvoicedBase:x.quantityInvoicedBase,correction:x.correction}));
-  output.receipts.push({po,status:r.status,rows});save();assert.equal(r.status,200);assert(rows.length>0&&!r.json['@odata.nextLink']);
+  output.rawReceipts??=[];output.rawReceipts.push({bcCompanyId:company,po,checkedAt:new Date().toISOString(),rows:r.json?.value});output.receipts.push({po,status:r.status,rows});save();assert.equal(r.status,200);assert(rows.length>0&&!r.json['@odata.nextLink']);
   assert(rows.every(x=>x.undoContractVersion===2&&x.locationCode==='1991'&&x.conceptCode==='DENNYS'&&x.shortcutDimension1Code==='1991'));
  }
  output.readChecksPassed=true;save();console.log(JSON.stringify({at:output.at,environment:env,installed:output.extensions.records,metadata:output.metadata,receipts:output.receipts,readOnly:true},null,2));

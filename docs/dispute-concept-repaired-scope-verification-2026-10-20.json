@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-20T04:43:04.247Z",
+  "readOnly": true,
+  "company": "HSS",
+  "results": [
+    {
+      "conceptCode": "DENNYS",
+      "locationCode": "1991",
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "status": 200,
+      "noStore": true,
+      "items": [
+        {
+          "id": 2,
+          "status": "IN_PROGRESS",
+          "orderNumber": "POR10000002",
+          "receiptNumber": "108157",
+          "locationCode": "1991",
+          "conceptCode": "DENNYS"
+        },
+        {
+          "id": 1,
+          "status": "IN_PROGRESS",
+          "orderNumber": "POR10000008",
+          "receiptNumber": "108167",
+          "locationCode": "1991",
+          "conceptCode": "DENNYS"
+        }
+      ]
+    },
+    {
+      "conceptCode": "1991",
+      "locationCode": "1991",
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "status": 200,
+      "noStore": true,
+      "items": []
+    },
+    {
+      "conceptCode": "DENNYS",
+      "locationCode": "OTHER",
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "status": 200,
+      "noStore": true,
+      "items": []
+    },
+    {
+      "conceptCode": "OTHER",
+      "locationCode": "1991",
+      "bcCompanyId": "f1912784-68b5-f011-bbd1-6045bd1ba617",
+      "status": 200,
+      "noStore": true,
+      "items": []
+    },
+    {
+      "conceptCode": "DENNYS",
+      "locationCode": "1991",
+      "bcCompanyId": "dd3af18b-55ae-ef11-b8ec-6045bd1f867d",
+      "status": 200,
+      "noStore": true,
+      "items": []
+    },
+    {
+      "caseId": 1,
+      "readOnlyUndoEvidence": true,
+      "status": 200,
+      "contract": 2,
+      "concept": "DENNYS",
+      "raw": "1991"
+    },
+    {
+      "caseId": 2,
+      "readOnlyUndoEvidence": true,
+      "status": 200,
+      "contract": 2,
+      "concept": "DENNYS",
+      "raw": "1991"
+    }
+  ],
+  "noBusinessMutation": true
+}
