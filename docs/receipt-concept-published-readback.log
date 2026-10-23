@@ -1,0 +1,87 @@
+{
+  "at": "2026-10-20T04:31:12.121Z",
+  "environment": "PREPRODTEST",
+  "installed": [
+    {
+      "id": "5aebd1c1-2f62-4145-b924-32816b4d64d5",
+      "packageId": "e885f548-3de6-44fb-8d63-b95ffa7e64a6",
+      "name": "Approved Product List",
+      "publisher": "Systems Integration",
+      "isInstalled": true,
+      "version": "1.1.2.28"
+    }
+  ],
+  "metadata": {
+    "status": 200,
+    "contractVersionField": true,
+    "rawDimensionField": true,
+    "boundUndoV2": true,
+    "parameters": [
+      "bindingParameter",
+      "requestId",
+      "expectedCompanyId",
+      "expectedReceiptId",
+      "expectedReceiptLineNumber",
+      "expectedOrderNumber",
+      "expectedOrderLineNumber",
+      "expectedVendorNumber",
+      "expectedItemNumber",
+      "expectedLocationCode",
+      "expectedConceptCode",
+      "expectedShortcutDimension1Code",
+      "expectedUnitOfMeasureCode",
+      "expectedQuantity",
+      "expectedQuantityBase",
+      "expectedModifiedAt"
+    ]
+  },
+  "receipts": [
+    {
+      "po": "POR10000008",
+      "status": 200,
+      "rows": [
+        {
+          "id": "c9c6e379-08c9-f111-a056-6045bd1f556a",
+          "receiptId": "bec6e379-08c9-f111-a056-6045bd1f556a",
+          "receiptNumber": "108167",
+          "lineNumber": 10000,
+          "orderNumber": "POR10000008",
+          "orderLineNumber": 10000,
+          "locationCode": "1991",
+          "conceptCode": "DENNYS",
+          "shortcutDimension1Code": "1991",
+          "undoContractVersion": 2,
+          "quantity": 1,
+          "quantityBase": 180,
+          "quantityInvoiced": 0,
+          "quantityInvoicedBase": 0,
+          "correction": false
+        }
+      ]
+    },
+    {
+      "po": "POR10000002",
+      "status": 200,
+      "rows": [
+        {
+          "id": "b52c6ef7-9bc3-f111-a057-6045bd1c76d8",
+          "receiptId": "aa2c6ef7-9bc3-f111-a057-6045bd1c76d8",
+          "receiptNumber": "108157",
+          "lineNumber": 10000,
+          "orderNumber": "POR10000002",
+          "orderLineNumber": 10000,
+          "locationCode": "1991",
+          "conceptCode": "DENNYS",
+          "shortcutDimension1Code": "1991",
+          "undoContractVersion": 2,
+          "quantity": 1,
+          "quantityBase": 200,
+          "quantityInvoiced": 0,
+          "quantityInvoicedBase": 0,
+          "correction": false
+        }
+      ]
+    }
+  ],
+  "readOnly": true
+}

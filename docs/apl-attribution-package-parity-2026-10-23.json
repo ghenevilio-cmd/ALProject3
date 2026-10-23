@@ -1,0 +1,22 @@
+{
+  "baseline": "Systems Integration_Approved Product List_1.1.2.28.app",
+  "candidate": "Systems Integration_Approved Product List_1.1.2.29.app",
+  "removed": [],
+  "changed": [
+    "src/src/ReactBC-main/TBGC%2520Brandcode/TBGC_Approved_Product_List_Page.al",
+    "src/src/ReactBC-main/TBGC%2520Brandcode/TBGC_Approved_Product_List_Table.al",
+    "src/src/VMS-APL-API/VMS_APL_ApprovedProductList_API.Page.al"
+  ],
+  "added": [
+    "src/src/VMS-APL-API/VMS_APL_Attribution.PermissionSet.al",
+    "src/src/VMS-APL-API/VMS_APL_AttributionGuard.Codeunit.al",
+    "src/src/VMS-APL-API/VMS_APL_AttributionScope.Codeunit.al",
+    "src/src/VMS-APL-API/VMS_APL_AttributionSetup.Page.al",
+    "src/src/VMS-APL-API/VMS_APL_AttributionSetup.Table.al",
+    "src/tests/apl-attribution/VMSAPLAttribution.Tests.Codeunit.al"
+  ],
+  "productionSourceMatchesCurrentALProject3": true,
+  "noProductionTestCodeunits": true,
+  "sha256": "8604dadfdd46f810c8734e67b2f34c65085d8b0e01d6877d2fa636426ae13689",
+  "existingSourcesAndAssetsPreservedExceptThreeReviewedFiles": true
+}

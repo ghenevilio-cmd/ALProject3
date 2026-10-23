@@ -146,8 +146,12 @@ page 80267 "Approved Product List"
                     ApplicationArea = All;
                     Caption = 'Modified By';
                     Editable = false;
-                    ToolTip = 'Specifies the user who last modified this record.';
+                    ToolTip = 'Shows the employee who applied or approved the latest VMS price operation, or the BC user for other changes.';
                 }
+                field("VMS Employee ID"; Rec."VMS Employee ID") { ApplicationArea = All; Editable = false; ToolTip = 'Identifies the employee recorded for the latest VMS operation.'; }
+                field("BC Modified By"; BcModifiedByUserName) { ApplicationArea = All; Editable = false; ToolTip = 'Shows the actual Business Central account that performed the last database write.'; }
+                field("Change Source"; Rec."VMS Attribution Source") { ApplicationArea = All; Editable = false; ToolTip = 'Identifies a verified VMS employee attribution for the current modification.'; }
+                field("VMS Operation ID"; Rec."VMS Command ID") { ApplicationArea = All; Editable = false; ToolTip = 'Links the modification to its VMS price operation and audit history.'; }
                 field("Modified At"; Rec."SystemModifiedAt")
                 {
                     ApplicationArea = All;
@@ -208,12 +212,16 @@ page 80267 "Approved Product List"
         IsCurrentRecordEditable: Boolean;
         IsInactiveToggleEditable: Boolean;
         ModifiedByUserName: Text;
+        BcModifiedByUserName: Text;
 
     local procedure UpdateModifiedByUserName()
     var
         UserRec: Record User;
     begin
         ModifiedByUserName := '';
+        BcModifiedByUserName := '';
+        if Rec."VMS Attribution Source" = 'VMS' then
+            ModifiedByUserName := Rec."VMS Employee Name";
         if IsNullGuid(Rec.SystemModifiedBy) then
             exit;
 
@@ -221,9 +229,11 @@ page 80267 "Approved Product List"
             exit;
 
         if UserRec."Full Name" <> '' then
-            ModifiedByUserName := UserRec."Full Name"
+            BcModifiedByUserName := UserRec."Full Name"
         else
-            ModifiedByUserName := UserRec."User Name";
+            BcModifiedByUserName := UserRec."User Name";
+        if ModifiedByUserName = '' then
+            ModifiedByUserName := BcModifiedByUserName;
     end;
 
     local procedure LookupCity(var SelectedCity: Text): Boolean

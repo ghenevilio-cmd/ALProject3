@@ -236,6 +236,11 @@ table 80266 "Approved Product List"
             DataClassification = EndUserIdentifiableInformation;
             Editable = false;
         }
+        field(30; "VMS Employee Name"; Text[200]) { DataClassification = EndUserIdentifiableInformation; Editable = false; Access = Internal; }
+        field(31; "VMS Employee ID"; Text[50]) { DataClassification = EndUserIdentifiableInformation; Editable = false; Access = Internal; }
+        field(32; "VMS Staff ID"; Integer) { DataClassification = EndUserIdentifiableInformation; Editable = false; Access = Internal; }
+        field(33; "VMS Command ID"; Guid) { DataClassification = SystemMetadata; Editable = false; Access = Internal; }
+        field(34; "VMS Attribution Source"; Code[10]) { DataClassification = SystemMetadata; Editable = false; Access = Internal; }
     }
 
     keys

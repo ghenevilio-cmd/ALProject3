@@ -18,7 +18,7 @@ page 80222 "VMS APL Approved Prod. API"
     ModifyAllowed = true;
     DeleteAllowed = false;
 
-    AboutText = 'Read-only API endpoint for pulling Approved Product List records.';
+    AboutText = 'Approved Product List read and conditional price-write API with protected employee attribution.';
     Extensible = false;
 
     layout
@@ -122,8 +122,127 @@ page 80222 "VMS APL Approved Prod. API"
                     Caption = 'Approved By';
                     Editable = true;
                 }
+                field(attributionContractVersion; AttributionContractVersion) { Editable = false; }
+                field(modifiedByStaffId; ModifiedByStaffId)
+                {
+                    trigger OnValidate()
+                    begin
+                        StaffSupplied := true;
+                    end;
+                }
+                field(modifiedByEmployeeId; ModifiedByEmployeeId)
+                {
+                    trigger OnValidate()
+                    begin
+                        EmployeeIdSupplied := true;
+                    end;
+                }
+                field(modifiedByEmployeeName; ModifiedByEmployeeName)
+                {
+                    trigger OnValidate()
+                    begin
+                        EmployeeNameSupplied := true;
+                    end;
+                }
+                field(modificationCommandId; ModificationCommandId)
+                {
+                    trigger OnValidate()
+                    begin
+                        CommandSupplied := true;
+                    end;
+                }
+                field(attributionSource; Rec."VMS Attribution Source") { Editable = false; }
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        AttributionContractVersion := AttributionGuard.ContractVersion();
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        ModifiedByStaffId := Rec."VMS Staff ID";
+        ModifiedByEmployeeId := Rec."VMS Employee ID";
+        ModifiedByEmployeeName := Rec."VMS Employee Name";
+        ModificationCommandId := Rec."VMS Command ID";
+        ResetSupplied();
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        Clear(ModifiedByStaffId);
+        Clear(ModifiedByEmployeeId);
+        Clear(ModifiedByEmployeeName);
+        Clear(ModificationCommandId);
+        ResetSupplied();
+    end;
+
+    trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    begin
+        if not HasAttribution() then
+            exit(true);
+        WriteAttributed(true);
+        exit(false);
+    end;
+
+    trigger OnModifyRecord(): Boolean
+    begin
+        if not HasAttribution() then
+            exit(true);
+        WriteAttributed(false);
+        exit(false);
+    end;
+
+    var
+        AttributionGuard: Codeunit "VMS APL Attribution Guard";
+        AttributionContractVersion: Integer;
+        ModifiedByStaffId: Integer;
+        ModifiedByEmployeeId: Text;
+        ModifiedByEmployeeName: Text;
+        ModificationCommandId: Guid;
+        StaffSupplied: Boolean;
+        EmployeeIdSupplied: Boolean;
+        EmployeeNameSupplied: Boolean;
+        CommandSupplied: Boolean;
+
+    local procedure HasAttribution(): Boolean
+    begin
+        if not (StaffSupplied or EmployeeIdSupplied or EmployeeNameSupplied or CommandSupplied) then
+            exit(false);
+        if not (StaffSupplied and EmployeeIdSupplied and EmployeeNameSupplied and CommandSupplied) then
+            Error('All employee attribution fields must be supplied together.');
+        exit(true);
+    end;
+
+    local procedure WriteAttributed(IsInsert: Boolean)
+    var
+        Scope: Codeunit "VMS APL Attribution Scope";
+    begin
+        if IsInsert and IsNullGuid(Rec.SystemId) then
+            Rec.SystemId := CreateGuid();
+        Scope.Prepare(Rec, IsInsert, ModifiedByStaffId, ModifiedByEmployeeId, ModifiedByEmployeeName, ModificationCommandId);
+        BindSubscription(Scope);
+        if IsInsert then
+            Rec.Insert(true, true)
+        else
+            Rec.Modify(true);
+        UnbindSubscription(Scope);
+        // The local binding also disappears if the record write raises an error.
+        ModifiedByStaffId := Rec."VMS Staff ID";
+        ModifiedByEmployeeId := Rec."VMS Employee ID";
+        ModifiedByEmployeeName := Rec."VMS Employee Name";
+        ModificationCommandId := Rec."VMS Command ID";
+        ResetSupplied();
+    end;
+
+    local procedure ResetSupplied()
+    begin
+        StaffSupplied := false;
+        EmployeeIdSupplied := false;
+        EmployeeNameSupplied := false;
+        CommandSupplied := false;
+    end;
 }
 
